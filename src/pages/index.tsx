@@ -1,5 +1,4 @@
-import { ColorModeButton } from '@/components/ui/color-mode';
-import { Box, Text } from '@chakra-ui/react';
+import AppLayout from '@/components/layout/AppLayout';
 import { GetStaticPropsContext } from 'next';
 import { useTranslations } from 'next-intl';
 
@@ -7,7 +6,7 @@ export default function Index() {
   const t = useTranslations();
 
   return (
-    <> </>
+    <AppLayout>Helo</AppLayout>
   );
 }
 
