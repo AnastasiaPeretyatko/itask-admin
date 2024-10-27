@@ -1,6 +1,10 @@
 import { extendTheme } from '@chakra-ui/react'
 import { buttonTheme } from './components/button'
 import { containerTheme } from './components/container'
+import { headingTheme } from './components/heading'
+import { inputTheme } from './components/input'
+import { listTheme } from './components/list'
+import { modalTheme } from './components/modal'
 
 export const theme = extendTheme({
   config: {
@@ -46,6 +50,10 @@ export const theme = extendTheme({
   },
   components: {
     Container: containerTheme,
-    Button: buttonTheme
+    Button: buttonTheme,
+    Heading: headingTheme,
+    Input: inputTheme,
+    List: listTheme,
+    Modal: modalTheme
   },
 })
