@@ -1,4 +1,5 @@
-import { Button } from '@chakra-ui/react'
+import { Button, Tooltip } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/router'
 import React from 'react'
 
@@ -8,18 +9,35 @@ type Props = {
     icon: React.JSX.Element
     path?: string
   }
+  isCollapse: boolean
 }
 
-const SidebarItem = ({ data }: Props) => {
+const SidebarItem = ({ data, isCollapse }: Props) => {
+  const t = useTranslations()
   const router = useRouter()
+
   return (
-    <Button
-      variant="sidebarBtn"
-      leftIcon={data.icon}
-      onClick={() => data.path && router.push(data.path)}
-    >
-      {data.title}
-    </Button>
+    <>
+      {isCollapse ? (
+        <Tooltip label={data.title} placement="right">
+          <Button
+            variant="sidebarBtn"
+            leftIcon={data.icon}
+            onClick={() => data.path && router.push(data.path)}
+            isActive={router.asPath === data.path}
+          ></Button>
+        </Tooltip>
+      ) : (
+        <Button
+          variant="sidebarBtn"
+          leftIcon={data.icon}
+          onClick={() => data.path && router.push(data.path)}
+          isActive={router.asPath === data.path}
+        >
+          {!isCollapse && t(data.title)}
+        </Button>
+      )}
+    </>
   )
 }
 

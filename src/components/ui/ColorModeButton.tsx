@@ -1,7 +1,6 @@
-import { Box, Button, Container, useColorMode } from '@chakra-ui/react'
+import { Button, Container, useColorMode } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import { BsSun, BsMoon } from 'react-icons/bs'
-import React from 'react'
 
 const buttonTheme = [
   {
@@ -14,23 +13,48 @@ const buttonTheme = [
   },
 ]
 
-const ColorModeButton = () => {
+type Props = {
+  isCollapse: boolean
+}
+
+const ColorModeButton = ({ isCollapse }: Props) => {
   const t = useTranslations()
-  const { colorMode, setColorMode } = useColorMode()
+  const { colorMode, setColorMode, toggleColorMode } = useColorMode()
+
+  const onSearchUseButton = () => {
+    return buttonTheme.find(btn => btn.value === colorMode) || buttonTheme[0]
+  }
+
   return (
     <Container variant={'boxTheme'}>
-      {buttonTheme.map(theme => (
+      {isCollapse ? (
         <Button
           key={Math.random()}
           size={'xs'}
           variant={'switchTheme'}
-          isActive={colorMode === theme.value}
-          onClick={() => setColorMode(theme.value)}
-          leftIcon={theme.icon}
+          isActive={!!onSearchUseButton}
+          onClick={toggleColorMode}
+          leftIcon={onSearchUseButton().icon}
         >
-          {t(theme.value.charAt(0).toUpperCase() + theme.value.slice(1))}
+          {/* {t(
+            onSearchUseButton().value.charAt(0).toUpperCase() +
+              onSearchUseButton().value.slice(1)
+          )} */}
         </Button>
-      ))}
+      ) : (
+        buttonTheme.map(theme => (
+          <Button
+            key={Math.random()}
+            size={'xs'}
+            variant={'switchTheme'}
+            isActive={colorMode === theme.value}
+            onClick={() => setColorMode(theme.value)}
+            leftIcon={theme.icon}
+          >
+            {t(theme.value.charAt(0).toUpperCase() + theme.value.slice(1))}
+          </Button>
+        ))
+      )}
     </Container>
   )
 }
