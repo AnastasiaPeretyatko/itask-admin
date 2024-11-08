@@ -2,7 +2,7 @@ import { Text } from '@chakra-ui/react'
 
 type Props = {
   size?: 'xs' | 'sm' | 'md' | 'lg'
-  children: string
+  children: string[] | string
   color?: 'text.pale'
 }
 
