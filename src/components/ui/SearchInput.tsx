@@ -7,16 +7,17 @@ import {
   InputRightElement,
 } from '@chakra-ui/react'
 
-type Props = {
+export type SearchInputProps = {
   value: string
   onChange: (value: string) => void
   onClearSearchInput?: () => void
 }
 
-const SearchInput = ({ onChange, value, onClearSearchInput }: Props) => {
+const SearchInput = ({ onChange, value, onClearSearchInput }: SearchInputProps) => {
   return (
     <InputGroup width={80}>
       <Input
+        variant={'search'}
         placeholder="Search"
         value={value}
         onChange={e => onChange(e.target.value)}
@@ -27,6 +28,7 @@ const SearchInput = ({ onChange, value, onClearSearchInput }: Props) => {
       <InputRightElement>
         {value && (
           <IconButton
+            size={'xs'}
             variant={'unstyled'}
             aria-label="remove search input"
             icon={<CloseIcon />}
