@@ -1,14 +1,15 @@
+import Header from '@/components/header'
 import AppLayout from '@/components/layout/AppLayout'
 import CreateProfessor from '@/components/modal/CreateProfessor'
 import WindowModal from '@/components/modal/WindowModal'
 import ViewTableProfessor from '@/components/professors/ViewTableProfessors'
 import useDebounce from '@/hooks/useDebounce'
-import { getProfessorsThunk } from '@/store/professors/professors.slice'
+import { getProfessorsThunk } from '@/store/professors/createAsyncThunk.professor'
 import { AppDispatch } from '@/store/store'
-import { Button, Heading, HStack, VStack } from '@chakra-ui/react'
+import { Button, HStack, VStack } from '@chakra-ui/react'
 import { GetStaticPropsContext } from 'next'
 import { useTranslations } from 'next-intl'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 const ProfessorsPage = () => {
@@ -31,22 +32,32 @@ const ProfessorsPage = () => {
   }
 
   useEffect(() => {
-    dispatch(getProfessorsThunk({ ...params, search: debouncedSearch }))
-  }, [debouncedSearch, params.page, params.limit])
+    dispatch(
+      getProfessorsThunk({
+        limit: params.limit,
+        page: params.page,
+        search: debouncedSearch,
+      })
+    )
+  }, [debouncedSearch, params.page, params.limit, dispatch])
 
   return (
     <AppLayout>
-      <VStack paddingX={4} mb={8}>
-        <Heading size={'md'} fontWeight={500} textTransform={'uppercase'}>
-          {t('Professors')}
-        </Heading>
-      </VStack>
-      <WindowModal
-        action={<Button>create</Button>}
-        modalBody={onClose => <CreateProfessor onClose={onClose} />}
-        title='Create professor'
+      <Header
+        onChange={onChangeSearchInput}
+        value={params.search}
+        onClearSearchInput={onClearSearchInput}
       />
-      <ViewTableProfessor />
+      <VStack width={'full'} gap={6} paddingX={6}>
+        <HStack width={'full'} justify={'space-between'}>
+          <WindowModal
+            action={<Button variant={'primary'}>{t('Create professor')}</Button>}
+            modalBody={onClose => <CreateProfessor onClose={onClose} />}
+            title={t("Create professor")}
+          />
+        </HStack>
+        <ViewTableProfessor />
+      </VStack>
     </AppLayout>
   )
 }
