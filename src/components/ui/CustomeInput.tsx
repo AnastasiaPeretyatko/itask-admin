@@ -8,39 +8,44 @@ import {
   useBoolean,
   useOutsideClick,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
-import { UseFormRegisterReturn } from 'react-hook-form'
+import { useRef } from 'react'
+import { FieldValues, Path, UseFormRegisterReturn, UseFormWatch } from 'react-hook-form'
 
-type Props = {
+type Props<T extends FieldValues> = {
   label: string
   helper?: string
   error?: string
   type?: string
   isRequired?: boolean
   register: UseFormRegisterReturn<string>
+  watch: UseFormWatch<T>
+  name: Path<T>
 }
 
-const CustomeInput = ({
+const CustomeInput = <T extends FieldValues,>({
   label,
   error,
   helper,
   type = 'text',
   isRequired = false,
   register,
-}: Props) => {
+  watch,
+  name
+}: Props<T>) => {
   const [flag, setFlag] = useBoolean()
   const ref = useRef(null)
-  const [value, setValue] = useState<string>('')
+
   useOutsideClick({
     ref: ref,
     handler: () => setFlag.off(),
   })
+  console.log('REgister', register);
 
   return (
     <>
       <Box
         bgGradient={
-          flag || value
+          flag || watch(name)
             ? 'linear(to-r, SECONDARY_BLUE, PRIMARY_PURPLE)'
             : 'none'
         }
@@ -57,13 +62,13 @@ const CustomeInput = ({
             sx={{
               zIndex: 1,
               position: 'absolute',
-              top: flag || value ? '-30%' : 1,
+              top: flag || watch(name) ? '-30%' : 1,
               left: '10px',
               transition: 'all .3s ease',
-              fontSize: flag || value ? 'xs' : 'md',
+              fontSize: flag || watch(name) ? 'xs' : 'md',
               backgroundColor: 'bg',
               paddingX: 1,
-              opacity: flag || value ? 0.7 : 0.5,
+              opacity: flag || watch(name) ? 0.7 : 0.5,
             }}
           >
             {label}
@@ -73,7 +78,6 @@ const CustomeInput = ({
             size={'sm'}
             variant={'form_input'}
             {...register}
-            onChange={e => setValue(e.target.value)}
           />
           {helper && !error && <FormHelperText>{helper}</FormHelperText>}
           {error && <FormErrorMessage>{error}</FormErrorMessage>}
