@@ -1,20 +1,22 @@
 import { Button, Flex, HStack } from '@chakra-ui/react'
-import { useTranslations } from 'next-intl'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import CustomeInput from '../ui/CustomeInput'
 import Empty from '../ui/Empty'
 import { TProfessorCreate } from '@/types/professor'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/store/store'
-import { postProfessorThunk } from '@/store/professors/professors.slice'
 import { useNotifications } from '@/hooks/useNotifications'
 import { useState } from 'react'
+import { postProfessorThunk } from '@/store/professors/createAsyncThunk.professor'
+import { useTranslations } from 'next-intl'
 
 const CreateProfessor = ({ onClose }: { onClose: () => void }) => {
+  const t = useTranslations()
   const {
     register,
     handleSubmit,
     formState: { isValid },
+    watch,
   } = useForm<TProfessorCreate>()
   const dispatch = useDispatch<AppDispatch>()
   const { showErrorMessage, showSuccessMessage } = useNotifications()
@@ -35,29 +37,29 @@ const CreateProfessor = ({ onClose }: { onClose: () => void }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex flexDir={'column'} gap={4}>
-        <Empty>
-          {
-            'You are going to create a new professor An account on the platform will be automatically created for this teacher'
-          }
-        </Empty>
-        <CustomeInput
+        <Empty>{t('Create professor information notify')}.</Empty>
+        <CustomeInput<TProfessorCreate>
           label={'Email'}
           register={register('email', { required: 'Name is required' })}
+          name={'email'}
+          watch={watch}
         />
-        <CustomeInput
+        <CustomeInput<TProfessorCreate>
           label={'Full name'}
           register={register('fullName', { required: 'Name is required' })}
+          name="fullName"
+          watch={watch}
         />
         {/* <SelectorInput label={t('Role')} /> */}
         <HStack width={'100%'} gap={4} marginY={4} justify={'end'}>
-          <Button>{'Cancel'}</Button>
+          <Button>{t('Cancel')}</Button>
           <Button
             variant={'primary'}
             type="submit"
             isLoading={isLoading}
             isDisabled={!isValid}
           >
-            {/* {t('Save')} */}
+            {t('Save')}
           </Button>
         </HStack>
       </Flex>
