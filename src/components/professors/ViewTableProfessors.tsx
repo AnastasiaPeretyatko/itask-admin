@@ -1,7 +1,9 @@
 import { RootState } from '@/store/store'
 import {
+  Avatar,
+  HStack,
   Icon,
-  IconButton,
+  Spinner,
   Table,
   TableContainer,
   Tbody,
@@ -10,13 +12,14 @@ import {
   Th,
   Thead,
   Tr,
+  VStack,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import CheckboxUI from '../ui/CheckboxUI'
 import moment from 'moment'
 import { CheckIcon } from '@chakra-ui/icons'
-import { CiMenuKebab } from 'react-icons/ci'
+import ActionMenu from './ActionMenu'
 
 const ViewTableProfessor = () => {
   const { data } = useSelector((state: RootState) => state.professors)
@@ -40,16 +43,27 @@ const ViewTableProfessor = () => {
     )
   }
 
-  if (!data) {
-    return <Text>Не найдено</Text>
-  }
-
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    setValues(data.map(item => ({ ...item, checked: false })))
+    if (data) {
+      setValues(data.map(item => ({ ...item, checked: false })))
+    }
   }, [data])
 
+  if (!data) {
+    return (
+      <Spinner
+        thickness="4px"
+        speed="0.65s"
+        emptyColor="gray.200"
+        color="PRIMARY_PURPLE"
+        size="xl"
+      />
+    )
+  }
+
   return (
-    <TableContainer width={'100%'}>
+    <TableContainer width={'100%'} borderRadius={'10px'} bg={'sidebarBG'}>
       <Table size={'sm'}>
         <Thead>
           <Tr>
@@ -60,8 +74,7 @@ const ViewTableProfessor = () => {
                 onCheckedChange={handleCheckAll}
               />
             </Th>
-            <Th>Full name</Th>
-            <Th>Email</Th>
+            <Th>Name</Th>
             <Th>Description</Th>
             <Th>Tel</Th>
             <Th>Created</Th>
@@ -79,8 +92,15 @@ const ViewTableProfessor = () => {
                     onCheckedChange={() => handleIndividualCheck(el.id)}
                   />
                 </Td>
-                <Td>{el.fullName}</Td>
-                <Td>{el.user.email}</Td>
+                <Td>
+                  <HStack>
+                    <Avatar />
+                    <VStack align={'start'} gap={0}>
+                      <Text>{el.fullName}</Text>
+                      <Text color={'text.pale'}>{el.user.email}</Text>
+                    </VStack>
+                  </HStack>
+                </Td>
                 <Td>{el.description}</Td>
                 <Td>{el.tel}</Td>
                 <Td>{moment(el.createdAt).format('DD/MM/YYYY')}</Td>
@@ -88,7 +108,7 @@ const ViewTableProfessor = () => {
                   <Icon as={CheckIcon} />
                 </Td>
                 <Td>
-                  <IconButton aria-label="" icon={<CiMenuKebab />} />
+                  <ActionMenu professor={el} />
                 </Td>
               </Tr>
             ))}
