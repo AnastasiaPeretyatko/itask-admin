@@ -9,34 +9,41 @@ import {
   useDisclosure,
   useOutsideClick,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import Label from './Label'
+import { SelectArrayType } from '@/common/assets/language'
 
 type Props = {
   label?: string
-  size?: string
+  size?: number
+  array: SelectArrayType[]
+  currentValue: string | undefined
+  onChangeValue: (value: string) => void
 }
 
-const SELECT = ['Figma', 'Photoshop', 'In disign']
-
-const SelectorInput = ({ label }: Props) => {
+const SelectorInput = ({
+  size,
+  label,
+  array,
+  currentValue = '',
+  onChangeValue,
+}: Props) => {
   const ref = useRef(null)
   const { isOpen, onToggle, onClose } = useDisclosure()
-  const [value, setValue] = useState<string>(SELECT[0])
 
   useOutsideClick({
     ref: ref,
     handler: () => onClose(),
   })
 
-  const onChangeState = (item: string) => {
-    setValue(item)
+  const onChangeState = (item: SelectArrayType) => {
+    onChangeValue(item.value)
     onToggle()
   }
 
   return (
     <>
-      <Container width={'100%'} position={'relative'} ref={ref} zIndex={1}>
+      <Container width={size || 'full'} position={'relative'} ref={ref} zIndex={1}>
         <Container
           variant={'selectorLine'}
           bgGradient={
@@ -45,18 +52,25 @@ const SelectorInput = ({ label }: Props) => {
         >
           <Container variant={'selector'} onClick={onToggle}>
             {label && <Label text={label} isFocus />}
-            <Text>{value}</Text>
+            <Text>
+              {array.find(el => el.value === currentValue)?.title ||
+                array[0].title}
+            </Text>
             <Icon as={isOpen ? ChevronUpIcon : ChevronDownIcon} />
           </Container>
         </Container>
 
         <Collapse in={isOpen} animateOpacity>
           <List variant={'selectList'}>
-            {SELECT.map(item => (
-              <ListItem key={Math.random()} onClick={() => onChangeState(item)}>
-                {item}
-              </ListItem>
-            ))}
+            {array &&
+              array.map(item => (
+                <ListItem
+                  key={Math.random()}
+                  onClick={() => onChangeState(item)}
+                >
+                  {item.title}
+                </ListItem>
+              ))}
           </List>
         </Collapse>
       </Container>
