@@ -1,13 +1,9 @@
-import {
-  defineStyle,
-  defineStyleConfig,
-  StyleFunctionProps,
-} from '@chakra-ui/react'
+import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
 
 // define the base component styles
 const baseStyle = defineStyle(() => {
   return {
-    padding: 0,
+    // padding: 0,
     maxW: 'unset',
     width: 'unset',
   }
@@ -43,7 +39,7 @@ const header = defineStyle(() => {
 
 const boxTheme = defineStyle(() => {
   return {
-    width:'100%',
+    width: '100%',
     backgroundColor: 'background.switch',
     display: 'flex',
     flexDir: 'row',
@@ -65,7 +61,8 @@ const selector = defineStyle(() => {
     border: '1px solid',
     borderColor: 'fill.switch',
     position: 'relative',
-    padding: 2,
+    paddingY: 2, 
+    paddingX: 4,
     fontSize: 'sm',
     bg: 'bg',
   }
@@ -98,6 +95,7 @@ const label = defineStyle(() => {
 
 const sidebar = defineStyle(() => {
   return {
+    bg: 'sidebarBG',
     display: 'flex',
     flexDir: 'column',
     width: '256px',

@@ -5,6 +5,8 @@ import { headingTheme } from './components/heading'
 import { inputTheme } from './components/input'
 import { listTheme } from './components/list'
 import { modalTheme } from './components/modal'
+import { tableTheme } from './components/table'
+import { menuTheme } from './components/menu'
 
 export const theme = extendTheme({
   config: {
@@ -20,15 +22,19 @@ export const theme = extendTheme({
   },
   semanticTokens: {
     colors: {
+      sidebarBG: { _dark: '#1A1D1F', _light: 'white.100' },
       text: {
         pale: { _dark: 'whiteAlpha.600', _light: 'blackAlpha.600' },
       },
-      bg: { _dark: 'BLACK_100', _light: 'white' },
+      bg: { _dark: 'black', _light: 'white.300' },
       fill: {
-        switch: { _dark: 'whiteAlpha.50', _light: 'blackAlpha.100' },
+        switch: { _dark: 'BLACK_300', _light: 'white.200' },
       },
       background: {
-        switch: { _dark: 'whiteAlpha.50', _light: 'blackAlpha.100' },
+        switch: { _dark: 'BLACK_100', _light: 'white.300' },
+      },
+      button: {
+        bg: { _dark: 'whiteAlpha.900', _light: 'blackAlpha.400' },
       },
     },
   },
@@ -47,6 +53,19 @@ export const theme = extendTheme({
     BLACK_200: '#1A1D1F',
     BLACK_300: '#272B30',
     BLACK_400: '#303336',
+
+    white: {
+      100: 'white',
+      200: '#FCFCFC',
+      300: '#F4F4F4',
+    },
+
+    red: {
+      100: '#FFECEE'
+    },
+
+    black: '#111315',
+    PRIMARY_WHITE: '#FCFCFC',
   },
   components: {
     Container: containerTheme,
@@ -54,6 +73,8 @@ export const theme = extendTheme({
     Heading: headingTheme,
     Input: inputTheme,
     List: listTheme,
-    Modal: modalTheme
+    Modal: modalTheme,
+    Table: tableTheme,
+    Menu: menuTheme,
   },
 })
