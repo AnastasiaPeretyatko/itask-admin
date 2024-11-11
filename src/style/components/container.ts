@@ -25,15 +25,20 @@ const viewDate = defineStyle(() => {
 
 const header = defineStyle(() => {
   return {
+    position: 'sticky',
+    top: 0,
+    zIndex: 10,
+    backgroundColor: 'background.main',
+    width: 'full',
     display: 'flex',
     flexDir: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: '20px',
-    paddingY: '10px',
-    marginX: '10px',
-    borderBottom: '1px solid',
-    borderColor: 'whiteAlpha.200',
+    padding: 4,
+    // borderColor: 'whiteAlpha.200',
+    boxShadow:'0 4px 2px -2px #80808021',
+    borderRadius: '10px'
   }
 })
 
@@ -61,8 +66,8 @@ const selector = defineStyle(() => {
     border: '1px solid',
     borderColor: 'fill.switch',
     position: 'relative',
-    paddingY: 2, 
-    paddingX: 4,
+    paddingY: 1,
+    paddingX: 3,
     fontSize: 'sm',
     bg: 'bg',
   }
@@ -94,13 +99,7 @@ const label = defineStyle(() => {
 })
 
 const sidebar = defineStyle(() => {
-  return {
-    bg: 'sidebarBG',
-    display: 'flex',
-    flexDir: 'column',
-    width: '256px',
-    height: '100vh',
-  }
+  return {}
 })
 
 export const containerTheme = defineStyleConfig({
