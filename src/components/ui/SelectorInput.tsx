@@ -2,7 +2,9 @@ import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 import {
   Collapse,
   Container,
+  HStack,
   Icon,
+  Image,
   List,
   ListItem,
   Text,
@@ -43,7 +45,13 @@ const SelectorInput = ({
 
   return (
     <>
-      <Container width={size || 'full'} position={'relative'} ref={ref} zIndex={1}>
+      <Container
+        width={size || 'full'}
+        position={'relative'}
+        ref={ref}
+        zIndex={1}
+        padding={0}
+      >
         <Container
           variant={'selectorLine'}
           bgGradient={
@@ -52,10 +60,20 @@ const SelectorInput = ({
         >
           <Container variant={'selector'} onClick={onToggle}>
             {label && <Label text={label} isFocus />}
-            <Text>
-              {array.find(el => el.value === currentValue)?.title ||
-                array[0].title}
-            </Text>
+            <HStack>
+              {array.find(el => el.value === currentValue)?.icon && (
+                <Image
+                  alt="iamge"
+                  src={array.find(el => el.value === currentValue)?.icon}
+                  width={5}
+                />
+              )}
+              <Text>
+                {array.find(el => el.value === currentValue)?.title ||
+                  array[0].title}
+              </Text>
+            </HStack>
+
             <Icon as={isOpen ? ChevronUpIcon : ChevronDownIcon} />
           </Container>
         </Container>
@@ -65,9 +83,16 @@ const SelectorInput = ({
             {array &&
               array.map(item => (
                 <ListItem
+                  display={'flex'}
+                  flexDir={'row'}
+                  alignItems={'center'}
+                  gap={2}
                   key={Math.random()}
                   onClick={() => onChangeState(item)}
                 >
+                  {item.icon && (
+                    <Image alt="iamge" src={`/${item.value}.png`} width={4} height={4} />
+                  )}
                   {item.title}
                 </ListItem>
               ))}
