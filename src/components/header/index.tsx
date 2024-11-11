@@ -1,36 +1,39 @@
-import { Avatar, HStack } from '@chakra-ui/react'
-import SearchInput, { SearchInputProps } from '../ui/SearchInput'
-import SelectorInput from '../ui/SelectorInput'
-import { useRouter } from 'next/router'
-import { LANGUAGES } from '@/common/assets/language'
+import { BellIcon, CalendarIcon } from '@chakra-ui/icons'
+import {
+  Avatar,
+  Container,
+  Heading,
+  HStack,
+  IconButton,
+  Text,
+} from '@chakra-ui/react'
+import UserSettingPopover from '../UserSettingPopover'
 
-type Props = {} & SearchInputProps
-
-const Header = ({ ...props }: Props) => {
-  const router = useRouter()
-
-  const onChangeLocale = (newLocale: string) => {
-    router.push(router.pathname, router.asPath, { locale: newLocale })
-  }
-
+const Header = () => {
   return (
-    <HStack
-      width={'100%'}
-      paddingY={3}
-      paddingX={6}
-      bg={'sidebarBG'}
-      justify={'space-between'}
-      mb={6}
-    >
-      <SearchInput {...props} />
-      <SelectorInput
-        size={48}
-        array={LANGUAGES}
-        currentValue={router.locale}
-        onChangeValue={onChangeLocale}
-      />
-      <Avatar size={'md'} name="Ivan Petrov" />
-    </HStack>
+    <Container variant={'header'}>
+      <Heading size={'md'} color={'primary.purple'}>
+        ITASK | Admin
+      </Heading>
+      <HStack>
+        <IconButton
+          variant={'unstyled'}
+          aria-label="notify"
+          icon={<CalendarIcon boxSize={4} />}
+        />
+        <IconButton
+          variant={'unstyled'}
+          aria-label="notify"
+          icon={<BellIcon boxSize={5} />}
+        />
+        <UserSettingPopover>
+          <HStack cursor={'pointer'}>
+            <Text fontWeight={600}>Ivan Ivanov</Text>
+            <Avatar size={'sm'} />
+          </HStack>
+        </UserSettingPopover>
+      </HStack>
+    </Container>
   )
 }
 

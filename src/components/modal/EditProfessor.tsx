@@ -6,9 +6,9 @@ import Empty from '../ui/Empty'
 import { TProfessor } from '@/types/professor'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/store/store'
-import { useNotifications } from '@/hooks/useNotifications'
 import { useState } from 'react'
 import { patchProfessorThunk } from '@/store/professors/createAsyncThunk.professor'
+import { useNotifications } from '@/hooks/useNotifications'
 
 type Props = {
   professor: TProfessor

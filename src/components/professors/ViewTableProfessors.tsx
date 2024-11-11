@@ -63,7 +63,7 @@ const ViewTableProfessor = () => {
   }
 
   return (
-    <TableContainer width={'100%'} borderRadius={'10px'} bg={'sidebarBG'}>
+    <TableContainer width={'100%'} >
       <Table size={'sm'}>
         <Thead>
           <Tr>

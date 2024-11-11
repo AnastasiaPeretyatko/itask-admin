@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@chakra-ui/react'
+import { Button, Text, Tooltip } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -18,7 +18,7 @@ const SidebarItem = ({ data, isCollapse }: Props) => {
 
   return (
     <>
-      {isCollapse ? (
+      {!isCollapse ? (
         <Tooltip label={data.title} placement="right">
           <Button
             variant="sidebarBtn"
@@ -30,11 +30,20 @@ const SidebarItem = ({ data, isCollapse }: Props) => {
       ) : (
         <Button
           variant="sidebarBtn"
+          justifyContent={isCollapse ? 'flex-start' : 'center'}
           leftIcon={data.icon}
           onClick={() => data.path && router.push(data.path)}
           isActive={router.asPath === data.path}
         >
-          {!isCollapse && t(data.title)}
+          <Text
+            sx={
+              !isCollapse
+                ? { opacity: 0, overflow: 'hidden', transition: 'all .5s ease' }
+                : {}
+            }
+          >
+            {t(data.title)}
+          </Text>
         </Button>
       )}
     </>

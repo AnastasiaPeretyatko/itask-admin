@@ -5,10 +5,10 @@ import Empty from '../ui/Empty'
 import { TProfessorCreate } from '@/types/professor'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/store/store'
-import { useNotifications } from '@/hooks/useNotifications'
 import { useState } from 'react'
 import { postProfessorThunk } from '@/store/professors/createAsyncThunk.professor'
 import { useTranslations } from 'next-intl'
+import { useNotifications } from '@/hooks/useNotifications'
 
 const CreateProfessor = ({ onClose }: { onClose: () => void }) => {
   const t = useTranslations()
