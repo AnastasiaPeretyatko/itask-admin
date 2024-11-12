@@ -29,6 +29,9 @@ export const theme = extendTheme({
         fill: { _dark: 'BLACK_300', _light: 'white.200' },
         switch: { _dark: 'BLACK_100', _light: 'white.300' },
       },
+      notify: {
+        bg: { _dark: 'primary.darkBlue', _light: 'white.100' },
+      },
 
       sidebarBG: { _dark: '#1A1D1F', _light: 'white.100' },
       text: {
