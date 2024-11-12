@@ -1,13 +1,9 @@
-import {
-  defineStyle,
-  defineStyleConfig,
-  StyleFunctionProps,
-} from '@chakra-ui/react'
+import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
 
 // define the base component styles
 const baseStyle = defineStyle(() => {
   return {
-    padding: 0,
+    // padding: 0,
     maxW: 'unset',
     width: 'unset',
   }
@@ -29,21 +25,26 @@ const viewDate = defineStyle(() => {
 
 const header = defineStyle(() => {
   return {
+    position: 'sticky',
+    top: 0,
+    zIndex: 10,
+    backgroundColor: 'background.main',
+    width: 'full',
     display: 'flex',
     flexDir: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: '20px',
-    paddingY: '10px',
-    marginX: '10px',
-    borderBottom: '1px solid',
-    borderColor: 'whiteAlpha.200',
+    padding: 4,
+    // borderColor: 'whiteAlpha.200',
+    boxShadow:'0 4px 2px -2px #80808021',
+    borderRadius: '10px'
   }
 })
 
 const boxTheme = defineStyle(() => {
   return {
-    width:'100%',
+    width: '100%',
     backgroundColor: 'background.switch',
     display: 'flex',
     flexDir: 'row',
@@ -65,7 +66,8 @@ const selector = defineStyle(() => {
     border: '1px solid',
     borderColor: 'fill.switch',
     position: 'relative',
-    padding: 2,
+    paddingY: 1,
+    paddingX: 3,
     fontSize: 'sm',
     bg: 'bg',
   }
@@ -97,12 +99,7 @@ const label = defineStyle(() => {
 })
 
 const sidebar = defineStyle(() => {
-  return {
-    display: 'flex',
-    flexDir: 'column',
-    width: '256px',
-    height: '100vh',
-  }
+  return {}
 })
 
 export const containerTheme = defineStyleConfig({

@@ -1,4 +1,14 @@
 {
   "Light": "Light",
-  "Dark": "Dark"
+  "Dark": "Dark",
+  "Professors": "Professors",
+  "Save": "Save",
+  "Edit": "Edit",
+  "Cancel": "Cancel",
+  "Delete": "Delete",
+  "Create professor": "Create professor",
+  "Create professor information notify": "The data about the new teacher will be saved in the system to create an account on the platform, after which the teacher will receive an email with instructions on how to activate the account and log in",
+  "Edit professor information notify": "The changed teacher data will be updated in the system and will immediately become available on the platform, and the teacher will receive a notification of the changes, if necessary",
+  "Home": "Home",
+  "Setting": "Setting"
 }

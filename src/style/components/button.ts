@@ -1,54 +1,81 @@
 import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
 
-const baseStyle = defineStyle({
-})
-
-const switchTheme = defineStyle(() => {
-  return {
-    textTransform: 'capitalize',
-    display: 'flex',
-    maxW: 'unset',
-    width: '100%',
-    _active: {
-      bg: 'PRIMARY_BLUE',
-      color: 'white',
-      borderRadius: 'md',
-    },
-  }
-})
+const baseStyle = defineStyle({})
 
 const primary = defineStyle(() => {
   return {
-    bg: 'PRIMARY_BLUE',
+    paddingX: 7,
+    fontSize: 'sm',
+    bg: 'primary.purple',
     color: 'white',
+    borderRadius: 10,
     _hover: {
       opacity: 0.8,
-    },
-    _active: {
-      bg: 'SECONDARY_BLUE',
+      _disabled: {
+        opacity: 0.5,
+        bg: 'button.bg',
+        color: 'text.pale',
+      },
     },
     _disabled: {
-      bg: 'BLACK_400',
+      bg: 'button.bg',
+      color: 'text.pale',
     },
   }
 })
 
 const sidebarBtn = defineStyle(() => {
   return {
-    borderRadius: 'md',
-    padding: 1,
-    justifyContent: 'start',
     width: '100%',
+    fontSize: 'sm',
+    fontWeight: 500,
+    padding: 2,
+    gap: 4,
     _hover: {
-      bg: 'fill.switch'
+      bg: 'neutral.light',
+    },
+    _active: {
+      bg: 'neutral.light',
+    },
+    '& span': { 
+      mr: 0
+    }
+  }
+})
+
+const unstyledBtn = defineStyle(() => {
+  return {
+    fontSize: 'sm',
+    fontWeight: 500,
+    padding: 2,
+    width: 'full',
+    justifyContent: 'flex-start',
+    height: 'max-content',
+    _hover: {
+      bg: 'background.switch',
+    },
+  }
+})
+
+const pagination = defineStyle(() => {
+  return {
+    color: 'text.pale',
+    _active: {
+      bg: 'primary.purple',
+      color: 'background.main'
     }
   }
 })
 
 export const buttonTheme = defineStyleConfig({
   baseStyle,
-  variants: { switchTheme, primary, sidebarBtn },
+  variants: {
+    primary,
+    sidebarBtn,
+    unstyledBtn,
+    pagination,
+  },
   defaultProps: {
-    size: 'sm',
+    // size: 'sm',
   },
 })

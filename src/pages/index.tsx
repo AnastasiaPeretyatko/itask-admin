@@ -1,9 +1,9 @@
 import AppLayout from '@/components/layout/AppLayout';
 import { GetStaticPropsContext } from 'next';
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl';
 
 export default function Index() {
-  const t = useTranslations();
+  // const t = useTranslations();
 
   return (
     <AppLayout>Helo</AppLayout>
