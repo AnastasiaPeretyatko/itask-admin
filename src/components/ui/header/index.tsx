@@ -7,14 +7,11 @@ import {
   IconButton,
   Text,
 } from '@chakra-ui/react'
-import UserSettingPopover from '../UserSettingPopover'
+import UserSettingPopover from '../user-settings-popover'
 
 const Header = () => {
   return (
     <Container variant={'header'}>
-      <Heading size={'md'} color={'primary.purple'}>
-        ITASK | Admin
-      </Heading>
       <HStack>
         <IconButton
           variant={'unstyled'}

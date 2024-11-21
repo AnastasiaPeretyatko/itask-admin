@@ -33,7 +33,7 @@ const header = defineStyle(() => {
     display: 'flex',
     flexDir: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     gap: '20px',
     padding: 4,
     // borderColor: 'whiteAlpha.200',
@@ -64,7 +64,7 @@ const selector = defineStyle(() => {
     width: '100%',
     borderRadius: '10px',
     border: '1px solid',
-    borderColor: 'fill.switch',
+    borderColor: 'background.fill',
     position: 'relative',
     paddingY: 1,
     paddingX: 3,
@@ -98,6 +98,16 @@ const label = defineStyle(() => {
   }
 })
 
+const wrapper_table = defineStyle(() => {
+  return {
+    // width: 'full',
+    margin: 2,
+    padding: 2,
+    borderRadius: '10px',
+    backgroundColor: 'background.main',
+  }
+})
+
 const sidebar = defineStyle(() => {
   return {}
 })
@@ -112,5 +122,6 @@ export const containerTheme = defineStyleConfig({
     label,
     selectorLine,
     sidebar,
+    wrapper_table
   },
 })

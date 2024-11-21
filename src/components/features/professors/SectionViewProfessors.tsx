@@ -1,16 +1,16 @@
 import { Button, HStack, Text, VStack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import ViewTableProfessor from './ViewTableProfessors'
-import SearchInput from '../ui/SearchInput'
-import WindowModal from '../modal/WindowModal'
 import { useTranslations } from 'next-intl'
-import CreateProfessor from '../modal/CreateProfessor'
-import Pagination from '../ui/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import useDebounce from '@/hooks/useDebounce'
-import { getProfessorsThunk } from '@/store/professors/createAsyncThunk.professor'
+import { getProfessorsThunk } from '@/store/professors/professors.thunks'
 import { BsPlusLg } from 'react-icons/bs'
+import SearchInput from '@/components/ui/SearchInput'
+import WindowModal from '@/components/modal/WindowModal'
+import CreateProfessor from './modal/CreateProfessor'
+import Pagination from '@/components/ui/Pagination'
+import ViewTableProfessor from './ViewTableProfessors'
 
 const SectionViewProfessors = () => {
   const t = useTranslations()
@@ -51,7 +51,7 @@ const SectionViewProfessors = () => {
       <VStack
         width={'full'}
         borderRadius={'10px'}
-        bg={'sidebarBG'}
+        bg={'background.main'}
         padding={4}
         gap={4}
       >

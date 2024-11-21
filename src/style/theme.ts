@@ -28,22 +28,18 @@ export const theme = extendTheme({
         main: { _dark: '#1A1D1F', _light: 'white.100' },
         fill: { _dark: 'BLACK_300', _light: 'white.200' },
         switch: { _dark: 'BLACK_100', _light: 'white.300' },
+        button: { _dark: 'whiteAlpha.200', _light: 'neutral.light' },
+      },
+      input: {
+        outline: { _dark: 'whiteAlpha.200', _light: 'blackAlpha.300' },
       },
       notify: {
         bg: { _dark: 'primary.darkBlue', _light: 'white.100' },
       },
-
-      sidebarBG: { _dark: '#1A1D1F', _light: 'white.100' },
       text: {
+        bold: { _dark: 'whiteAlpha.800', _light: 'blackAlpha.800' },
         pale: { _dark: 'whiteAlpha.600', _light: 'blackAlpha.600' },
       },
-      bg: { _dark: 'black', _light: 'white.300' },
-      fill: {
-        switch: { _dark: 'BLACK_300', _light: 'white.200' },
-      },
-      // background: {
-      //   switch: { _dark: 'BLACK_100', _light: 'white.300' },
-      // },
       button: {
         bg: { _dark: 'whiteAlpha.900', _light: 'blackAlpha.400' },
       },
@@ -51,19 +47,6 @@ export const theme = extendTheme({
   },
   colors: {
     ...colors,
-
-    // white: {
-    //   100: 'white',
-    //   200: '#FCFCFC',
-    //   300: '#F4F4F4',
-    // },
-
-    // red: {
-    //   100: '#FFECEE',
-    // },
-
-    // black: '#111315',
-    // PRIMARY_WHITE: '#FCFCFC',
   },
   components: {
     Container: containerTheme,

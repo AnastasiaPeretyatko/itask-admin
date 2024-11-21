@@ -16,13 +16,13 @@ import {
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import CheckboxUI from '../ui/CheckboxUI'
-import moment from 'moment'
 import { CheckIcon } from '@chakra-ui/icons'
-import ActionMenu from './ActionMenu'
+import CheckboxUI from '@/components/ui/CheckboxUI'
+import { useTranslations } from 'next-intl'
 
-const ViewTableProfessor = () => {
-  const { data } = useSelector((state: RootState) => state.professors)
+const ViewTableStudents = () => {
+  const t = useTranslations()
+  const { data } = useSelector((state: RootState) => state.students)
 
   const [values, setValues] = useState(
     data ? data.map(item => ({ ...item, checked: false })) : []
@@ -63,7 +63,7 @@ const ViewTableProfessor = () => {
   }
 
   return (
-    <TableContainer width={'100%'} >
+    <TableContainer width={'100%'}>
       <Table size={'sm'}>
         <Thead>
           <Tr>
@@ -74,18 +74,18 @@ const ViewTableProfessor = () => {
                 onCheckedChange={handleCheckAll}
               />
             </Th>
-            <Th>Name</Th>
-            <Th>Description</Th>
-            <Th>Tel</Th>
-            <Th>Created</Th>
-            <Th>Status</Th>
-            <Th>Action</Th>
+            <Th>{t("Fullname")}</Th>
+            <Th>{t("Group")}</Th>
+            <Th>{t("Tel")}</Th>
+            <Th>{t("Status")}</Th>
+            <Th>{t("Created")}</Th>
+            <Th>{t("Action")}</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {values &&
+          {values && 
             values.map(el => (
-              <Tr key={el.id}>
+              <Tr key={el.id} onClick={() => handleIndividualCheck(el.id)}>
                 <Td>
                   <CheckboxUI
                     isChecked={el.checked}
@@ -94,22 +94,29 @@ const ViewTableProfessor = () => {
                 </Td>
                 <Td>
                   <HStack>
-                    <Avatar />
-                    <VStack align={'start'} gap={0}>
-                      <Text>{el.fullName}</Text>
-                      <Text color={'text.pale'}>{el.user.email}</Text>
+                    <Avatar boxSize={10} />
+                    <VStack align={'start'} gap={1}>
+                      <Text
+                        fontSize={'md'}
+                        fontWeight={'500'}
+                        color={'text.bold'}
+                      >
+                        {el.fullName}
+                      </Text>
+                      <Text fontSize={'sm'} color={'text.pale'}>
+                        {el.user.email}
+                      </Text>
                     </VStack>
                   </HStack>
                 </Td>
-                <Td>{el.description}</Td>
+                <Td>{el.group.groupCode}</Td>
                 <Td>{el.tel}</Td>
-                <Td>{moment(el.createdAt).format('DD/MM/YYYY')}</Td>
                 <Td>
                   <Icon as={CheckIcon} />
                 </Td>
-                <Td>
-                  <ActionMenu professor={el} />
-                </Td>
+                <Td>{/* <ActionMenu professor={el} /> */}</Td>
+                <Td>{/* <ActionMenu professor={el} /> */}</Td>
+
               </Tr>
             ))}
         </Tbody>
@@ -118,4 +125,4 @@ const ViewTableProfessor = () => {
   )
 }
 
-export default ViewTableProfessor
+export default ViewTableStudents

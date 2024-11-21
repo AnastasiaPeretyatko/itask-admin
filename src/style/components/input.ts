@@ -6,10 +6,10 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const form_input = definePartsStyle({
   field: {
-    backgroundColor: 'bg',
+    backgroundColor: 'background.main',
     borderRadius: '10px',
     border: '1px solid',
-    borderColor: 'fill.switch',
+    borderColor: 'input.outline',
     _focusVisible: {
       border: 'inherit',
     },
@@ -21,15 +21,15 @@ const search = definePartsStyle({
     paddingX: 4,
     borderRadius: 10,
     border: '1px solid',
-    borderColor: 'text.pale',
+    borderColor: 'input.outline',
     fontSize: 'sm',
     _placeholder: {
       fontSize: 'sm',
       color: 'text.pale',
     },
     _focus: {
-      border: '2px solid',
-      borderColor: 'PRIMARY_PURPLE',
+      border: '1px solid',
+      borderColor: 'text.pale',
     },
   },
 })

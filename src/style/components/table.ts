@@ -7,9 +7,17 @@ const { definePartsStyle, defineMultiStyleConfig } =
 const baseStyle = definePartsStyle({
   table: {
     thead: {
-      bg: 'whiteAlpha.100',
+      bg: '#1a40cf1c',
       th: {
         paddingY: 3
+      }
+    },
+    tbody: {
+      tr: {
+        cursor: 'pointer',
+        _hover: {
+          bg: 'background.button'
+        }
       }
     }
   }

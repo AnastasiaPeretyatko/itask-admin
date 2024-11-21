@@ -1,4 +1,4 @@
-import ToastAlert from '@/components/toast/ToastAlert'
+import ToastAlert from '@/components/ui/toast/ToastAlert'
 import { useToast } from '@chakra-ui/react'
 
 export const useNotifications = () => {

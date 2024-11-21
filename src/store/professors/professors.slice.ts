@@ -4,7 +4,7 @@ import {
   getProfessorsThunk,
   patchProfessorThunk,
   postProfessorThunk,
-} from './createAsyncThunk.professor'
+} from './professors.thunks'
 
 export type TParams = {
   limit: number

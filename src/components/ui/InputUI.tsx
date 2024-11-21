@@ -9,7 +9,12 @@ import {
   useOutsideClick,
 } from '@chakra-ui/react'
 import { useRef } from 'react'
-import { FieldValues, Path, UseFormRegisterReturn, UseFormWatch } from 'react-hook-form'
+import {
+  FieldValues,
+  Path,
+  UseFormRegisterReturn,
+  UseFormWatch,
+} from 'react-hook-form'
 
 type Props<T extends FieldValues> = {
   label: string
@@ -22,7 +27,7 @@ type Props<T extends FieldValues> = {
   name: Path<T>
 }
 
-const CustomeInput = <T extends FieldValues,>({
+const InputUI = <T extends FieldValues>({
   label,
   error,
   helper,
@@ -30,7 +35,7 @@ const CustomeInput = <T extends FieldValues,>({
   isRequired = false,
   register,
   watch,
-  name
+  name,
 }: Props<T>) => {
   const [flag, setFlag] = useBoolean()
   const ref = useRef(null)
@@ -39,14 +44,14 @@ const CustomeInput = <T extends FieldValues,>({
     ref: ref,
     handler: () => setFlag.off(),
   })
-  console.log('REgister', register);
+  console.log('REgister', register)
 
   return (
     <>
       <Box
         bgGradient={
           flag || watch(name)
-            ? 'linear(to-r, SECONDARY_BLUE, PRIMARY_PURPLE)'
+            ? 'linear(to-r, secondary.blue, primary.purple)'
             : 'none'
         }
         padding={0.5}
@@ -63,12 +68,13 @@ const CustomeInput = <T extends FieldValues,>({
               zIndex: 1,
               position: 'absolute',
               top: flag || watch(name) ? '-30%' : 1,
-              left: '10px',
+              left: flag || watch(name) ? '8px' : '10px',
               transition: 'all .3s ease',
               fontSize: flag || watch(name) ? 'xs' : 'md',
-              backgroundColor: 'bg',
-              paddingX: 1,
-              opacity: flag || watch(name) ? 0.7 : 0.5,
+              fontWeight: '400',
+              backgroundColor: 'background.main',
+              paddingX: flag || watch(name) ? 2 : 1,
+              color: flag || watch(name) ? 'text.bold' : 'text.pale',
             }}
           >
             {label}
@@ -77,6 +83,7 @@ const CustomeInput = <T extends FieldValues,>({
             type={type}
             size={'sm'}
             variant={'form_input'}
+            sx={flag || watch(name) ? { border: 'unset' } : {}}
             {...register}
           />
           {helper && !error && <FormHelperText>{helper}</FormHelperText>}
@@ -87,4 +94,4 @@ const CustomeInput = <T extends FieldValues,>({
   )
 }
 
-export default CustomeInput
+export default InputUI

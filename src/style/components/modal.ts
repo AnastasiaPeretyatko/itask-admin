@@ -12,7 +12,7 @@ const baseStyle = definePartsStyle({
     fontSize: 'lg'
   },
   dialog:{
-    bg:'bg'
+    bg:'background.main',
   }
 })
 

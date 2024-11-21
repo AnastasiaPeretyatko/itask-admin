@@ -1,10 +1,10 @@
-import { Flex, HStack, VStack } from '@chakra-ui/react'
+import { Container, Flex, HStack, VStack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import Header from '../header'
-import Sidebar from '../sidebar/Sidebar'
+import Sidebar from '../ui/sidebar/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { changeStateSidebar } from '@/store/user-setting/setting.slice'
+import Header from '../ui/header'
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { isOpenSidebar } = useSelector(
@@ -19,7 +19,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   }, [dispatch, isOpenSidebar])
 
   return (
-    <HStack w="full" h="100vh">
+    <HStack maxW={'100vw'} w="100vw" h="100vh">
       <Flex
         as="aside"
         w="full"
@@ -42,7 +42,9 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
         align="start"
       >
         <Header />
-        {children}
+        <Container maxW={'100%'} width={'100%'} margin={0} padding={0}>
+          {children}
+        </Container>
       </VStack>
     </HStack>
   )

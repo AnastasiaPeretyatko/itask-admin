@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { useRef } from 'react'
 import Label from './Label'
-import { SelectArrayType } from '@/common/assets/language'
+import { SelectArrayType } from '@/assets/language'
 
 type Props = {
   label?: string

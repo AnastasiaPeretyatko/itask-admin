@@ -1,30 +1,41 @@
 import { Button, Flex, HStack } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import CustomeInput from '../ui/CustomeInput'
-import Empty from '../ui/Empty'
-import { TProfessorCreate } from '@/types/professor'
+import { TProfessor } from '@/types/professor'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/store/store'
 import { useState } from 'react'
-import { postProfessorThunk } from '@/store/professors/createAsyncThunk.professor'
-import { useTranslations } from 'next-intl'
+import { patchProfessorThunk } from '@/store/professors/professors.thunks'
 import { useNotifications } from '@/hooks/useNotifications'
+import Empty from '@/components/ui/Empty'
+import InputUI from '@/components/ui/InputUI'
 
-const CreateProfessor = ({ onClose }: { onClose: () => void }) => {
+type Props = {
+  professor: TProfessor
+  onClose: () => void
+}
+
+const EditProfessor = ({ professor, onClose }: Props) => {
   const t = useTranslations()
   const {
     register,
     handleSubmit,
     formState: { isValid },
     watch,
-  } = useForm<TProfessorCreate>()
+  } = useForm<TProfessor>({
+    defaultValues: {
+      tel: professor.tel,
+      description: professor.description,
+      fullName: professor.fullName,
+    },
+  })
   const dispatch = useDispatch<AppDispatch>()
   const { showErrorMessage, showSuccessMessage } = useNotifications()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const onSubmit: SubmitHandler<TProfessorCreate> = data => {
+  const onSubmit: SubmitHandler<TProfessor> = data => {
     setIsLoading(true)
-    dispatch(postProfessorThunk(data))
+    dispatch(patchProfessorThunk({ id: professor.id, data }))
       .unwrap()
       .then(res => {
         showSuccessMessage(res.message)
@@ -37,20 +48,26 @@ const CreateProfessor = ({ onClose }: { onClose: () => void }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex flexDir={'column'} gap={4}>
-        <Empty>{t('Create professor information notify')}.</Empty>
-        <CustomeInput<TProfessorCreate>
-          label={'Email'}
-          register={register('email', { required: 'Name is required' })}
-          name={'email'}
-          watch={watch}
-        />
-        <CustomeInput<TProfessorCreate>
+        <Empty>{t('Edit professor information notify')}.</Empty>
+        <InputUI<TProfessor>
           label={'Full name'}
           register={register('fullName', { required: 'Name is required' })}
-          name="fullName"
           watch={watch}
+          name="fullName"
         />
-        {/* <SelectorInput label={t('Role')} /> */}
+        <InputUI<TProfessor>
+          label={'Tel'}
+          type="tel"
+          register={register('tel', { required: 'Name is required' })}
+          watch={watch}
+          name="tel"
+        />
+        <InputUI<TProfessor>
+          label={'Description'}
+          register={register('description', { required: 'Name is required' })}
+          watch={watch}
+          name="description"
+        />
         <HStack width={'100%'} gap={4} marginY={4} justify={'end'}>
           <Button>{t('Cancel')}</Button>
           <Button
@@ -67,4 +84,4 @@ const CreateProfessor = ({ onClose }: { onClose: () => void }) => {
   )
 }
 
-export default CreateProfessor
+export default EditProfessor

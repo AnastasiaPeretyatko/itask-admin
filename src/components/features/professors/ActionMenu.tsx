@@ -1,12 +1,12 @@
 import { IconButton, Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import React from 'react'
 import { CiMenuKebab } from 'react-icons/ci'
-import WindowModal from '../modal/WindowModal'
-import EditProfessor from '../modal/EditProfessor'
+import WindowModal from '../../modal/WindowModal'
 import { useTranslations } from 'next-intl'
 import { TProfessor } from '@/types/professor'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import CustomMenuItem from '../ui/CustomMenuItem'
+import CustomMenuItem from '../../ui/CustomMenuItem'
+import EditProfessor from './modal/EditProfessor'
 
 const ActionMenu = ({ professor }: { professor: TProfessor }) => {
   const t = useTranslations()
