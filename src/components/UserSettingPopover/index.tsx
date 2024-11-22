@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import { BsGear, BsIndent } from 'react-icons/bs'
-import SelectorInput from '../ui/SelectorInput'
+import SelectorInput from '../ui/SelectorLanguageInput'
 import { LANGUAGES } from '@/common/assets/language'
 import { useRouter } from 'next/router'
 
