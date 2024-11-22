@@ -14,7 +14,7 @@ import {
   Tr,
   VStack,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { CheckIcon } from '@chakra-ui/icons'
 import CheckboxUI from '@/components/ui/CheckboxUI'
@@ -35,7 +35,12 @@ const ViewTableStudents = () => {
     setValues(values.map(item => ({ ...item, checked: !allChecked })))
   }
 
-  const handleIndividualCheck = (id: string) => {
+  const handleIndividualCheck = (
+    event: ChangeEvent<HTMLInputElement> | MouseEvent<HTMLTableRowElement>,
+    id: string
+  ) => {
+    event.preventDefault()
+    console.log('id', id)
     setValues(
       values.map(item =>
         item.id === id ? { ...item, checked: !item.checked } : item
@@ -74,22 +79,22 @@ const ViewTableStudents = () => {
                 onCheckedChange={handleCheckAll}
               />
             </Th>
-            <Th>{t("Fullname")}</Th>
-            <Th>{t("Group")}</Th>
-            <Th>{t("Tel")}</Th>
-            <Th>{t("Status")}</Th>
-            <Th>{t("Created")}</Th>
-            <Th>{t("Action")}</Th>
+            <Th>{t('Fullname')}</Th>
+            <Th>{t('Group')}</Th>
+            <Th>{t('Tel')}</Th>
+            <Th>{t('Status')}</Th>
+            <Th>{t('Created')}</Th>
+            <Th>{t('Action')}</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {values && 
+          {values &&
             values.map(el => (
-              <Tr key={el.id} onClick={() => handleIndividualCheck(el.id)}>
+              <Tr key={el.id} onClick={e => handleIndividualCheck(e, el.id)}>
                 <Td>
                   <CheckboxUI
                     isChecked={el.checked}
-                    onCheckedChange={() => handleIndividualCheck(el.id)}
+                    onCheckedChange={e => handleIndividualCheck(e, el.id)}
                   />
                 </Td>
                 <Td>
@@ -116,7 +121,6 @@ const ViewTableStudents = () => {
                 </Td>
                 <Td>{/* <ActionMenu professor={el} /> */}</Td>
                 <Td>{/* <ActionMenu professor={el} /> */}</Td>
-
               </Tr>
             ))}
         </Tbody>

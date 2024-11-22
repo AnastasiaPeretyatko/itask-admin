@@ -16,7 +16,7 @@ const BreadcrumbUI = () => {
   const path = useMemo(() => {
     const rest = router.pathname.split('/')[1]
     return rest[0].toUpperCase() + rest.slice(1)
-  }, [])
+  }, [router.pathname])
 
   return (
     <Breadcrumb mb={4}>
@@ -30,7 +30,7 @@ const BreadcrumbUI = () => {
       </BreadcrumbItem>
 
       <BreadcrumbItem isCurrentPage>
-        <BreadcrumbLink >{t(path)}</BreadcrumbLink>
+        <BreadcrumbLink>{t(path)}</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
   )

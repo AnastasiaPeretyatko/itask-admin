@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { changeStateSidebar } from '@/store/user-setting/setting.slice'
 import { Hamburger } from '../../customeIcon'
+import { PiStudentLight } from 'react-icons/pi'
 
 const Sidebar_Item = {
   menu: [
     { title: 'Home', icon: <BsHouse />, path: '/' },
     { title: 'Professors', icon: <BsPeople />, path: '/professors' },
-    { title: 'Students', icon: <BsPeople />, path: '/students'}
+    { title: 'Students', icon: <PiStudentLight />, path: '/students' },
   ],
 }
 

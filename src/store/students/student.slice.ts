@@ -50,6 +50,7 @@ const students = createSlice({
         state.isLoading = false
         console.log('payload', payload);
         state.data = payload.data
+        state.count = payload.count
       })
       .addCase(getAllStudentsThunk.rejected, state => {
         state.isLoading = false

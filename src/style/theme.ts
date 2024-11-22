@@ -30,6 +30,7 @@ export const theme = extendTheme({
         switch: { _dark: 'BLACK_100', _light: 'white.300' },
         button: { _dark: 'whiteAlpha.200', _light: 'neutral.light' },
       },
+      bg: { _dark: 'black', _light: 'white.300' },
       input: {
         outline: { _dark: 'whiteAlpha.200', _light: 'blackAlpha.300' },
       },

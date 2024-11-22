@@ -4,6 +4,7 @@ import {
   getAllStudentsRequest,
   postStudentRequest,
 } from '@/services/students.service'
+import { TParams } from './student.slice'
 
 export const postStudentThunk = createAsyncThunk<
   { data: TStudent; message: string },
@@ -15,7 +16,7 @@ export const postStudentThunk = createAsyncThunk<
 >('/student/create', async (data, { rejectWithValue, fulfillWithValue }) => {
   try {
     const res = await postStudentRequest(data)
-    console.log(res);
+    console.log(res)
 
     return fulfillWithValue({
       data: res.data.data,
@@ -33,21 +34,19 @@ export const postStudentThunk = createAsyncThunk<
 })
 
 export const getAllStudentsThunk = createAsyncThunk<
-  { data: TStudent[]},
-  undefined,
+  { data: TStudent[], count: number  },
+  TParams,
   {
     rejectValue: { statusCode: number; message: string }
-    fulfillWithValue: { data: TStudent[]}
   }
->('/students/getAll', async (_, { rejectWithValue, fulfillWithValue }) => {
+>('/students/getAll', async (params, { rejectWithValue }) => {
   try {
-    const res = await getAllStudentsRequest()
+    const res = await getAllStudentsRequest(params)
 
-    console.log('res', res);
-
-    return fulfillWithValue({
-      data: res.data
-    })
+    return {
+      data: res.data.data,
+      count: res.data.count,
+    }
   } catch (error) {
     const hasErrResponse = (
       error as { response: { data: { statusCode: number; message: string } } }
