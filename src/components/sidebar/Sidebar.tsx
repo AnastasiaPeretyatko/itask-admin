@@ -11,6 +11,7 @@ const Sidebar_Item = {
   menu: [
     { title: 'Home', icon: <BsHouse />, path: '/' },
     { title: 'Professors', icon: <BsPeople />, path: '/professors' },
+    { title: 'Groups', icon: <BsPeople />, path: '/groups' },
   ],
 }
 
