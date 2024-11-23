@@ -24,6 +24,26 @@ const primary = defineStyle(() => {
   }
 })
 
+const secondary = defineStyle(() => {
+  return {
+    paddingX: 7,
+    fontSize: 'sm',
+    border: '2px solid',
+    borderColor: 'primary.purple',
+    borderRadius: 10,
+    _hover: {
+      opacity: 0.8,
+      bg: 'primary.purple',
+      color: 'white',
+      _disabled: {
+        opacity: 0.5,
+        bg: 'button.bg',
+        color: 'text.pale',
+      },
+    },
+  }
+})
+
 const sidebarBtn = defineStyle(() => {
   return {
     width: '100%',
@@ -32,29 +52,19 @@ const sidebarBtn = defineStyle(() => {
     padding: 2,
     gap: 4,
     _hover: {
-      bg: 'neutral.light',
+      bg: 'background.button',
     },
     _active: {
-      bg: 'neutral.light',
+      bg: 'background.button',
     },
-    '& span': { 
-      mr: 0
-    }
+    '& span': {
+      mr: 0,
+    },
   }
 })
 
 const unstyledBtn = defineStyle(() => {
-  return {
-    fontSize: 'sm',
-    fontWeight: 500,
-    padding: 2,
-    width: 'full',
-    justifyContent: 'flex-start',
-    height: 'max-content',
-    _hover: {
-      bg: 'background.switch',
-    },
-  }
+  return {}
 })
 
 const pagination = defineStyle(() => {
@@ -62,8 +72,8 @@ const pagination = defineStyle(() => {
     color: 'text.pale',
     _active: {
       bg: 'primary.purple',
-      color: 'background.main'
-    }
+      color: 'background.main',
+    },
   }
 })
 
@@ -71,6 +81,7 @@ export const buttonTheme = defineStyleConfig({
   baseStyle,
   variants: {
     primary,
+    secondary,
     sidebarBtn,
     unstyledBtn,
     pagination,

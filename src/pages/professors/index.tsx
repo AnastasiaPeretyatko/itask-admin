@@ -1,5 +1,5 @@
+import SectionViewProfessors from '@/components/features/professors/SectionViewProfessors'
 import AppLayout from '@/components/layout/AppLayout'
-import SectionViewProfessors from '@/components/professors/SectionViewProfessors'
 import { GetStaticPropsContext } from 'next'
 
 const ProfessorsPage = () => {

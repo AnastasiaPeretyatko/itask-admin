@@ -8,7 +8,7 @@ import {
 import React from 'react'
 
 type Props = {
-  lable: string
+  label: string
   icon?: ComponentWithAs<'svg', IconProps>
   onClick?: () => void
   isDelete?: boolean
@@ -16,7 +16,7 @@ type Props = {
 }
 
 const CustomMenuItem = ({
-  lable,
+  label,
   icon,
   onClick,
   isDelete,
@@ -34,7 +34,7 @@ const CustomMenuItem = ({
       onClick={onClick}
     >
       <Icon as={icon} />
-      <Text>{lable}</Text>
+      <Text>{label}</Text>
     </MenuItem>
   )
 }

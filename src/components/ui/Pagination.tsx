@@ -9,10 +9,11 @@ type Props = {
 }
 
 const Pagination = ({ count, limit, page, onChangePage }: Props) => {
-  const arrayPages = Array.from(
-    { length: Math.ceil(count / limit) },
-    (v, i) => i + 1
-  )
+  const arrayPages = Array.from({ length: Math.ceil(count / limit) }, (v, i) => i + 1)
+
+  if(!arrayPages.length) {
+    return null
+  }
 
   return (
     <HStack>
@@ -25,7 +26,7 @@ const Pagination = ({ count, limit, page, onChangePage }: Props) => {
       />
       {arrayPages.map(el => (
         <Button
-        size={'sm'}
+          size={'sm'}
           variant={'pagination'}
           key={'pagination' + el}
           isActive={el === page}

@@ -4,7 +4,7 @@ import React from 'react'
 type Props = {
   isChecked: boolean
   indeterminate?: boolean
-  onCheckedChange: () => void
+  onCheckedChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   lable?: string
 }
 

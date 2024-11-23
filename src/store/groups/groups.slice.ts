@@ -1,10 +1,10 @@
-import { TGroup } from '@/types/group'
+import { TGroup } from '@/types/groups'
 import { createSlice } from '@reduxjs/toolkit'
 import {
   getGroupThunk,
   patchGroupThunk,
   postGroupThunk,
-} from './createAsyncThunk.group'
+} from './groups.thunks'
 
 export type TParams = {
   limit: number
@@ -52,7 +52,7 @@ const groups = createSlice({
         state.data = payload.data
         state.count = payload.count
       })
-      .addCase(getGroupThunk.rejected, (state, { payload }) => {
+      .addCase(getGroupThunk.rejected, (state) => {
         state.isLoading = false
       })
       .addCase(patchGroupThunk.pending, state => {
@@ -61,7 +61,6 @@ const groups = createSlice({
       })
       .addCase(patchGroupThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false
-        console.log(payload.data);
         state.data = state.data.map(el =>
           el.id === payload.data.id ? payload.data : el
         )

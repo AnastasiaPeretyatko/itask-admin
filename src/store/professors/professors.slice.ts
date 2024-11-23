@@ -4,7 +4,7 @@ import {
   getProfessorsThunk,
   patchProfessorThunk,
   postProfessorThunk,
-} from './createAsyncThunk.professor'
+} from './professors.thunks'
 
 export type TParams = {
   limit: number
@@ -52,9 +52,8 @@ const professors = createSlice({
         state.data = payload.data
         state.count = payload.count
       })
-      .addCase(getProfessorsThunk.rejected, (state, { payload }) => {
+      .addCase(getProfessorsThunk.rejected, (state) => {
         state.isLoading = false
-        console.log('payload', payload)
       })
       .addCase(patchProfessorThunk.pending, state => {
         state.isLoading = true
@@ -62,7 +61,6 @@ const professors = createSlice({
       })
       .addCase(patchProfessorThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false
-        console.log(payload.data);
         state.data = state.data.map(el =>
           el.id === payload.data.id ? payload.data : el
         )

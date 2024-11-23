@@ -11,11 +11,17 @@ export type SearchInputProps = {
   value: string
   onChange: (value: string) => void
   onClearSearchInput?: () => void
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
 }
 
-const SearchInput = ({ onChange, value, onClearSearchInput }: SearchInputProps) => {
+const SearchInput = ({
+  onChange,
+  value,
+  onClearSearchInput,
+  size = 'sm',
+}: SearchInputProps) => {
   return (
-    <InputGroup width={80}>
+    <InputGroup width={80} size={size}>
       <Input
         variant={'search'}
         placeholder="Search"

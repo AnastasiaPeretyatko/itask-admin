@@ -9,6 +9,8 @@
   "Create professor": "Create professor",
   "Create professor information notify": "The data about the new teacher will be saved in the system to create an account on the platform, after which the teacher will receive an email with instructions on how to activate the account and log in",
   "Edit professor information notify": "The changed teacher data will be updated in the system and will immediately become available on the platform, and the teacher will receive a notification of the changes, if necessary",
+  "Create student information notify": "Enter the information about the student to add him to the system. Make sure that all required fields are filled in correctly.",
+  "Create student": "Create student",
   "Home": "Home",
   "Setting": "Setting",
   "Groups": "Groups",
@@ -21,8 +23,6 @@
   "Course": "Course",
   "Group number": "Group number",
   "Name": "Name",
-  "Created": "Created",
-  "Action": "Action",
   "ИКТИБ": "ICTIS",
   "ИРТСУ": "IRCS",
   "ИНЭП": "IEE",
@@ -31,5 +31,14 @@
   "specialist": "Specialist",
   "master": "Master",
   "full-time": "Full-time",
-  "extramural": "Extramural"
+  "extramural": "Extramural",
+  "Students": "Students",
+  "Create": "Create",
+  "Created": "Created",
+  "Fullname": "Fullname",
+  "Email": "Email",
+  "Group": "Group",
+  "Tel": "Tel",
+  "Status": "Status",
+  "Action": "Action"
 }
