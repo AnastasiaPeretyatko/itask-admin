@@ -64,12 +64,12 @@ const selector = defineStyle(() => {
     width: '100%',
     borderRadius: '10px',
     border: '1px solid',
-    borderColor: 'background.fill',
+    borderColor: 'input.outline',
     position: 'relative',
     paddingY: 1,
     paddingX: 3,
     fontSize: 'sm',
-    bg: 'bg',
+    bg: 'background.main',
   }
 })
 

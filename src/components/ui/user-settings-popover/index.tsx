@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import { BsGear, BsIndent } from 'react-icons/bs'
-import SelectorInput from '../SelectorInput'
+import SelectorLanguageInput from '../selector/SelectorLanguageInput'
 import { LANGUAGES } from '@/assets/language'
 import { useRouter } from 'next/router'
 
@@ -63,7 +63,7 @@ const UserSettingPopover = ({ children }: Props) => {
                 isChecked={colorMode === 'dark'}
               />
             </FormControl>
-            <SelectorInput
+            <SelectorLanguageInput
               array={LANGUAGES}
               currentValue={router.locale}
               onChangeValue={onChangeLocale}

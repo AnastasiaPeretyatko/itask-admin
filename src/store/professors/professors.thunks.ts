@@ -6,13 +6,14 @@ import {
   patchProfessorRequest,
   postProfessorRequest,
 } from '@/services/professor.service'
+import { MessageType } from '@/types/common'
 
 export const postProfessorThunk = createAsyncThunk<
-  { data: TProfessor; message: string },
+  { data: TProfessor; message: MessageType },
   TProfessorCreate,
   {
-    rejectValue: { statusCode: number; message: string }
-    fulfillWithValue: { data: TProfessor; message: string }
+    rejectValue: { statusCode: number; message: MessageType }
+    fulfillWithValue: { data: TProfessor; message: MessageType }
   }
 >('/professor/create', async (data, { rejectWithValue, fulfillWithValue }) => {
   try {
@@ -24,7 +25,7 @@ export const postProfessorThunk = createAsyncThunk<
     })
   } catch (error) {
     const hasErrResponse = (
-      error as { response: { data: { statusCode: number; message: string } } }
+      error as { response: { data: { statusCode: number; message: MessageType } } }
     ).response
     if (!hasErrResponse) {
       throw error
@@ -37,7 +38,7 @@ export const getProfessorsThunk = createAsyncThunk<
   { data: TProfessor[]; count: number },
   TParams,
   {
-    rejectValue: { statusCode: number; message: string }
+    rejectValue: { statusCode: number; message: MessageType }
   }
 >('/professor/get', async (params, { rejectWithValue }) => {
   try {
@@ -48,7 +49,7 @@ export const getProfessorsThunk = createAsyncThunk<
     }
   } catch (error) {
     const hasErrResponse = (
-      error as { response: { data: { statusCode: number; message: string } } }
+      error as { response: { data: { statusCode: number; message: MessageType } } }
     ).response
     if (!hasErrResponse) {
       throw error
@@ -58,11 +59,11 @@ export const getProfessorsThunk = createAsyncThunk<
 })
 
 export const patchProfessorThunk = createAsyncThunk<
-  { data: TProfessor; message: string },
+  { data: TProfessor; message: MessageType },
   { id: string; data: Partial<TProfessor> },
   {
-    rejectValue: { statusCode: number; message: string }
-    fulfillWithValue: { data: TProfessor; message: string }
+    rejectValue: { statusCode: number; message: MessageType }
+    fulfillWithValue: { data: TProfessor; message: MessageType }
   }
 >('/professor/patch', async ({ id, data }, { rejectWithValue }) => {
   try {
@@ -73,7 +74,7 @@ export const patchProfessorThunk = createAsyncThunk<
     }
   } catch (error) {
     const hasErrResponse = (
-      error as { response: { data: { statusCode: number; message: string } } }
+      error as { response: { data: { statusCode: number; message: MessageType } } }
     ).response
     if (!hasErrResponse) {
       throw error

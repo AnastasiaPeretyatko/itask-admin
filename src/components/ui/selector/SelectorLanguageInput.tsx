@@ -12,7 +12,7 @@ import {
   useOutsideClick,
 } from '@chakra-ui/react'
 import { useRef } from 'react'
-import Label from './Label'
+import Label from '../Label'
 import { SelectArrayType } from '@/assets/language'
 
 type Props = {
@@ -23,7 +23,7 @@ type Props = {
   onChangeValue: (value: string) => void
 }
 
-const SelectorInput = ({
+const SelectorLanguageInput = ({
   size,
   label,
   array,
@@ -103,4 +103,4 @@ const SelectorInput = ({
   )
 }
 
-export default SelectorInput
+export default SelectorLanguageInput

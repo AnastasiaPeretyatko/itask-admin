@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import professorsReducer from './professors/professors.slice'
+import groupsReducer from './groups/groups.slice'
 import settingsReducer from './user-setting/setting.slice'
 import studentsReducer from './students/student.slice'
 
@@ -11,5 +12,6 @@ export const store = configureStore({
     professors: professorsReducer,
     userSettings: settingsReducer,
     students: studentsReducer,
+    groups: groupsReducer,
   },
 })

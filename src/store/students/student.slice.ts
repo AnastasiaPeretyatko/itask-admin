@@ -48,7 +48,6 @@ const students = createSlice({
       })
       .addCase(getAllStudentsThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false
-        console.log('payload', payload);
         state.data = payload.data
         state.count = payload.count
       })

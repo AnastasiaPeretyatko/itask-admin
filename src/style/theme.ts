@@ -34,6 +34,9 @@ export const theme = extendTheme({
       input: {
         outline: { _dark: 'whiteAlpha.200', _light: 'blackAlpha.300' },
       },
+      selector: {
+        bg: { _dark: '#2e3337', _light: 'white.100' },
+      },
       notify: {
         bg: { _dark: 'primary.darkBlue', _light: 'white.100' },
       },

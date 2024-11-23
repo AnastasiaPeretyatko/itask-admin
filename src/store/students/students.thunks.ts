@@ -5,18 +5,18 @@ import {
   postStudentRequest,
 } from '@/services/students.service'
 import { TParams } from './student.slice'
+import { MessageType } from '@/types/common'
 
 export const postStudentThunk = createAsyncThunk<
-  { data: TStudent; message: string },
+  { data: TStudent; message: MessageType },
   TStudentCreate,
   {
-    rejectValue: { statusCode: number; message: string }
-    fulfillWithValue: { data: TStudent; message: string }
+    rejectValue: { statusCode: number; message: MessageType }
+    fulfillWithValue: { data: TStudent; message: MessageType }
   }
 >('/student/create', async (data, { rejectWithValue, fulfillWithValue }) => {
   try {
     const res = await postStudentRequest(data)
-    console.log(res)
 
     return fulfillWithValue({
       data: res.data.data,
@@ -24,7 +24,7 @@ export const postStudentThunk = createAsyncThunk<
     })
   } catch (error) {
     const hasErrResponse = (
-      error as { response: { data: { statusCode: number; message: string } } }
+      error as { response: { data: { statusCode: number; message: MessageType } } }
     ).response
     if (!hasErrResponse) {
       throw error
@@ -37,7 +37,7 @@ export const getAllStudentsThunk = createAsyncThunk<
   { data: TStudent[], count: number  },
   TParams,
   {
-    rejectValue: { statusCode: number; message: string }
+    rejectValue: { statusCode: number; message: MessageType }
   }
 >('/students/getAll', async (params, { rejectWithValue }) => {
   try {
@@ -49,7 +49,7 @@ export const getAllStudentsThunk = createAsyncThunk<
     }
   } catch (error) {
     const hasErrResponse = (
-      error as { response: { data: { statusCode: number; message: string } } }
+      error as { response: { data: { statusCode: number; message: MessageType } } }
     ).response
     if (!hasErrResponse) {
       throw error

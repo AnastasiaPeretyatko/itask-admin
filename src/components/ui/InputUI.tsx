@@ -8,7 +8,7 @@ import {
   useBoolean,
   useOutsideClick,
 } from '@chakra-ui/react'
-import { useRef } from 'react'
+import { ChangeEvent, useRef } from 'react'
 import {
   FieldValues,
   Path,
@@ -17,14 +17,16 @@ import {
 } from 'react-hook-form'
 
 type Props<T extends FieldValues> = {
-  label: string
+  label?: string
   helper?: string
   error?: string
   type?: string
   isRequired?: boolean
-  register: UseFormRegisterReturn<string>
-  watch: UseFormWatch<T>
+  register?: UseFormRegisterReturn<string>
+  watch?: UseFormWatch<T>
   name: Path<T>
+  onChangeState?: (e: ChangeEvent<HTMLInputElement>) => void
+  value?: string | number
 }
 
 const InputUI = <T extends FieldValues>({
@@ -36,21 +38,25 @@ const InputUI = <T extends FieldValues>({
   register,
   watch,
   name,
+  value,
+  onChangeState,
 }: Props<T>) => {
   const [flag, setFlag] = useBoolean()
+  // const [useValue, setValue] = useState((watch && watch(name)) || '')
   const ref = useRef(null)
+
+  const useValue = watch ? watch(name) : value;
 
   useOutsideClick({
     ref: ref,
     handler: () => setFlag.off(),
   })
-  console.log('REgister', register)
 
   return (
     <>
       <Box
         bgGradient={
-          flag || watch(name)
+          flag || useValue
             ? 'linear(to-r, secondary.blue, primary.purple)'
             : 'none'
         }
@@ -63,28 +69,32 @@ const InputUI = <T extends FieldValues>({
           position={'relative'}
           onClick={setFlag.on}
         >
-          <FormLabel
-            sx={{
-              zIndex: 1,
-              position: 'absolute',
-              top: flag || watch(name) ? '-30%' : 1,
-              left: flag || watch(name) ? '8px' : '10px',
-              transition: 'all .3s ease',
-              fontSize: flag || watch(name) ? 'xs' : 'md',
-              fontWeight: '400',
-              backgroundColor: 'background.main',
-              paddingX: flag || watch(name) ? 2 : 1,
-              color: flag || watch(name) ? 'text.bold' : 'text.pale',
-            }}
-          >
-            {label}
-          </FormLabel>
+          {label && (
+            <FormLabel
+              sx={{
+                zIndex: 1,
+                position: 'absolute',
+                top: flag || useValue ? '-30%' : 1,
+                left: flag || useValue ? '8px' : '10px',
+                transition: 'all .3s ease',
+                fontSize: flag || useValue ? 'xs' : 'md',
+                fontWeight: '400',
+                backgroundColor: 'background.main',
+                paddingX: flag || useValue ? 2 : 1,
+                color: flag || useValue ? 'text.bold' : 'text.pale',
+              }}
+            >
+              {label}
+            </FormLabel>
+          )}
           <Input
             type={type}
             size={'sm'}
             variant={'form_input'}
-            sx={flag || watch(name) ? { border: 'unset' } : {}}
+            sx={flag || useValue ? { border: 'unset' } : {}}
             {...register}
+            value={value}
+            onChange={onChangeState}
           />
           {helper && !error && <FormHelperText>{helper}</FormHelperText>}
           {error && <FormErrorMessage>{error}</FormErrorMessage>}

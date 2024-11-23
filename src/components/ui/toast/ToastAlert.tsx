@@ -1,4 +1,4 @@
-import { Box, HStack, Icon, IconButton, Text, VStack } from '@chakra-ui/react'
+import { Box, HStack, Icon, IconButton, Text } from '@chakra-ui/react'
 import { CheckCircleIcon, CloseIcon } from '@chakra-ui/icons'
 
 type Props = {

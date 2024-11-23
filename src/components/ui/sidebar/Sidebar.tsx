@@ -1,5 +1,4 @@
 import { HStack, IconButton, Text, VStack } from '@chakra-ui/react'
-import { useEffect } from 'react'
 import { BsHouse, BsPeople } from 'react-icons/bs'
 import SidebarItem from './SidebarItem'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,6 +11,7 @@ const Sidebar_Item = {
   menu: [
     { title: 'Home', icon: <BsHouse />, path: '/' },
     { title: 'Professors', icon: <BsPeople />, path: '/professors' },
+    { title: 'Groups', icon: <BsPeople />, path: '/groups' },
     { title: 'Students', icon: <PiStudentLight />, path: '/students' },
   ],
 }
@@ -21,9 +21,7 @@ const Sidebar = () => {
     (state: RootState) => state.userSettings
   )
   const dispatch = useDispatch<AppDispatch>()
-  useEffect(() => {
-    console.log('isOpenSidebar', isOpenSidebar)
-  }, [isOpenSidebar])
+
   return (
     <VStack width={'100%'} align={'start'}>
       <HStack

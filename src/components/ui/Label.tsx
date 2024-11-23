@@ -16,9 +16,9 @@ const Label = ({ text, isFocus }: Props) => {
         left: '10px',
         transition: 'all .3s ease',
         fontSize: isFocus ? 'xs' : 'md',
-        backgroundColor: 'bg',
+        backgroundColor: 'background.main',
         paddingX: 1,
-        opacity: isFocus ? 0.7 : 0.5,
+        color: isFocus ? 'text.bold' : 'text.pale',
       }}
     >
       {text}
