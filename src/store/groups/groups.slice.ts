@@ -1,7 +1,8 @@
 import { TGroup } from '@/types/groups'
 import { createSlice } from '@reduxjs/toolkit'
 import {
-  getGroupThunk,
+  getGroupOneThunk,
+  getGroupsThunk,
   patchGroupThunk,
   postGroupThunk,
 } from './groups.thunks'
@@ -14,6 +15,7 @@ export type TParams = {
 
 type TInitialState = {
   data: TGroup[] | []
+  currentGroup: TGroup
   count: number
   isLoading: boolean
   message: string | null
@@ -21,6 +23,7 @@ type TInitialState = {
 
 const initialState: TInitialState = {
   data: [],
+  currentGroup: {} as TGroup,
   count: 0,
   isLoading: true,
   message: null,
@@ -43,16 +46,16 @@ const groups = createSlice({
       .addCase(postGroupThunk.rejected, state => {
         state.isLoading = false
       })
-      .addCase(getGroupThunk.pending, state => {
+      .addCase(getGroupsThunk.pending, state => {
         state.isLoading = true
         state.message = null
       })
-      .addCase(getGroupThunk.fulfilled, (state, { payload }) => {
+      .addCase(getGroupsThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false
         state.data = payload.data
         state.count = payload.count
       })
-      .addCase(getGroupThunk.rejected, (state) => {
+      .addCase(getGroupsThunk.rejected, (state) => {
         state.isLoading = false
       })
       .addCase(patchGroupThunk.pending, state => {

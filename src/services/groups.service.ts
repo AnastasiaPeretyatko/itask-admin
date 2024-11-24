@@ -9,13 +9,17 @@ export const getGroupNameAndIdRequest = async (search: string) =>
 export const postGroupRequest = (data: TGroupCreate) =>
   http.post('/groups', data)
 
-export const getGroupRequest = (params: TParams) =>
+export const getGroupsRequest = (params: TParams) =>
   http.get('/groups', { params })
 
-export const patchGroupRequest = ({
-  id,
-  data,
-}: {
+export const getGroupsIdRequest = () => http.get('/groups/groups.id')
+
+export const getGroupRequest = (id: string) => http.get(`/groups/${id}`)
+
+export const patchGroupRequest = ({ id, data }: {
   id: string
   data: Partial<TGroup>
 }) => http.patch(`/groups/${id}`, data)
+
+export const getStudentsByGroupRequest = (id: string) =>
+  http.get(`/groups/${id}/students`)

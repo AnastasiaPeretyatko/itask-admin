@@ -1,9 +1,18 @@
-import { getGroupNameAndIdRequest } from '@/services/groups.service'
+import {
+  getGroupNameAndIdRequest,
+  getGroupRequest,
+  getStudentsByGroupRequest,
+} from '@/services/groups.service'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { TGroup, TGroupCreate, TName } from '@/types/groups'
 import { MessageType } from '@/types/common'
-import { getGroupRequest, patchGroupRequest, postGroupRequest } from '@/services/groups.service'
+import {
+  getGroupsRequest,
+  patchGroupRequest,
+  postGroupRequest,
+} from '@/services/groups.service'
 import { TParams } from './groups.slice'
+import { TStudent } from '@/types/student'
 
 export const getGroupNameAndIdThunk = createAsyncThunk<
   { data: TName[] },
@@ -54,7 +63,7 @@ export const postGroupThunk = createAsyncThunk<
   }
 })
 
-export const getGroupThunk = createAsyncThunk<
+export const getGroupsThunk = createAsyncThunk<
   { data: TGroup[]; count: number },
   TParams,
   {
@@ -62,14 +71,39 @@ export const getGroupThunk = createAsyncThunk<
   }
 >('/group/get', async (params, { rejectWithValue }) => {
   try {
-    const res = await getGroupRequest(params)
+    const res = await getGroupsRequest(params)
     return {
       data: res.data.data,
       count: res.data.count,
     }
   } catch (error) {
     const hasErrResponse = (
-      error as { response: { data: { statusCode: number; message: MessageType } } }
+      error as {
+        response: { data: { statusCode: number; message: MessageType } }
+      }
+    ).response
+    if (!hasErrResponse) {
+      throw error
+    }
+    return rejectWithValue(hasErrResponse.data)
+  }
+})
+
+export const getGroupOneThunk = createAsyncThunk<
+  { data: TGroup },
+  string,
+  {
+    rejectValue: { statusCode: number; message: MessageType }
+  }
+>('/group/one', async (id, { rejectWithValue }) => {
+  try {
+    const res = await getGroupRequest(id)
+    return res
+  } catch (error) {
+    const hasErrResponse = (
+      error as {
+        response: { data: { statusCode: number; message: MessageType } }
+      }
     ).response
     if (!hasErrResponse) {
       throw error
@@ -92,6 +126,28 @@ export const patchGroupThunk = createAsyncThunk<
       data: res.data,
       message: res.data.message,
     }
+  } catch (error) {
+    const hasErrResponse = (
+      error as { response: { data: { statusCode: number; message: MessageType } } }
+    ).response
+    if (!hasErrResponse) {
+      throw error
+    }
+    return rejectWithValue(hasErrResponse.data)
+  }
+})
+
+export const getStudentsByGroupThunk = createAsyncThunk<
+  { data: TStudent[] },
+  string,
+  {
+    rejectValue: { statusCode: number; message: MessageType }
+  }
+>('/groups/students', async (id, { rejectWithValue }) => {
+  try {
+    const res = await getStudentsByGroupRequest(id)
+
+    return res
   } catch (error) {
     const hasErrResponse = (
       error as { response: { data: { statusCode: number; message: MessageType } } }

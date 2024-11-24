@@ -2,6 +2,7 @@ import { TStudent } from '@/types/student'
 import { createSlice } from '@reduxjs/toolkit'
 import {
   getAllStudentsThunk,
+  patchStudentThunk,
   postStudentThunk,
 } from './students.thunks'
 
@@ -52,6 +53,19 @@ const students = createSlice({
         state.count = payload.count
       })
       .addCase(getAllStudentsThunk.rejected, state => {
+        state.isLoading = false
+      })
+      .addCase(patchStudentThunk.pending, state => {
+        state.isLoading = true
+        state.message = null
+      })
+      .addCase(patchStudentThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false
+        state.data = state.data.map(student =>
+          student.id === payload.data.id ? payload.data : student
+        )
+      })
+      .addCase(patchStudentThunk.rejected, state => {
         state.isLoading = false
       })
   },
