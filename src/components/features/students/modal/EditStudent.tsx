@@ -5,20 +5,20 @@ import { AppDispatch } from '@/store/store'
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { useNotifications } from '@/hooks/useNotifications'
-import { TStudentCreate } from '@/types/student'
-import { postStudentThunk } from '@/store/students/students.thunks'
+import { TStudent, TStudentCreate } from '@/types/student'
+import { patchStudentThunk } from '@/store/students/students.thunks'
 import Empty from '@/components/ui/Empty'
 import InputUI from '@/components/ui/InputUI'
 import { getGroupNameAndIdThunk } from '@/store/groups/groups.thunks'
 import SelectForm from '@/components/ui/selector/SelectForm'
-import { TGroup, TName } from '@/types/groups'
+import { TName } from '@/types/groups'
 
 type Props = {
   onClose: () => void,
-  group?: TGroup
+  student: TStudent
 }
 
-const CreateStudent = ({ onClose, group }: Props) => {
+const EditStudent = ({ onClose, student }: Props) => {
   const t = useTranslations()
   const {
     register,
@@ -28,7 +28,10 @@ const CreateStudent = ({ onClose, group }: Props) => {
     control,
   } = useForm<TStudentCreate>({
     defaultValues: {
-      groupId:  group?.id,
+      email: student.user.email,
+      fullName: student.fullName,
+      groupId: student.group.id,
+      tel: student.tel
     }
   })
   const dispatch = useDispatch<AppDispatch>()
@@ -38,7 +41,7 @@ const CreateStudent = ({ onClose, group }: Props) => {
 
   const onSubmit: SubmitHandler<TStudentCreate> = data => {
     setIsLoading(true)
-    dispatch(postStudentThunk(data))
+    dispatch(patchStudentThunk({id: student.id, data}))
       .unwrap()
       .then(res => {
         showSuccessMessage(res.message)
@@ -81,7 +84,7 @@ const CreateStudent = ({ onClose, group }: Props) => {
           array={groups}
           control={control}
           name="groupId"
-          currentValue={group?.groupCode}
+          currentValue={student.group.groupCode}
           onChangeState={fetchGroupList}
         />
         <HStack width={'100%'} gap={4} marginY={4} justify={'end'}>
@@ -102,4 +105,4 @@ const CreateStudent = ({ onClose, group }: Props) => {
   )
 }
 
-export default CreateStudent
+export default EditStudent

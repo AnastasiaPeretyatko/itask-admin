@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import useDebounce from '@/hooks/useDebounce'
-import { getGroupThunk } from '@/store/groups/groups.thunks'
+import { getGroupsThunk } from '@/store/groups/groups.thunks'
 import SearchInput from '@/components/ui/SearchInput'
 import WindowModal from '@/components/modal/WindowModal'
 import CreateGroup from './modal/CreateGroup'
@@ -48,7 +48,7 @@ const SectionViewGroups = () => {
 
   useEffect(() => {
     dispatch(
-      getGroupThunk({
+      getGroupsThunk({
         limit: params.limit,
         page: params.page,
         search: debouncedSearch,

@@ -9,7 +9,12 @@ import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 import { BsHouse } from 'react-icons/bs'
 
-const BreadcrumbUI = () => {
+type Props ={
+  options?: string[]
+}
+
+
+const BreadcrumbUI = ({ options }: Props) => {
   const router = useRouter()
   const t = useTranslations()
 
@@ -17,6 +22,8 @@ const BreadcrumbUI = () => {
     const rest = router.pathname.split('/')[1]
     return rest[0].toUpperCase() + rest.slice(1)
   }, [router.pathname])
+
+  console.log(router.pathname, router.query);
 
   return (
     <Breadcrumb mb={4}>
@@ -29,9 +36,15 @@ const BreadcrumbUI = () => {
         />
       </BreadcrumbItem>
 
-      <BreadcrumbItem isCurrentPage>
+      <BreadcrumbItem isCurrentPage={!router.query.id}>
         <BreadcrumbLink>{t(path)}</BreadcrumbLink>
       </BreadcrumbItem>
+
+      {options?.map((item, index) => (
+        <BreadcrumbItem key={index}>
+          <BreadcrumbLink>{item}</BreadcrumbLink>
+        </BreadcrumbItem>
+      ))}
     </Breadcrumb>
   )
 }

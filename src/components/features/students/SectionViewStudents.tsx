@@ -20,7 +20,7 @@ const NotFoundImage = dynamic(() => import('@/components/ui/not-found'), {
 })
 
 const SectionViewStudents = () => {
-  const { count } = useSelector((state: RootState) => state.students)
+  const { data, count } = useSelector((state: RootState) => state.students)
   const t = useTranslations()
   const dispatch = useDispatch<AppDispatch>()
   const [params, setParams] = React.useState({
@@ -55,6 +55,8 @@ const SectionViewStudents = () => {
     )
   }, [dispatch, params.limit, params.page, debouncedSearch])
 
+  console.log(data, count);
+
   return (
     <Container variant={'wrapper_table'}>
       <HStack mb={4} justifyContent="space-between">
@@ -81,7 +83,7 @@ const SectionViewStudents = () => {
           <NotFoundImage />
         </Container>
       ) : (
-        <ViewTableStudents />
+        <ViewTableStudents students={data}/>
       )}
 
       <HStack width={'full'} justify={'space-between'}>

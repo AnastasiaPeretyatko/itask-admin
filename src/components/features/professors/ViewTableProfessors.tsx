@@ -19,7 +19,8 @@ import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { CheckIcon } from '@chakra-ui/icons'
 import CheckboxUI from '@/components/ui/CheckboxUI'
-import ActionMenu from './ActionMenu'
+import ActionMenu from '../../ui/ActionMenu'
+import { getProfessorsMenuConfig } from './config/getProfessorMenuConfig'
 
 const ViewTableProfessor = () => {
   const { data } = useSelector((state: RootState) => state.professors)
@@ -63,7 +64,7 @@ const ViewTableProfessor = () => {
   }
 
   return (
-    <TableContainer width={'100%'} >
+    <TableContainer width={'100%'}>
       <Table size={'sm'}>
         <Thead>
           <Tr>
@@ -107,8 +108,8 @@ const ViewTableProfessor = () => {
                 <Td>
                   <Icon as={CheckIcon} />
                 </Td>
-                <Td>
-                  <ActionMenu professor={el} />
+                <Td onClick={e => e.stopPropagation()}>
+                  <ActionMenu actions={getProfessorsMenuConfig(el)} />
                 </Td>
               </Tr>
             ))}

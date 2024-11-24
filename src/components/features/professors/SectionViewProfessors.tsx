@@ -1,11 +1,10 @@
-import { Button, HStack, Text, VStack } from '@chakra-ui/react'
+import { HStack, Text, VStack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import useDebounce from '@/hooks/useDebounce'
 import { getProfessorsThunk } from '@/store/professors/professors.thunks'
-import { BsPlusLg } from 'react-icons/bs'
 import SearchInput from '@/components/ui/SearchInput'
 import WindowModal from '@/components/modal/WindowModal'
 import CreateProfessor from './modal/CreateProfessor'
@@ -62,11 +61,6 @@ const SectionViewProfessors = () => {
             onClearSearchInput={onClearSearchInput}
           />
           <WindowModal
-            action={
-              <Button variant={'primary'} leftIcon={<BsPlusLg />}>
-                {t('Create professor')}
-              </Button>
-            }
             modalBody={onClose => <CreateProfessor onClose={onClose} />}
             title={t('Create professor')}
           />

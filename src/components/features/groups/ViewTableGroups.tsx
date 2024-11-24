@@ -13,13 +13,15 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import CheckboxUI from '../../ui/CheckboxUI'
 import moment from 'moment'
-import ActionMenu from './ActionMenu'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/router'
+import ActionMenu from '@/components/ui/ActionMenu'
+import { getGroupMenuConfig } from './config/getGroupMenuConfig'
 
 const ViewTableGroups = () => {
   const t = useTranslations()
   const { data } = useSelector((state: RootState) => state.groups)
-
+  const router = useRouter()
   const [values, setValues] = useState(
     data ? data.map(item => ({ ...item, checked: false })) : []
   )
@@ -59,7 +61,7 @@ const ViewTableGroups = () => {
   }
 
   return (
-    <TableContainer width={'100%'} >
+    <TableContainer width={'100%'}>
       <Table size={'sm'}>
         <Thead>
           <Tr>
@@ -88,13 +90,19 @@ const ViewTableGroups = () => {
                     onCheckedChange={() => handleIndividualCheck(el.id)}
                   />
                 </Td>
-                <Td>{el.groupCode}</Td>
+                <Td
+                  cursor={'pointer'}
+                  _hover={{ color: 'primary.purple' }}
+                  onClick={() => router.push(`/groups/${el.id}`)}
+                >
+                  {el.groupCode}
+                </Td>
                 <Td>{el.university.name}</Td>
                 <Td>{el.degree}</Td>
                 <Td>{el.educationMode}</Td>
                 <Td>{moment(el.created_at).format('DD/MM/YYYY')}</Td>
                 <Td>
-                  <ActionMenu group={el} />
+                  <ActionMenu actions={getGroupMenuConfig(el)} />
                 </Td>
               </Tr>
             ))}

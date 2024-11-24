@@ -1,9 +1,7 @@
-import { RootState } from '@/store/store'
 import {
   Avatar,
   HStack,
   Icon,
-  Spinner,
   Table,
   TableContainer,
   Tbody,
@@ -15,17 +13,23 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { CheckIcon } from '@chakra-ui/icons'
 import CheckboxUI from '@/components/ui/CheckboxUI'
 import { useTranslations } from 'next-intl'
+import { TStudent } from '@/types/student'
+import ActionMenu from '@/components/ui/ActionMenu'
+import { getStudentsMenuConfig } from './config/getStudentsMenuConfig'
 
-const ViewTableStudents = () => {
+type Props = {
+  students?: TStudent[]
+}
+
+const ViewTableStudents = ({ students }: Props) => {
   const t = useTranslations()
-  const { data } = useSelector((state: RootState) => state.students)
+  // const { data } = useSelector((state: RootState) => state.students)
 
   const [values, setValues] = useState(
-    data ? data.map(item => ({ ...item, checked: false })) : []
+    students ? students.map(item => ({ ...item, checked: false })) : []
   )
 
   const allChecked = values.every(value => value.checked)
@@ -49,22 +53,10 @@ const ViewTableStudents = () => {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    if (data) {
-      setValues(data.map(item => ({ ...item, checked: false })))
+    if (students) {
+      setValues(students.map(item => ({ ...item, checked: false })))
     }
-  }, [data])
-
-  if (!data) {
-    return (
-      <Spinner
-        thickness="4px"
-        speed="0.65s"
-        emptyColor="gray.200"
-        color="PRIMARY_PURPLE"
-        size="xl"
-      />
-    )
-  }
+  }, [students])
 
   return (
     <TableContainer width={'100%'}>
@@ -118,8 +110,10 @@ const ViewTableStudents = () => {
                 <Td>
                   <Icon as={CheckIcon} />
                 </Td>
-                <Td>{/* <ActionMenu professor={el} /> */}</Td>
-                <Td>{/* <ActionMenu professor={el} /> */}</Td>
+                <Td></Td>
+                <Td onClick={e => e.stopPropagation()}>
+                  <ActionMenu actions={getStudentsMenuConfig(el)} />
+                </Td>
               </Tr>
             ))}
         </Tbody>

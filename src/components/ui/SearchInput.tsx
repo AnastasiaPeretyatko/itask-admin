@@ -12,6 +12,7 @@ export type SearchInputProps = {
   onChange: (value: string) => void
   onClearSearchInput?: () => void
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
+  isDisabled?: boolean
 }
 
 const SearchInput = ({
@@ -19,6 +20,7 @@ const SearchInput = ({
   value,
   onClearSearchInput,
   size = 'sm',
+  isDisabled = false,
 }: SearchInputProps) => {
   return (
     <InputGroup width={80} size={size}>
@@ -27,6 +29,7 @@ const SearchInput = ({
         placeholder="Search"
         value={value}
         onChange={e => onChange(e.target.value)}
+        isDisabled={isDisabled}
       />
       <InputLeftElement>
         <SearchIcon />
