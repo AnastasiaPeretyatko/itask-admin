@@ -1,9 +1,7 @@
-import { RootState } from '@/store/store'
 import {
   Avatar,
   HStack,
   Icon,
-  Spinner,
   Table,
   TableContainer,
   Tbody,
@@ -15,7 +13,6 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { CheckIcon } from '@chakra-ui/icons'
 import CheckboxUI from '@/components/ui/CheckboxUI'
 import { useTranslations } from 'next-intl'

@@ -1,10 +1,9 @@
 import { TGroup } from '@/types/groups'
 import { createSlice } from '@reduxjs/toolkit'
 import {
-  getGroupOneThunk,
   getGroupsThunk,
   patchGroupThunk,
-  postGroupThunk,
+  postGroupThunk
 } from './groups.thunks'
 
 export type TParams = {

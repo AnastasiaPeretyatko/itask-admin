@@ -6,12 +6,12 @@ import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { useNotifications } from '@/hooks/useNotifications'
 import { TStudent, TStudentCreate } from '@/types/student'
-import { patchStudentThunk, postStudentThunk } from '@/store/students/students.thunks'
+import { patchStudentThunk } from '@/store/students/students.thunks'
 import Empty from '@/components/ui/Empty'
 import InputUI from '@/components/ui/InputUI'
 import { getGroupNameAndIdThunk } from '@/store/groups/groups.thunks'
 import SelectForm from '@/components/ui/selector/SelectForm'
-import { TGroup, TName } from '@/types/groups'
+import { TName } from '@/types/groups'
 
 type Props = {
   onClose: () => void,

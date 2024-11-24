@@ -10,8 +10,7 @@ import {
   getStudentsByGroupThunk,
 } from '@/store/groups/groups.thunks'
 import { AppDispatch, RootState } from '@/store/store'
-import { getAllStudentsThunk } from '@/store/students/students.thunks'
-import { Container, Heading, HStack, Text } from '@chakra-ui/react'
+import { Container, Heading, HStack } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticPropsContext } from 'next'
 import { useTranslations } from 'next-intl'
@@ -93,7 +92,7 @@ const PageGroup = () => {
       dispatch(getGroupOneThunk(query.id))
       dispatch(getStudentsByGroupThunk(query.id))
     }
-  }, [query])
+  }, [query, dispatch])
 
   return (
     <AppLayout>
