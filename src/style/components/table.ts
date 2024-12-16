@@ -17,6 +17,10 @@ const baseStyle = definePartsStyle({
         cursor: 'pointer',
         _hover: {
           bg: 'background.button'
+        },
+        td: {
+          border: '1px solid',
+          borderColor: 'blackAlpha.200',
         }
       }
     }
