@@ -15,3 +15,6 @@ export const patchProfessorRequest = ({
   id: string
   data: Partial<TProfessor>
 }) => http.patch(`/professors/${id}`, data)
+
+export const getProfessorNamesRequest = (search: string) =>
+  http.get('/professors/name', { params: { search } })

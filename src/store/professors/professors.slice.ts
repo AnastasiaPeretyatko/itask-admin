@@ -7,8 +7,8 @@ import {
 } from './professors.thunks'
 
 export type TParams = {
-  limit: number
-  page: number
+  limit?: number
+  page?: number
   search?: string
 }
 

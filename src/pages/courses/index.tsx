@@ -5,15 +5,13 @@ import WindowModal from '@/components/modal/WindowModal'
 import BreadcrumbUI from '@/components/ui/breadcrumb'
 import { getCoursesThunk } from '@/store/courses/courses.thunks'
 import { AppDispatch } from '@/store/store'
-import { Button } from '@chakra-ui/react'
+import { Button, Container, HStack } from '@chakra-ui/react'
 import { GetStaticPropsContext } from 'next'
-import { useTranslations } from 'next-intl'
 import React, { useEffect } from 'react'
 import { BsPlusLg } from 'react-icons/bs'
 import { useDispatch } from 'react-redux'
 
 const CoursesPage = () => {
-  const t = useTranslations()
   const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
@@ -23,16 +21,21 @@ const CoursesPage = () => {
   return (
     <AppLayout>
       <BreadcrumbUI />
-      <WindowModal
-        modalBody={onClose => <CreateCourseModal onClose={onClose} />}
-        title={'Create course'}
-        action={
-          <Button variant={'primary'} leftIcon={<BsPlusLg />}>
-            {'Create course'}
-          </Button>
-        }
-      />
+      <Container variant={'wrapper_table'}>
+        <HStack mb={4} justify={'end'}>
+        <WindowModal
+          modalBody={onClose => <CreateCourseModal onClose={onClose} />}
+          title={'Create course'}
+          action={
+            <Button variant={'primary'} leftIcon={<BsPlusLg />}>
+              {'Create course'}
+            </Button>
+          }
+        />
+      </HStack>
       <ViewTableCourse />
+      </Container>
+      
     </AppLayout>
   )
 }

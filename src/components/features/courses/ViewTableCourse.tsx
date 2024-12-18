@@ -13,6 +13,8 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import CheckboxUI from '@/components/ui/CheckboxUI'
+import WindowModal from '@/components/modal/WindowModal'
+import ViewInfoByCourseModal from './modal/ViewInfoByCourseModal'
 
 const ViewTableCourse = () => {
   const { data } = useSelector((state: RootState) => state.courses)
@@ -83,7 +85,11 @@ const ViewTableCourse = () => {
                     onCheckedChange={() => handleIndividualCheck(el.id)}
                   />
                 </Td>
-                <Td>{el.name}</Td>
+                <WindowModal
+                  action={<Td>{el.name}</Td>}
+                  modalBody={() => <ViewInfoByCourseModal id={el.id} />}
+                  title="Информация о курсе"
+                />
                 <Td
                   maxW={'400px'}
                   overflowX={'hidden'}
