@@ -40,5 +40,8 @@
   "Group": "Group",
   "Tel": "Tel",
   "Status": "Status",
-  "Action": "Action"
+  "Action": "Action",
+  "Courses": "Courses",
+  "courses": "courses",
+  "Create course": "Create course"
 }

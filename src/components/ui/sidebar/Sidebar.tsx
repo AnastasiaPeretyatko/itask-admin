@@ -13,6 +13,7 @@ const Sidebar_Item = {
     { title: 'Professors', icon: <BsPeople />, path: '/professors' },
     { title: 'Groups', icon: <BsPeople />, path: '/groups' },
     { title: 'Students', icon: <PiStudentLight />, path: '/students' },
+    { title: 'Courses', icon: <PiStudentLight />, path: '/courses' },
   ],
 }
 

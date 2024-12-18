@@ -10,16 +10,23 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 
 type Props = {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   action?: ReactNode
   modalBody: (onClose: () => void) => ReactNode
   title: string
+  isNotAction?: boolean
 }
 
-const WindowModal = ({ size = 'xl', action, modalBody, title }: Props) => {
+const WindowModal = ({
+  size = 'xl',
+  action,
+  modalBody,
+  title,
+  isNotAction = false,
+}: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const t = useTranslations()
 
@@ -28,15 +35,30 @@ const WindowModal = ({ size = 'xl', action, modalBody, title }: Props) => {
       React.cloneElement(action as React.ReactElement<any>, { onClick: onOpen })
     : action
 
+  useEffect(() => {
+    if(isNotAction){
+      onOpen()
+    }
+
+  }, [isNotAction, onOpen])
+
   return (
     <>
-      {action ? (
-        ActionButton
-      ) : (
-        <Button size={'sm'} variant={'primary'} onClick={onOpen} leftIcon={<AddIcon boxSize={3}/>}>
-          {t('Create')}
-        </Button>
-      )}
+      {!isNotAction ? (
+        action ? (
+          ActionButton
+        ) : (
+          <Button
+            size={'sm'}
+            variant={'primary'}
+            onClick={onOpen}
+            leftIcon={<AddIcon boxSize={3} />}
+          >
+            {t('Create')}
+          </Button>
+        )
+      ) : null}
+      {/* {} */}
 
       <Modal
         size={size}
