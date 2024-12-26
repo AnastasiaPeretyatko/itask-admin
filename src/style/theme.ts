@@ -6,7 +6,7 @@ import { inputTheme } from './components/input'
 import { listTheme } from './components/list'
 import { modalTheme } from './components/modal'
 import { tableTheme } from './components/table'
-import { menuTheme } from './components/menu'
+// import { menuTheme } from './components/menu'
 import { popoverTheme } from './components/popover'
 import { colors } from './colors'
 
@@ -60,7 +60,7 @@ export const theme = extendTheme({
     List: listTheme,
     Modal: modalTheme,
     Table: tableTheme,
-    Menu: menuTheme,
+    // Menu: menuTheme,
     Popover: popoverTheme,
   },
 })

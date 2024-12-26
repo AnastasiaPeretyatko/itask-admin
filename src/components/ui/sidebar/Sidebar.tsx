@@ -1,61 +1,81 @@
-import { HStack, IconButton, Text, VStack } from '@chakra-ui/react'
-import { BsHouse, BsPeople } from 'react-icons/bs'
-import SidebarItem from './SidebarItem'
+import { Button, Container, IconButton, VStack } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { changeStateSidebar } from '@/store/user-setting/setting.slice'
-import { Hamburger } from '../../customeIcon'
-import { PiStudentLight } from 'react-icons/pi'
-
-const Sidebar_Item = {
-  menu: [
-    { title: 'Home', icon: <BsHouse />, path: '/' },
-    { title: 'Professors', icon: <BsPeople />, path: '/professors' },
-    { title: 'Groups', icon: <BsPeople />, path: '/groups' },
-    { title: 'Students', icon: <PiStudentLight />, path: '/students' },
-  ],
-}
+import { CloseIcon } from '@chakra-ui/icons'
+import { LogoutIcon, MenuIcon } from '@/components/customIcon'
+import { sidebarConfig } from './config'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 const Sidebar = () => {
+  const router = useRouter()
   const { isOpenSidebar } = useSelector(
     (state: RootState) => state.userSettings
   )
   const dispatch = useDispatch<AppDispatch>()
 
+  const setCollapse = () => {
+    dispatch(changeStateSidebar(!isOpenSidebar))
+  }
+
+  useEffect(() => {
+    if (isOpenSidebar === null) {
+      dispatch(changeStateSidebar(!!localStorage.getItem('sidebar') || true))
+    }
+  }, [dispatch, isOpenSidebar])
+
   return (
-    <VStack width={'100%'} align={'start'}>
-      <HStack
+    <Container
+      variant="sidebar"
+      boxShadow={'base'}
+      maxW={isOpenSidebar ? 200 : 20}
+      transition="ease-in-out .2s"
+    >
+      <IconButton
+        aria-label="menu"
+        variant="unstyled"
+        textAlign={isOpenSidebar ? 'end' : 'center'}
+        icon={isOpenSidebar ? <CloseIcon /> : <MenuIcon />}
+        fontSize={'xs'}
+        onClick={setCollapse}
+      />
+
+      <VStack
+        height="100%"
+        justify="space-between"
+        align={isOpenSidebar ? 'center' : 'start'}
         width={'100%'}
-        paddingY={4}
-        justify={isOpenSidebar ? 'space-between' : 'center'}
       >
-        <Text
-          color={'primary.purple'}
-          fontWeight={600}
-          whiteSpace={'nowrap'}
-          sx={{
-            display: isOpenSidebar ? 'block' : 'none',
-          }}
-        >
-          ITASK | Admin
-        </Text>
-        <IconButton
-          aria-label="Hamburger menu"
-          icon={<Hamburger />}
-          variant={'unstyled'}
-          width={'min-content'}
-          height={'min-content'}
-          onClick={() => dispatch(changeStateSidebar(!isOpenSidebar))}
-        />
-      </HStack>
-      {Sidebar_Item.menu.map(item => (
-        <SidebarItem
-          key={item.title}
-          data={item}
-          isCollapse={!!isOpenSidebar}
-        />
-      ))}
-    </VStack>
+        <VStack width={'100%'} align={isOpenSidebar ? 'start' : 'center'}>
+          {sidebarConfig.map(el => {
+            return (
+              <Button
+                key={el.title}
+                variant="sidebar"
+                textAlign={'center'}
+                justifyContent={!isOpenSidebar ? 'center' : 'start'}
+                leftIcon={el.icon}
+                onClick={() => router.push(el.path)}
+                isActive={router.pathname === el.path}
+              >
+                {isOpenSidebar && el.title}
+              </Button>
+            )
+          })}
+        </VStack>
+      </VStack>
+      <Button
+        size="sm"
+        variant="sidebar"
+        textAlign={'center'}
+        justifyContent={!isOpenSidebar ? 'center' : 'start'}
+        leftIcon={<LogoutIcon bgSize={3} />}
+        // onClick={handleClickLogOut}
+      >
+        {isOpenSidebar && 'Выйти'}
+      </Button>
+    </Container>
   )
 }
 

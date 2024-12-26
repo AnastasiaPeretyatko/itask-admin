@@ -1,10 +1,20 @@
 import { BellIcon, CalendarIcon } from '@chakra-ui/icons'
-import { Avatar, Container, HStack, IconButton, Text } from '@chakra-ui/react'
+import {
+  Avatar,
+  Container,
+  Heading,
+  HStack,
+  IconButton,
+  Text,
+} from '@chakra-ui/react'
 import UserSettingPopover from '../user-settings-popover'
 
 const Header = () => {
   return (
     <Container variant={'header'}>
+      <Heading size={'md'} color={'primary.purple'}>
+        ITASK | Admin
+      </Heading>
       <HStack>
         <IconButton
           variant={'unstyled'}

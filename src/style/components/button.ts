@@ -44,23 +44,28 @@ const secondary = defineStyle(() => {
   }
 })
 
-const sidebarBtn = defineStyle(() => {
-  return {
-    width: '100%',
-    fontSize: 'sm',
-    fontWeight: 500,
-    padding: 2,
-    gap: 4,
-    _hover: {
-      bg: 'background.button',
+const sidebar = defineStyle({
+  display: 'flex',
+  width: 'full',
+  gap: 2,
+  padding: 3,
+  color: 'gray.500',
+  fontWeight: 400,
+  borderRadius: 'md',
+  '& span': {
+    '& svg': {
+      margin: 'unset',
     },
-    _active: {
-      bg: 'background.button',
-    },
-    '& span': {
-      mr: 0,
-    },
-  }
+    marginInlineEnd: 'unset',
+  },
+  _hover: {
+    bg: 'blackAlpha.800',
+    color: 'white',
+  },
+  _active: {
+    bg: 'blackAlpha.800',
+    color: 'white',
+  },
 })
 
 const unstyledBtn = defineStyle(() => {
@@ -82,7 +87,7 @@ export const buttonTheme = defineStyleConfig({
   variants: {
     primary,
     secondary,
-    sidebarBtn,
+    sidebar,
     unstyledBtn,
     pagination,
   },
