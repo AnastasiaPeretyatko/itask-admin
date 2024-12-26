@@ -15,6 +15,9 @@ const userSetting = definePartsStyle({
     bg: 'background.main',
     width: 60,
     borderRadius: '10px',
+    _focusVisible: {
+      boxShadow: 'none',
+    }
   },
   body: {
     padding: 1,
