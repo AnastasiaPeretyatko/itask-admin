@@ -1,25 +1,15 @@
 import { AddIcon } from '@chakra-ui/icons'
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-} from '@chakra-ui/react'
+import { Button, Modal, ModalOverlay, useDisclosure } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import React, { ReactNode } from 'react'
 
 type Props = {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   action?: ReactNode
-  modalBody: (onClose: () => void) => ReactNode
-  title: string
+  children: (onClose: () => void) => ReactNode
 }
 
-const WindowModal = ({ size = 'xl', action, modalBody, title }: Props) => {
+const WindowModal = ({ size = 'xl', action, children }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const t = useTranslations()
 
@@ -33,7 +23,12 @@ const WindowModal = ({ size = 'xl', action, modalBody, title }: Props) => {
       {action ? (
         ActionButton
       ) : (
-        <Button size={'sm'} variant={'primary'} onClick={onOpen} leftIcon={<AddIcon boxSize={3}/>}>
+        <Button
+          size={'sm'}
+          variant={'primary'}
+          onClick={onOpen}
+          leftIcon={<AddIcon boxSize={3} />}
+        >
           {t('Create')}
         </Button>
       )}
@@ -46,11 +41,7 @@ const WindowModal = ({ size = 'xl', action, modalBody, title }: Props) => {
         motionPreset="slideInBottom"
       >
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{title}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>{modalBody(onClose)}</ModalBody>
-        </ModalContent>
+        {children(onClose)}
       </Modal>
     </>
   )

@@ -9,6 +9,7 @@ import { tableTheme } from './components/table'
 // import { menuTheme } from './components/menu'
 import { popoverTheme } from './components/popover'
 import { colors } from './colors'
+import { textareaTheme } from './components/textarea'
 
 export const theme = extendTheme({
   config: {
@@ -62,5 +63,6 @@ export const theme = extendTheme({
     Table: tableTheme,
     // Menu: menuTheme,
     Popover: popoverTheme,
+    Textarea: textareaTheme
   },
 })

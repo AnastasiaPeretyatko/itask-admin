@@ -36,7 +36,9 @@ const FormInput = ({
           <IconButton
             aria-label="show password"
             variant={'unstyled'}
-            icon={isShowPassword === 'password' ? <ViewOffIcon /> : <ViewIcon />}
+            icon={
+              isShowPassword === 'password' ? <ViewOffIcon /> : <ViewIcon />
+            }
             onClick={() =>
               setIsShowPassword(prev =>
                 prev === 'password' ? 'text' : 'password'
@@ -52,7 +54,13 @@ const FormInput = ({
     <FormControl isInvalid={!!errorMessage}>
       <FormLabel>{label}</FormLabel>
       <InputGroup>
-        <Input variant={'form_input'} type={isShowPassword} {...register} size={'sm'} />
+        <Input
+          variant={'form_input'}
+          type={isShowPassword}
+          {...register}
+          size={'sm'}
+          placeholder={label}
+        />
         {isPassword}
       </InputGroup>
       {!errorMessage ? (
