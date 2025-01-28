@@ -29,7 +29,7 @@ const Sidebar = () => {
     <Container
       variant="sidebar"
       boxShadow={'base'}
-      maxW={isOpenSidebar ? 200 : 20}
+      maxW={isOpenSidebar ? 250 : 20}
       transition="ease-in-out .2s"
     >
       <IconButton
@@ -66,7 +66,6 @@ const Sidebar = () => {
         </VStack>
       </VStack>
       <Button
-        size="sm"
         variant="sidebar"
         textAlign={'center'}
         justifyContent={!isOpenSidebar ? 'center' : 'start'}

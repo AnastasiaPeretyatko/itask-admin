@@ -38,7 +38,6 @@ const header = defineStyle(() => {
     padding: 4,
     // borderColor: 'whiteAlpha.200',
     boxShadow:'0 4px 2px -2px #80808021',
-    borderRadius: '10px'
   }
 })
 

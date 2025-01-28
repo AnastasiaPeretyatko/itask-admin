@@ -51,6 +51,7 @@ const sidebar = defineStyle({
   padding: 3,
   color: 'gray.500',
   fontWeight: 400,
+  fontSize: 'sm',
   borderRadius: 'md',
   '& span': {
     '& svg': {

@@ -21,7 +21,7 @@ const SidebarItem = ({ data, isCollapse }: Props) => {
       {!isCollapse ? (
         <Tooltip label={data.title} placement="right">
           <Button
-            variant="sidebarBtn"
+            variant="sidebar"
             leftIcon={data.icon}
             onClick={() => data.path && router.push(data.path)}
             isActive={router.asPath === data.path}
@@ -29,7 +29,7 @@ const SidebarItem = ({ data, isCollapse }: Props) => {
         </Tooltip>
       ) : (
         <Button
-          variant="sidebarBtn"
+          variant="sidebar"
           justifyContent={isCollapse ? 'flex-start' : 'center'}
           leftIcon={data.icon}
           onClick={() => data.path && router.push(data.path)}
