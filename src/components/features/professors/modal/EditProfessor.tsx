@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { patchProfessorThunk } from '@/store/professors/professors.thunks'
 import { useNotifications } from '@/hooks/useNotifications'
 import Empty from '@/components/ui/Empty'
-import InputUI from '@/components/ui/InputUI'
+import FormInput from '@/components/ui/FormInput'
 
 type Props = {
   professor: TProfessor
@@ -20,8 +20,7 @@ const EditProfessor = ({ professor, onClose }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { isValid },
-    watch,
+    formState: { isValid, errors },
   } = useForm<TProfessor>({
     defaultValues: {
       tel: professor.tel,
@@ -49,24 +48,20 @@ const EditProfessor = ({ professor, onClose }: Props) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex flexDir={'column'} gap={4}>
         <Empty>{t('Edit professor information notify')}.</Empty>
-        <InputUI<TProfessor>
-          label={'Full name'}
-          register={register('fullName', { required: 'Name is required' })}
-          watch={watch}
-          name="fullName"
+        <FormInput
+          label="Full Name"
+          register={register('fullName')}
+          errorMessage={errors.fullName?.message}
         />
-        <InputUI<TProfessor>
-          label={'Tel'}
-          type="tel"
-          register={register('tel', { required: 'Name is required' })}
-          watch={watch}
-          name="tel"
+        <FormInput
+          label="Tel"
+          register={register('tel')}
+          errorMessage={errors.tel?.message}
         />
-        <InputUI<TProfessor>
-          label={'Description'}
-          register={register('description', { required: 'Name is required' })}
-          watch={watch}
-          name="description"
+        <FormInput
+          label="Description"
+          register={register('description')}
+          errorMessage={errors.description?.message}
         />
         <HStack width={'100%'} gap={4} marginY={4} justify={'end'}>
           <Button>{t('Cancel')}</Button>

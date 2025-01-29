@@ -60,10 +60,9 @@ const SectionViewProfessors = () => {
             value={params.search}
             onClearSearchInput={onClearSearchInput}
           />
-          <WindowModal
-            modalBody={onClose => <CreateProfessor onClose={onClose} />}
-            title={t('Create professor')}
-          />
+          <WindowModal>
+            {onClose => <CreateProfessor onClose={onClose} />}
+          </WindowModal>
         </HStack>
         <ViewTableProfessor />
         <HStack width={'full'} justify={'space-between'}>

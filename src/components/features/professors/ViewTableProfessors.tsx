@@ -1,8 +1,8 @@
 import { RootState } from '@/store/store'
 import {
   Avatar,
+  Badge,
   HStack,
-  Icon,
   Spinner,
   Table,
   TableContainer,
@@ -21,6 +21,7 @@ import { CheckIcon } from '@chakra-ui/icons'
 import CheckboxUI from '@/components/ui/CheckboxUI'
 import ActionMenu from '../../ui/ActionMenu'
 import { getProfessorsMenuConfig } from './config/getProfessorMenuConfig'
+import { STATUS_USER } from '@/assets/constants/enum'
 
 const ViewTableProfessor = () => {
   const { data } = useSelector((state: RootState) => state.professors)
@@ -104,9 +105,11 @@ const ViewTableProfessor = () => {
                 </Td>
                 <Td>{el.description}</Td>
                 <Td>{el.tel}</Td>
-                <Td>{moment(el.createdAt).format('DD/MM/YYYY')}</Td>
+                <Td>{moment(el.createdAt).format('DD.MM.YYYY')}</Td>
                 <Td>
-                  <Icon as={CheckIcon} />
+                  <Badge bg={STATUS_USER.ACTIVE ? 'green.100' : 'red.100'}>
+                    {STATUS_USER.ACTIVE}
+                  </Badge>
                 </Td>
                 <Td onClick={e => e.stopPropagation()}>
                   <ActionMenu actions={getProfessorsMenuConfig(el)} />
