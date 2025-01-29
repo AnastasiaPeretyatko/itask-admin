@@ -50,6 +50,7 @@ const sidebar = defineStyle({
   gap: 2,
   padding: 3,
   color: 'gray.500',
+  textAlign: 'center',
   fontWeight: 400,
   fontSize: 'sm',
   borderRadius: 'md',
@@ -83,6 +84,24 @@ const pagination = defineStyle(() => {
   }
 })
 
+const openSidebar = defineStyle({
+  minW: 'unset',
+  width: 26,
+  height: 26,
+  borderRadius: 'full',
+  padding: 1,
+  fontSize: 'lg',
+  position: 'absolute',
+  zIndex: 1,
+  right: -13,
+  top: 23,
+  backgroundColor: 'background.switch',
+  boxShadow: 'lg',
+  _hover: {
+    backgroundColor: 'blackAlpha.800',
+  },
+})
+
 export const buttonTheme = defineStyleConfig({
   baseStyle,
   variants: {
@@ -91,8 +110,6 @@ export const buttonTheme = defineStyleConfig({
     sidebar,
     unstyledBtn,
     pagination,
-  },
-  defaultProps: {
-    // size: 'sm',
+    openSidebar,
   },
 })

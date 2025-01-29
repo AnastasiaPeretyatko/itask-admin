@@ -1,4 +1,4 @@
-import { Flex, HStack, VStack } from '@chakra-ui/react'
+import { Box, Flex, HStack, VStack } from '@chakra-ui/react'
 import React from 'react'
 import Sidebar from '../ui/sidebar/Sidebar'
 import Header from '../ui/header'
@@ -6,7 +6,6 @@ import Header from '../ui/header'
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <VStack w="full" height="100vh" gap={0} overflow={'hidden'}>
-      <Header />
       <HStack
         width={'100%'}
         maxH={'full'}
@@ -23,10 +22,10 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           justifyContent="start"
           flexDir="column"
           overflowY="auto"
-          p={2}
-          bg={'gray.100'}
+          backgroundColor={'background.fill'}
         >
-          {children}
+          <Header />
+          <Box padding={4} width={'full'}>{children}</Box>
         </Flex>
       </HStack>
     </VStack>

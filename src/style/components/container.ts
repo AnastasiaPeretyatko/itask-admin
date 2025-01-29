@@ -1,9 +1,8 @@
 import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
 
-// define the base component styles
+
 const baseStyle = defineStyle(() => {
   return {
-    // padding: 0,
     maxW: 'unset',
     width: 'unset',
   }
@@ -15,7 +14,6 @@ const viewDate = defineStyle(() => {
     backgroundColor: 'BLACK_400',
     color: 'white',
     fontSize: 'sm',
-    // padding: '1px 5px',
     margin: 0,
     width: 'min-content',
     height: '100%',
@@ -25,19 +23,16 @@ const viewDate = defineStyle(() => {
 
 const header = defineStyle(() => {
   return {
-    position: 'sticky',
+    position: 'relative',
     top: 0,
-    zIndex: 10,
-    backgroundColor: 'background.main',
+    zIndex: 0,
     width: 'full',
     display: 'flex',
     flexDir: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'end',
     gap: '20px',
     padding: 4,
-    // borderColor: 'whiteAlpha.200',
-    boxShadow:'0 4px 2px -2px #80808021',
   }
 })
 
@@ -114,8 +109,8 @@ const sidebar = defineStyle(() => {
     flexDirection: 'column',
     height: '100%',
     width: '100%',
-    overflow: 'hidden',
-    position: 'sticky',
+    boxShadow: 'base',
+    position: 'relative',
     top: 0,
     padding: 4,
     gap: 4
