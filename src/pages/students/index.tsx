@@ -1,4 +1,4 @@
-import AppLayout from '@/components/layout/AppLayout'
+import AppLayout from '@/components/Layout/AppLayout'
 import { GetStaticPropsContext } from 'next'
 import BreadcrumbUI from '@/components/ui/breadcrumb'
 import SectionViewStudents from '@/components/features/students/SectionViewStudents'

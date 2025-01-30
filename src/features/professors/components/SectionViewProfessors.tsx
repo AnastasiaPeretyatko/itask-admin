@@ -7,9 +7,9 @@ import useDebounce from '@/hooks/useDebounce'
 import { getProfessorsThunk } from '@/store/professors/professors.thunks'
 import SearchInput from '@/components/ui/SearchInput'
 import WindowModal from '@/components/modal/WindowModal'
-import CreateProfessor from './modal/CreateProfessor'
 import ViewTableProfessor from './ViewTableProfessors'
 import { AddIcon, ArrowForwardIcon } from '@chakra-ui/icons'
+import { addProfessor } from '@/actions/definitions/professors'
 
 const SectionViewProfessors = () => {
   // const t = useTranslations()
@@ -47,12 +47,7 @@ const SectionViewProfessors = () => {
 
   return (
     <>
-      <VStack
-        width={'full'}
-        borderRadius={'10px'}
-        padding={4}
-        gap={4}
-      >
+      <VStack width={'full'} borderRadius={'10px'} padding={4} gap={4}>
         <HStack width={'full'} justify={'space-between'}>
           <SearchInput
             value={params.search}
@@ -61,12 +56,9 @@ const SectionViewProfessors = () => {
             onClearSearchInput={onClearSearchInput}
           />
           <WindowModal
-            action={
-              <IconButton aria-label="add" size={'sm'} icon={<AddIcon />} />
-            }
-          >
-            {onClose => <CreateProfessor onClose={onClose} />}
-          </WindowModal>
+            action={<IconButton aria-label="add" icon={<AddIcon />} />}
+            body={onClose => addProfessor.children(onClose).content}
+          />
         </HStack>
         <ViewTableProfessor />
         <HStack width={'full'} justify={'space-between'}>

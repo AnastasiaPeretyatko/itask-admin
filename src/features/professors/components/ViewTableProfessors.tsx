@@ -14,9 +14,10 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import CheckboxUI from '@/components/ui/CheckboxUI'
-import ActionMenu from '../../ui/ActionMenu'
+import ActionMenu from '@/components/ui/ActionMenu'
 import { getProfessorsMenuConfig } from './config/getProfessorMenuConfig'
 import { STATUS_USER } from '@/assets/constants/enum'
+import { addProfessor } from '@/actions/definitions/professors'
 
 const ViewTableProfessor = () => {
   const { data } = useSelector((state: RootState) => state.professors)
@@ -39,6 +40,9 @@ const ViewTableProfessor = () => {
       )
     )
   }
+
+  const listActions = [addProfessor]
+
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -99,7 +103,7 @@ const ViewTableProfessor = () => {
                   </Badge>
                 </Td>
                 <Td onClick={e => e.stopPropagation()}>
-                  <ActionMenu actions={getProfessorsMenuConfig(el)} />
+                  <ActionMenu actions={listActions} />
                 </Td>
               </Tr>
             ))}

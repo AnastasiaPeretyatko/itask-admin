@@ -1,7 +1,7 @@
 import { Box, Flex, HStack, VStack } from '@chakra-ui/react'
 import React from 'react'
-import Sidebar from '../ui/sidebar/Sidebar'
-import Header from '../ui/header'
+import Sidebar from '../Sidebar'
+import Header from '../Header'
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (

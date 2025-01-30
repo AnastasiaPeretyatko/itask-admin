@@ -6,10 +6,10 @@ import React, { ReactNode } from 'react'
 type Props = {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   action?: ReactNode
-  children: (onClose: () => void) => ReactNode
+  body: (onClose: () => void) => ReactNode
 }
 
-const WindowModal = ({ size = 'xl', action, children }: Props) => {
+const WindowModal = ({ size = 'xl', action, body }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const t = useTranslations()
 
@@ -41,7 +41,7 @@ const WindowModal = ({ size = 'xl', action, children }: Props) => {
         motionPreset="slideInBottom"
       >
         <ModalOverlay />
-        {children(onClose)}
+        {body(onClose)}
       </Modal>
     </>
   )
