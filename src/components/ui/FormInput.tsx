@@ -15,7 +15,8 @@ import { UseFormRegisterReturn } from 'react-hook-form'
 type Props = {
   label?: string
   type?: 'text' | 'password' | 'email'
-  register: UseFormRegisterReturn<string>
+  register?: UseFormRegisterReturn<string>
+  value?: string
   errorMessage?: string | null
   helperText?: string
 }
@@ -26,6 +27,7 @@ const FormInput = ({
   register,
   errorMessage,
   helperText,
+  value
 }: Props) => {
   const [isShowPassword, setIsShowPassword] = useState(type)
 
@@ -58,6 +60,7 @@ const FormInput = ({
           variant={'form_input'}
           type={isShowPassword}
           {...register}
+          value={value}
           size={'sm'}
           placeholder={label}
         />

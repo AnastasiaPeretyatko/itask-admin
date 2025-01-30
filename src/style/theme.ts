@@ -28,8 +28,8 @@ export const theme = extendTheme({
     colors: {
       font: {_dark: 'whiteAlpha.900', _light: 'blackAlpha.800' },
       background: {
-        main: { _dark: '#1A1D1F', _light: 'white.100' },
-        fill: { _dark: 'black.300', _light: 'white.200' },
+        fill: { _dark: '#1A1D1F', _light: 'white.100' },
+        main: { _dark: 'black.300', _light: 'white.300' },
         switch: { _dark: 'black.100', _light: 'white.300' },
         button: { _dark: 'whiteAlpha.200', _light: 'neutral.light' },
       },

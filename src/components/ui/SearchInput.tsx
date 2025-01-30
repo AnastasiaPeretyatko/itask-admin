@@ -13,20 +13,22 @@ export type SearchInputProps = {
   onClearSearchInput?: () => void
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   isDisabled?: boolean
+  placeholder?: string
 }
 
 const SearchInput = ({
   onChange,
   value,
   onClearSearchInput,
-  size = 'sm',
+  size = 'md',
   isDisabled = false,
+  placeholder = 'Search',
 }: SearchInputProps) => {
   return (
     <InputGroup width={80} size={size}>
       <Input
         variant={'search'}
-        placeholder="Search"
+        placeholder={placeholder}
         value={value}
         onChange={e => onChange(e.target.value)}
         isDisabled={isDisabled}

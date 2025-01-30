@@ -7,9 +7,18 @@ const { definePartsStyle, defineMultiStyleConfig } =
 const baseStyle = definePartsStyle({
   table: {
     thead: {
-      bg: '#1a40cf1c',
+      bg: 'background.main',
       th: {
-        paddingY: 3
+        paddingY: 3,
+        textTransform: 'capitalize',
+        fontSize: 'sm',
+        fontWeight: 'normal',
+        _first: {
+          width: '48px' // for checkbox
+        },
+        _last: {
+          width: '48px' // for checkbox
+        }
       }
     },
     tbody: {
@@ -17,6 +26,9 @@ const baseStyle = definePartsStyle({
         cursor: 'pointer',
         _hover: {
           bg: 'background.button'
+        },
+        td: {
+          paddingY: 3
         }
       }
     }

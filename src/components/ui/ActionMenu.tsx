@@ -2,6 +2,7 @@ import {
   ComponentWithAs,
   IconButton,
   IconProps,
+  Menu,
   // Menu,
   MenuButton,
   MenuList,
@@ -28,46 +29,60 @@ type ActionMenuProps = {
 const ActionMenu = ({ actions }: ActionMenuProps) => {
   const t = useTranslations()
   return (
-    <div>kek</div>
-    // <Menu size={'sm'}>
-    //   <MenuButton
-    //     as={IconButton}
-    //     icon={<CiMenuKebab />}
-    //     variant={'unstyled'}
-    //     display={'flex'}
-    //     justifyContent={'center'}
-    //   />
-    //   <MenuList>
-    //     {actions.map(action => (
-    //       <WindowModal
-    //         key={action.title}
-    //         title={action.title}
-    //         action={
-    //           <CustomMenuItem
-    //             icon={action.icon}
-    //             label={t(action.actionLabel)}
-    //             isDelete={action.isDelete}
-    //             isDisabled={action.isDisabled}
-    //           />
-    //         }
-    //         modalBody={onClose => action.modalBody(onClose)}
-    //       />
-    //     ))}
-    //     {/* <WindowModal
-    //       title="Edit professor"
-    //       action={<CustomMenuItem icon={EditIcon} lable={t('Edit')} />}
-    //       modalBody={onClose => (
-    //         <EditProfessor professor={professor} onClose={onClose} />
-    //       )}
-    //     />
-    //     <CustomMenuItem
-    //       isDisabled
-    //       isDelete
-    //       icon={DeleteIcon}
-    //       lable={t('Delete')}
-    //     /> */}
-    //   </MenuList>
-    // </Menu>
+    // <div>kek</div>
+    <Menu size={'sm'}>
+      <MenuButton
+        as={IconButton}
+        icon={<CiMenuKebab />}
+        variant={'unstyled'}
+        display={'flex'}
+        justifyContent={'center'}
+      />
+      <MenuList>
+        {actions.map(action => (
+          <WindowModal
+            key={action.title}
+            // title={action.title}
+            action={
+              <CustomMenuItem
+                icon={action.icon}
+                label={t(action.actionLabel)}
+                isDelete={action.isDelete}
+                isDisabled={action.isDisabled}
+              />
+            }
+          >
+            {onClose => action.modalBody(onClose)}
+          </WindowModal>
+          // <WindowModal
+          //   key={action.title}
+          //   title={action.title}
+          //   action={
+          //     <CustomMenuItem
+          //       icon={action.icon}
+          //       label={t(action.actionLabel)}
+          //       isDelete={action.isDelete}
+          //       isDisabled={action.isDisabled}
+          //     />
+          //   }
+          //   modalBody={onClose => }
+          // />
+        ))}
+        {/* <WindowModal
+          title="Edit professor"
+          action={<CustomMenuItem icon={EditIcon} lable={t('Edit')} />}
+          modalBody={onClose => (
+            <EditProfessor professor={professor} onClose={onClose} />
+          )}
+        />
+        <CustomMenuItem
+          isDisabled
+          isDelete
+          icon={DeleteIcon}
+          lable={t('Delete')}
+        /> */}
+      </MenuList>
+    </Menu>
   )
 }
 

@@ -20,11 +20,11 @@ const ActionMenu = ({ group }: { group: TGroup }) => {
         justifyContent={'center'}
       />
       <MenuList>
-        <WindowModal
+        {/* <WindowModal
           title="Edit group"
           action={<CustomMenuItem icon={EditIcon} label={t('Edit')} />}
           modalBody={onClose => <EditGroup group={group} onClose={onClose} />}
-        />
+        /> */}
         <CustomMenuItem
           isDisabled
           isDelete

@@ -1,23 +1,18 @@
 import { RootState } from '@/store/store'
 import {
-  Avatar,
   Badge,
-  HStack,
   Spinner,
   Table,
   TableContainer,
   Tbody,
   Td,
-  Text,
   Th,
   Thead,
   Tr,
-  VStack,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
-import { CheckIcon } from '@chakra-ui/icons'
 import CheckboxUI from '@/components/ui/CheckboxUI'
 import ActionMenu from '../../ui/ActionMenu'
 import { getProfessorsMenuConfig } from './config/getProfessorMenuConfig'
@@ -77,11 +72,11 @@ const ViewTableProfessor = () => {
               />
             </Th>
             <Th>Name</Th>
-            <Th>Description</Th>
+            <Th>Email</Th>
             <Th>Tel</Th>
             <Th>Created</Th>
             <Th>Status</Th>
-            <Th>Action</Th>
+            <Th></Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -94,16 +89,8 @@ const ViewTableProfessor = () => {
                     onCheckedChange={() => handleIndividualCheck(el.id)}
                   />
                 </Td>
-                <Td>
-                  <HStack>
-                    <Avatar />
-                    <VStack align={'start'} gap={0}>
-                      <Text>{el.fullName}</Text>
-                      <Text color={'text.pale'}>{el.user.email}</Text>
-                    </VStack>
-                  </HStack>
-                </Td>
-                <Td>{el.description}</Td>
+                <Td>{el.fullName}</Td>
+                <Td>{el.user.email}</Td>
                 <Td>{el.tel}</Td>
                 <Td>{moment(el.createdAt).format('DD.MM.YYYY')}</Td>
                 <Td>

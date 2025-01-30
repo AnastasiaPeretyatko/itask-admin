@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl'
 import { useNotifications } from '@/hooks/useNotifications'
 import SelectorUI from '@/components/ui/selector/SelectorUI'
 import { postGroupThunk } from '@/store/groups/groups.thunks'
-import InputUI from '@/components/ui/InputUI'
+import FormInput from '@/components/ui/FormInput'
 import SelectForm from '@/components/ui/selector/SelectForm'
 import { getUniversitiesThunk } from '@/store/universities/universities.thunks'
 import { DEGREE, EDUCATION_MODE } from '@/assets/constants'
@@ -69,19 +69,19 @@ const CreateGroup = ({ onClose }: { onClose: () => void }) => {
           control={control}
           options={EDUCATION_MODE}
         />
-        <InputUI<TGroupCreate>
+        <FormInput
           label={t('Course')}
           register={register('course', { required: 'Course is required' })}
-          watch={watch}
-          name="course"
+          // watch={watch}
+          // name="course"
         />
-        <InputUI<TGroupCreate>
+        <FormInput
           label={t('Group number')}
           register={register('groupNumber', {
             required: 'Group number is required',
           })}
-          watch={watch}
-          name="groupNumber"
+          // watch={watch}
+          // name="groupNumbe r"
         />
         <HStack width={'100%'} gap={4} marginY={4} justify={'end'}>
           <Button>{t('Cancel')}</Button>
