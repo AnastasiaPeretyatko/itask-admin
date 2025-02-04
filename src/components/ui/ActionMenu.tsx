@@ -2,14 +2,17 @@ import { IconButton, Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import { CiMenuKebab } from 'react-icons/ci'
 import WindowModal from '../modal/WindowModal'
 import CustomMenuItem from './CustomMenuItem'
-import { useTranslations } from 'next-intl'
+import { TProfessor } from '@/types/professor'
+import { createActionType } from '@/actions/definitions/professors'
 
 type ActionMenuProps = {
-  actions: any[] // Список модальных окон
+  actions: (el: TProfessor) => createActionType[] // Список модальных окон
+  data?: TProfessor
 }
 
-const ActionMenu = ({ actions }: ActionMenuProps) => {
-  const t = useTranslations()
+const ActionMenu = ({ actions, data }: ActionMenuProps) => {
+  const listActions = data && actions(data)
+  // const t = useTranslations()
 
   return (
     <Menu size={'sm'}>
@@ -21,7 +24,7 @@ const ActionMenu = ({ actions }: ActionMenuProps) => {
         justifyContent={'center'}
       />
       <MenuList>
-        {actions.map(action => {
+        {listActions?.map(action => {
           return (
             <WindowModal
               key={action.id}
