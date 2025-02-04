@@ -15,9 +15,9 @@ import { useSelector } from 'react-redux'
 import moment from 'moment'
 import CheckboxUI from '@/components/ui/CheckboxUI'
 import ActionMenu from '@/components/ui/ActionMenu'
-import { getProfessorsMenuConfig } from './config/getProfessorMenuConfig'
+import { TProfessor } from '@/types/professor'
 import { STATUS_USER } from '@/assets/constants/enum'
-import { addProfessor } from '@/actions/definitions/professors'
+import { updateProfessor } from '@/actions/definitions/professors'
 
 const ViewTableProfessor = () => {
   const { data } = useSelector((state: RootState) => state.professors)
@@ -41,7 +41,7 @@ const ViewTableProfessor = () => {
     )
   }
 
-  const listActions = [addProfessor]
+  const listActions = (el: TProfessor) => [updateProfessor(el)]
 
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -103,7 +103,7 @@ const ViewTableProfessor = () => {
                   </Badge>
                 </Td>
                 <Td onClick={e => e.stopPropagation()}>
-                  <ActionMenu actions={listActions} />
+                  <ActionMenu actions={listActions}  data={el}/>
                 </Td>
               </Tr>
             ))}

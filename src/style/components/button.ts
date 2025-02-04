@@ -9,17 +9,15 @@ const primary = defineStyle(() => {
     bg: 'primary.purple',
     color: 'white',
     borderRadius: 10,
+    _disabled: {
+      opacity: 0.7,
+    },
     _hover: {
       opacity: 0.8,
       _disabled: {
-        opacity: 0.5,
-        bg: 'button.bg',
-        color: 'text.pale',
+        opacity: 0.7,
+        bg: 'primary.purple',
       },
-    },
-    _disabled: {
-      bg: 'button.bg',
-      color: 'text.pale',
     },
   }
 })

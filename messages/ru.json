@@ -35,10 +35,11 @@
   "master": "Магистратура",
   "full-time": "Очное",
   "extramural": "Заочное",
-  "Fullname": "ФИО",
+  "Full Name": "ФИО",
   "Email": "Email",
   "Group": "Группа",
   "Tel": "Телефон",
   "Status": "Статус",
-  "Action": "Действие"
+  "Action": "Действие",
+  "Description": "Описание"
 }

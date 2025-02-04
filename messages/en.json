@@ -35,10 +35,11 @@
   "Students": "Students",
   "Create": "Create",
   "Created": "Created",
-  "Fullname": "Fullname",
+  "Full Name": "Full Name",
   "Email": "Email",
   "Group": "Group",
   "Tel": "Tel",
   "Status": "Status",
-  "Action": "Action"
+  "Action": "Action",
+  "Description": "Description"
 }

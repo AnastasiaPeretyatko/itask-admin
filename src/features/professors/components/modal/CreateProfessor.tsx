@@ -46,38 +46,32 @@ const CreateProfessor = ({ onClose }: { onClose: () => void }) => {
 
   return (
     <ModalContent as={'form'} onSubmit={handleSubmit(onSubmit)}>
-      <ModalHeader
-        display={'flex'}
-        gap={4}
-        textTransform={'unset'}
-        alignItems={'center'}
-        pb={0}
-      >
+      <ModalHeader>
         <Icon as={FolderIcon} width={'6'} height={'6'} />
         <Heading size={'md'} fontWeight={500}>
           {t('Create professor')}
         </Heading>
       </ModalHeader>
       <ModalCloseButton />
-      <ModalBody display={'flex'} flexDir={'column'} gap={4}>
-        <Empty>{t('Create professor information notify')}.</Empty>
+      <ModalBody>
+        <Empty marginBottom={2}>{t('Create professor information notify')}.</Empty>
         <FormInput
           register={register('fullName', { required: 'Full name is required' })}
-          label="Full Name"
+          label={t("Full Name")}
           errorMessage={errors.fullName?.message}
         />
         <FormInput
           register={register('email', { required: 'Email is required' })}
-          label="Email"
+          label={t("Email")}
           errorMessage={errors.email?.message}
         />
         <TextareaUI
           register={register('description')}
-          label={'Description'}
+          label={t('Description')}
           errorMessage={errors.description?.message}
         />
       </ModalBody>
-      <ModalFooter gap={4}>
+      <ModalFooter>
         <Button onClick={onClose}>{t('Cancel')}</Button>
         <Button
           variant={'primary'}
