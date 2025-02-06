@@ -1,9 +1,9 @@
-import { IconButton, Menu, MenuButton, MenuList } from '@chakra-ui/react'
-import { CiMenuKebab } from 'react-icons/ci'
-import WindowModal from '../modal/WindowModal'
-import CustomMenuItem from './CustomMenuItem'
-import { TProfessor } from '@/types/professor'
-import { createActionType } from '@/actions/definitions/professors'
+import { IconButton, Menu, MenuButton, MenuList } from '@chakra-ui/react';
+import { CiMenuKebab } from 'react-icons/ci';
+import WindowModal from '../modal/WindowModal';
+import CustomMenuItem from './CustomMenuItem';
+import { createActionType } from '@/actions/definitions/professors';
+import { TProfessor } from '@/types/professor';
 
 type ActionMenuProps = {
   actions: (el: TProfessor) => createActionType[] // Список модальных окон
@@ -11,7 +11,7 @@ type ActionMenuProps = {
 }
 
 const ActionMenu = ({ actions, data }: ActionMenuProps) => {
-  const listActions = data && actions(data)
+  const listActions = data && actions(data);
   // const t = useTranslations()
 
   return (
@@ -24,20 +24,26 @@ const ActionMenu = ({ actions, data }: ActionMenuProps) => {
         justifyContent={'center'}
       />
       <MenuList>
-        {listActions?.map(action => {
+        {listActions?.map((action) => {
+          console.log(action);
           return (
             <WindowModal
               key={action.id}
               action={
-                <CustomMenuItem icon={action.icon} label={action.actionLabel} />
+                <CustomMenuItem
+                  icon={action.icon}
+                  label={action.actionLabel}
+                  isDelete={action.isDeleted}
+                  isDisabled={action.isDesabled}
+                />
               }
-              body={onClose => action.children(onClose).content}
+              body={(onClose) => action.children(onClose).content}
             />
-          )
+          );
         })}
       </MenuList>
     </Menu>
-  )
-}
+  );
+};
 
-export default ActionMenu
+export default ActionMenu;

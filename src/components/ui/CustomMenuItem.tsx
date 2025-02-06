@@ -1,5 +1,5 @@
-import { ComponentWithAs, IconProps, MenuItem, Text } from '@chakra-ui/react'
-import React from 'react'
+import { ComponentWithAs, IconProps, MenuItem, Text } from '@chakra-ui/react';
+import React from 'react';
 
 type Props = {
   label?: string
@@ -16,8 +16,8 @@ const CustomMenuItem = ({
   isDelete,
   isDisabled,
 }: Props) => {
-  const ComponentIcon = icon as ComponentWithAs<'svg', IconProps>
-
+  const ComponentIcon = icon as ComponentWithAs<'svg', IconProps>;
+  console.log(label, isDisabled);
   return (
     <MenuItem
       isDisabled={isDisabled}
@@ -26,7 +26,8 @@ const CustomMenuItem = ({
         gap: 2,
         _hover: {
           bg: isDelete ? 'red.100' : 'background.switch',
-          color: isDelete ? 'red' : 'BLACK_200',
+          color: isDelete ? 'red' : 'text.bold',
+          fontWeight: 500,
         },
       }}
       onClick={onClick}
@@ -34,7 +35,7 @@ const CustomMenuItem = ({
       <ComponentIcon boxSize={3} />
       <Text>{label}</Text>
     </MenuItem>
-  )
-}
+  );
+};
 
-export default CustomMenuItem
+export default CustomMenuItem;

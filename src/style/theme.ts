@@ -1,15 +1,16 @@
-import { extendTheme } from '@chakra-ui/react'
-import { buttonTheme } from './components/button'
-import { containerTheme } from './components/container'
-import { headingTheme } from './components/heading'
-import { inputTheme } from './components/input'
-import { listTheme } from './components/list'
-import { modalTheme } from './components/modal'
-import { tableTheme } from './components/table'
+import { extendTheme } from '@chakra-ui/react';
+import { colors } from './colors';
+import { buttonTheme } from './components/button';
+import { containerTheme } from './components/container';
+import { headingTheme } from './components/heading';
+import { inputTheme } from './components/input';
+import { listTheme } from './components/list';
+import { menuTheme } from './components/menu';
+import { modalTheme } from './components/modal';
+import { popoverTheme } from './components/popover';
+import { tableTheme } from './components/table';
 // import { menuTheme } from './components/menu'
-import { popoverTheme } from './components/popover'
-import { colors } from './colors'
-import { textareaTheme } from './components/textarea'
+import { textareaTheme } from './components/textarea';
 
 export const theme = extendTheme({
   config: {
@@ -20,13 +21,13 @@ export const theme = extendTheme({
     global: {
       body: {
         bg: 'background.main',
-        color: 'font'
+        color: 'font',
       },
     },
   },
   semanticTokens: {
     colors: {
-      font: {_dark: 'whiteAlpha.900', _light: 'blackAlpha.800' },
+      font: { _dark: 'whiteAlpha.900', _light: 'blackAlpha.800' },
       background: {
         fill: { _dark: '#1A1D1F', _light: 'white.100' },
         main: { _dark: 'black.300', _light: 'white.300' },
@@ -63,8 +64,8 @@ export const theme = extendTheme({
     List: listTheme,
     Modal: modalTheme,
     Table: tableTheme,
-    // Menu: menuTheme,
+    Menu: menuTheme,
     Popover: popoverTheme,
-    Textarea: textareaTheme
+    Textarea: textareaTheme,
   },
-})
+});

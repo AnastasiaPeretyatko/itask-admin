@@ -1,8 +1,8 @@
-import { menuAnatomy } from '@chakra-ui/anatomy'
-import { createMultiStyleConfigHelpers } from '@chakra-ui/react'
+import { menuAnatomy } from '@chakra-ui/anatomy';
+import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
 
 const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(menuAnatomy.keys)
+  createMultiStyleConfigHelpers(menuAnatomy.keys);
 
 const baseStyle = definePartsStyle({
   list: {
@@ -13,16 +13,18 @@ const baseStyle = definePartsStyle({
     gap: 2,
     borderRadius: '5px',
     padding: 2,
-    _hover: {
-      bg: 'background.switch',
-    },
+    color: 'text.pale',
     _active: {
       bg: 'transparent',
     },
     _focus: {
       bg: 'transparent',
     },
+    _disabled: {
+      opacity: 0.7,
+    },
   },
-})
+});
+
 // export the base styles in the component theme
-export const menuTheme = defineMultiStyleConfig({ baseStyle })
+export const menuTheme = defineMultiStyleConfig({ baseStyle });

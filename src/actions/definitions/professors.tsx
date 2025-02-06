@@ -1,8 +1,8 @@
-import { createAction } from '@/actions'
-import CreateProfessor from '@/features/professors/components/modal/CreateProfessor'
-import EditProfessor from '@/features/professors/components/modal/EditProfessor'
-import { TProfessor } from '@/types/professor'
-import { AddIcon, ComponentWithAs, IconProps } from '@chakra-ui/icons'
+import { AddIcon, ComponentWithAs, DeleteIcon, IconProps } from '@chakra-ui/icons';
+import { createAction } from '@/actions';
+import CreateProfessor from '@/features/professors/components/CreateProfessor';
+import EditProfessor from '@/features/professors/components/EditProfessor';
+import { TProfessor } from '@/types/professor';
 
 export type createActionType = {
   id?: string
@@ -13,6 +13,8 @@ export type createActionType = {
     title: string
     content: JSX.Element
   }
+  isDeleted?: boolean
+  isDesabled?: boolean
 }
 
 export const addProfessor = createAction({
@@ -23,7 +25,7 @@ export const addProfessor = createAction({
     title: 'Add professor',
     content: <CreateProfessor onClose={onClose} />,
   }),
-})
+});
 
 export const updateProfessor = (data: TProfessor) =>
   createAction({
@@ -32,6 +34,25 @@ export const updateProfessor = (data: TProfessor) =>
     actionLabel: 'Update professor',
     children: (onClose: () => void) => ({
       title: 'Update professor',
-      content: <EditProfessor professor={data} onClose={onClose} />,
+      content: <EditProfessor
+        professor={data}
+        onClose={onClose}
+      />,
     }),
-  })
+  });
+
+export const deleteProfessor = (data: TProfessor) =>
+  createAction({
+    name: ({ t }: { t: any }) => t('Delete professor'),
+    icon: DeleteIcon,
+    actionLabel: 'Delete professor',
+    children: (onClose: () => void) => ({
+      title: 'Delete professor',
+      content: <div>
+        <p>Are you sure you want to delete this professor?</p>
+        <button onClick={onClose}>No</button>
+      </div>,
+    }),
+    isDeleted: true,
+    isDesabled: true,
+  });
