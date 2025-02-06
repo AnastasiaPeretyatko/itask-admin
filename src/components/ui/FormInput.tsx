@@ -1,4 +1,4 @@
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
   FormControl,
   FormErrorMessage,
@@ -8,9 +8,9 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-} from '@chakra-ui/react'
-import { useMemo, useState } from 'react'
-import { UseFormRegisterReturn } from 'react-hook-form'
+} from '@chakra-ui/react';
+import { useMemo, useState } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 type Props = {
   label?: string
@@ -27,9 +27,9 @@ const FormInput = ({
   register,
   errorMessage,
   helperText,
-  value
+  value,
 }: Props) => {
-  const [isShowPassword, setIsShowPassword] = useState(type)
+  const [isShowPassword, setIsShowPassword] = useState(type);
 
   const isPassword = useMemo(() => {
     if (type === 'password') {
@@ -42,15 +42,15 @@ const FormInput = ({
               isShowPassword === 'password' ? <ViewOffIcon /> : <ViewIcon />
             }
             onClick={() =>
-              setIsShowPassword(prev =>
-                prev === 'password' ? 'text' : 'password'
+              setIsShowPassword((prev) =>
+                prev === 'password' ? 'text' : 'password',
               )
             }
           />
         </InputRightElement>
-      )
+      );
     }
-  }, [isShowPassword, type])
+  }, [isShowPassword, type]);
 
   return (
     <FormControl isInvalid={!!errorMessage}>
@@ -72,7 +72,7 @@ const FormInput = ({
         <FormErrorMessage>{errorMessage}</FormErrorMessage>
       )}
     </FormControl>
-  )
-}
+  );
+};
 
-export default FormInput
+export default FormInput;

@@ -10,6 +10,7 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import moment from 'moment';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { deleteProfessor, updateProfessor } from '@/actions/definitions/professors';
@@ -20,6 +21,7 @@ import { RootState } from '@/store/store';
 import { TProfessor } from '@/types/professor';
 
 const ViewTableProfessor = () => {
+  const t = useTranslations();
   const { data } = useSelector((state: RootState) => state.professors);
 
   const [values, setValues] = useState(
@@ -75,17 +77,23 @@ const ViewTableProfessor = () => {
                 onCheckedChange={handleCheckAll}
               />
             </Th>
-            <Th>Name</Th>
-            <Th>Email</Th>
-            <Th>Tel</Th>
-            <Th>Created</Th>
-            <Th>Status</Th>
+            <Th>{t('Full Name')}</Th>
+            <Th>{t('Email')}</Th>
+            <Th>{t('Tel')}</Th>
+            <Th>{t('Added')}</Th>
+            <Th>{t('Status')}</Th>
             <Th></Th>
           </Tr>
         </Thead>
         <Tbody>
           {values ? values.map((el) => (
-            <Tr key={el.id}>
+            <Tr
+              key={el.id}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleIndividualCheck(el.id);
+              }}
+            >
               <Td>
                 <CheckboxUI
                   isChecked={el.checked}

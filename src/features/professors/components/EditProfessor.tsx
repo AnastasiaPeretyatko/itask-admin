@@ -3,7 +3,6 @@ import {
   Button,
   Flex,
   Heading,
-  HStack,
   Icon,
   ModalBody,
   ModalCloseButton,
@@ -48,11 +47,11 @@ const EditProfessor = ({ professor, onClose }: Props) => {
     setIsLoading(true);
     dispatch(patchProfessorThunk({ id: professor.id, data }))
       .unwrap()
-      .then((res) => {
-        showSuccessMessage(res.message);
+      .then(() => {
+        showSuccessMessage({ title: 'Преподаватель успешно отредактирован' });
         onClose();
       })
-      .catch((err) => showErrorMessage(err.message))
+      .catch(() => showErrorMessage({ title: 'Произошла ошибка' }))
       .finally(() => setIsLoading(false));
   };
 
@@ -83,7 +82,9 @@ const EditProfessor = ({ professor, onClose }: Props) => {
           <Empty>{t('Edit professor information notify')}.</Empty>
           <FormInput
             label="Full Name"
-            register={register('fullName')}
+            register={register('fullName', {
+              required: 'Full name is required',
+            })}
             errorMessage={errors.fullName?.message}
           />
           <FormInput

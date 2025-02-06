@@ -33,6 +33,7 @@ export const theme = extendTheme({
         main: { _dark: 'black.300', _light: 'white.300' },
         switch: { _dark: 'black.100', _light: 'white.300' },
         button: { _dark: 'whiteAlpha.200', _light: 'neutral.light' },
+        natural: { _dark: 'black.100', _light: '#e2e3e72e' },
       },
       bg: { _dark: 'black', _light: 'white.300' },
       input: {

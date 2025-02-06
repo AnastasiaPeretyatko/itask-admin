@@ -32,4 +32,4 @@ export const colors = {
     medium: '#B0B0B0',
     dark: '#303336',
   },
-}
+};

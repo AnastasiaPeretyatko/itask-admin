@@ -1,49 +1,50 @@
-import { Container, HStack } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
-import ViewTableStudents from './ViewTableStudents'
-import SearchInput from '@/components/ui/SearchInput'
-import WindowModal from '@/components/modal/WindowModal'
-import CreateStudent from './modal/CreateStudent'
-import { useTranslations } from 'next-intl'
-import Pagination from '@/components/ui/Pagination'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '@/store/store'
-import { getAllStudentsThunk } from '@/store/students/students.thunks'
-import useDebounce from '@/hooks/useDebounce'
-import SelectUI from '@/components/ui/SelectUI'
-import { LIMIT } from '@/assets/constants'
+import { AddIcon } from '@chakra-ui/icons';
+import { Container, HStack, IconButton } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
+import { useTranslations } from 'next-intl';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import ViewTableStudents from './ViewTableStudents';
+import CreateStudent from './modal/CreateStudent';
+import { LIMIT } from '@/assets/constants';
+import WindowModal from '@/components/modal/WindowModal';
+import Pagination from '@/components/ui/Pagination';
+import SearchInput from '@/components/ui/SearchInput';
+import SelectUI from '@/components/ui/SelectUI';
+import useDebounce from '@/hooks/useDebounce';
+import { AppDispatch, RootState } from '@/store/store';
+import { getAllStudentsThunk } from '@/store/students/students.thunks';
 // import NotFoundImage from '@/components/ui/not-found'
-import dynamic from 'next/dynamic'
 
 const NotFoundImage = dynamic(() => import('@/components/ui/not-found'), {
   ssr: false,
-})
+});
 
 const SectionViewStudents = () => {
-  const { data, count } = useSelector((state: RootState) => state.students)
-  const t = useTranslations()
-  const dispatch = useDispatch<AppDispatch>()
+  const { data, count } = useSelector((state: RootState) => state.students);
+  const t = useTranslations();
+  const dispatch = useDispatch<AppDispatch>();
   const [params, setParams] = React.useState({
     page: 1,
     limit: 10,
     search: '',
-  })
-  const debouncedSearch = useDebounce(params.search, 500)
+  });
+  const debouncedSearch = useDebounce(params.search, 500);
   const onChangePage = (page: number) => {
-    setParams(prev => ({ ...prev, page }))
-  }
+    setParams((prev) => ({ ...prev, page }));
+  };
 
   const onChangeSearchInput = (value: string) => {
-    setParams(prev => ({ ...prev, search: value }))
-  }
+    setParams((prev) => ({ ...prev, search: value }));
+  };
 
   const onClearSearchInput = () => {
-    setParams(prev => ({ ...prev, search: '' }))
-  }
+    setParams((prev) => ({ ...prev, search: '' }));
+  };
 
   const onChangeLimit = (limit: string | number) => {
-    setParams(prev => ({ ...prev, limit: +limit }))
-  }
+    setParams((prev) => ({ ...prev, limit: +limit }));
+  };
 
   useEffect(() => {
     dispatch(
@@ -51,15 +52,18 @@ const SectionViewStudents = () => {
         limit: params.limit,
         page: params.page,
         search: debouncedSearch,
-      })
-    )
-  }, [dispatch, params.limit, params.page, debouncedSearch])
+      }),
+    );
+  }, [dispatch, params.limit, params.page, debouncedSearch]);
 
   console.log(data, count);
 
   return (
     <Container variant={'wrapper_table'}>
-      <HStack mb={4} justifyContent="space-between">
+      <HStack
+        mb={4}
+        justifyContent="space-between"
+      >
         <SearchInput
           onClearSearchInput={onClearSearchInput}
           onChange={onChangeSearchInput}
@@ -67,8 +71,11 @@ const SectionViewStudents = () => {
           size="sm"
         />
         <WindowModal
-          title={t('Create student')}
-          modalBody={onClose => <CreateStudent onClose={onClose} />}
+          action={<IconButton
+            aria-label="add"
+            icon={<AddIcon />}
+          />}
+          body={(onClose) => <CreateStudent onClose={onClose} />}
         />
       </HStack>
       {!count ? (
@@ -86,7 +93,10 @@ const SectionViewStudents = () => {
         <ViewTableStudents students={data}/>
       )}
 
-      <HStack width={'full'} justify={'space-between'}>
+      <HStack
+        width={'full'}
+        justify={'space-between'}
+      >
         <SelectUI
           size={20}
           array={LIMIT}
@@ -102,7 +112,7 @@ const SectionViewStudents = () => {
         />
       </HStack>
     </Container>
-  )
-}
+  );
+};
 
-export default SectionViewStudents
+export default SectionViewStudents;

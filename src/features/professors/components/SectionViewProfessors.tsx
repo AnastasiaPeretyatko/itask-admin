@@ -46,6 +46,8 @@ const SectionViewProfessors = () => {
     );
   }, [debouncedSearch, params.page, params.limit, dispatch]);
 
+  console.log(data);
+
   return (
     <VStack
       width={'full'}

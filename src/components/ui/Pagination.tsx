@@ -1,5 +1,5 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { Button, HStack, IconButton } from '@chakra-ui/react'
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { Button, HStack, IconButton } from '@chakra-ui/react';
 
 type Props = {
   limit: number
@@ -9,10 +9,11 @@ type Props = {
 }
 
 const Pagination = ({ count, limit, page, onChangePage }: Props) => {
-  const arrayPages = Array.from({ length: Math.ceil(count / limit) }, (v, i) => i + 1)
+  const arrayPages = Array.from({ length: Math.ceil(count / limit) }, (v, i) => i + 1);
 
-  if(!arrayPages.length) {
-    return null
+
+  if(!arrayPages.length || arrayPages.length === 1) {
+    return null;
   }
 
   return (
@@ -24,7 +25,7 @@ const Pagination = ({ count, limit, page, onChangePage }: Props) => {
         isDisabled={page - 1 === 0}
         onClick={() => onChangePage(page - 1)}
       />
-      {arrayPages.map(el => (
+      {arrayPages.map((el) => (
         <Button
           size={'sm'}
           variant={'pagination'}
@@ -43,7 +44,7 @@ const Pagination = ({ count, limit, page, onChangePage }: Props) => {
         onClick={() => onChangePage(page + 1)}
       />
     </HStack>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;
