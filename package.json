@@ -16,6 +16,9 @@
     "@emotion/styled": "^11.13.0",
     "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.7",
+    "eslint-plugin-es": "^4.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-stylelint": "^0.1.1",
     "framer-motion": "^11.11.0",
     "lottie-react": "^2.4.0",
     "lottie-web": "^5.12.2",
@@ -34,8 +37,13 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^8",
+    "@typescript-eslint/eslint-plugin": "^8.23.0",
+    "@typescript-eslint/parser": "^8.23.0",
+    "eslint": "^8.57.1",
     "eslint-config-next": "15.0.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
     "typescript": "^5"
   }
 }
