@@ -1,6 +1,6 @@
-import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
+import { defineStyle, defineStyleConfig } from '@chakra-ui/react';
 
-const baseStyle = defineStyle({})
+const baseStyle = defineStyle({});
 
 const primary = defineStyle(() => {
   return {
@@ -19,8 +19,8 @@ const primary = defineStyle(() => {
         bg: 'primary.purple',
       },
     },
-  }
-})
+  };
+});
 
 const secondary = defineStyle(() => {
   return {
@@ -39,8 +39,8 @@ const secondary = defineStyle(() => {
         color: 'text.pale',
       },
     },
-  }
-})
+  };
+});
 
 const sidebar = defineStyle({
   display: 'flex',
@@ -66,11 +66,11 @@ const sidebar = defineStyle({
     bg: 'blackAlpha.800',
     color: 'white',
   },
-})
+});
 
 const unstyledBtn = defineStyle(() => {
-  return {}
-})
+  return {};
+});
 
 const pagination = defineStyle(() => {
   return {
@@ -79,8 +79,8 @@ const pagination = defineStyle(() => {
       bg: 'primary.purple',
       color: 'background.main',
     },
-  }
-})
+  };
+});
 
 const openSidebar = defineStyle({
   minW: 'unset',
@@ -98,7 +98,7 @@ const openSidebar = defineStyle({
   _hover: {
     backgroundColor: 'blackAlpha.800',
   },
-})
+});
 
 export const buttonTheme = defineStyleConfig({
   baseStyle,
@@ -110,4 +110,4 @@ export const buttonTheme = defineStyleConfig({
     pagination,
     openSidebar,
   },
-})
+});
