@@ -7,11 +7,12 @@ const { definePartsStyle, defineMultiStyleConfig } =
 const form_input = definePartsStyle({
   field: {
     backgroundColor: 'background.main',
-    borderRadius: '10px',
+    borderRadius: 6,
     border: '1px solid',
     borderColor: 'input.outline',
-    _focusVisible: {
-      border: 'inherit',
+    _focus: {
+      border: '2px solid',
+      borderColor: 'primary.purple',
     },
   },
 })
@@ -19,18 +20,17 @@ const form_input = definePartsStyle({
 const search = definePartsStyle({
   field: {
     paddingX: 4,
-    borderRadius: 10,
-    border: '1px solid',
-    borderColor: 'input.outline',
+    borderRadius: 0,
+    backgroundColor: 'unset',
     fontSize: 'sm',
     _placeholder: {
-      fontSize: 'sm',
+      fontSize: 'md',
       color: 'text.pale',
     },
     _focus: {
-      border: '1px solid',
-      borderColor: 'text.pale',
-    },
+      borderBottom: '1px solid',
+      // какой нибудь акцентный цвет для бордера снизу
+    }
   },
 })
 

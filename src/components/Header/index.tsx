@@ -1,6 +1,6 @@
 import { BellIcon, CalendarIcon } from '@chakra-ui/icons'
 import { Avatar, Container, HStack, IconButton, Text } from '@chakra-ui/react'
-import UserSettingPopover from '../user-settings-popover'
+import UserSettingPopover from '../ui/user-settings-popover'
 
 const Header = () => {
   return (
@@ -8,13 +8,15 @@ const Header = () => {
       <HStack>
         <IconButton
           variant={'unstyled'}
+          color={'text.pale'}
           aria-label="notify"
-          icon={<CalendarIcon boxSize={4} />}
+          icon={<CalendarIcon boxSize={5} />}
         />
         <IconButton
           variant={'unstyled'}
+          color={'text.pale'}
           aria-label="notify"
-          icon={<BellIcon boxSize={5} />}
+          icon={<BellIcon boxSize={6} />}
         />
         <UserSettingPopover>
           <HStack cursor={'pointer'}>

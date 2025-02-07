@@ -1,6 +1,6 @@
-import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
+import { defineStyle, defineStyleConfig } from '@chakra-ui/react';
 
-const baseStyle = defineStyle({})
+const baseStyle = defineStyle({});
 
 const primary = defineStyle(() => {
   return {
@@ -9,20 +9,18 @@ const primary = defineStyle(() => {
     bg: 'primary.purple',
     color: 'white',
     borderRadius: 10,
+    _disabled: {
+      opacity: 0.7,
+    },
     _hover: {
       opacity: 0.8,
       _disabled: {
-        opacity: 0.5,
-        bg: 'button.bg',
-        color: 'text.pale',
+        opacity: 0.7,
+        bg: 'primary.purple',
       },
     },
-    _disabled: {
-      bg: 'button.bg',
-      color: 'text.pale',
-    },
-  }
-})
+  };
+});
 
 const secondary = defineStyle(() => {
   return {
@@ -41,31 +39,38 @@ const secondary = defineStyle(() => {
         color: 'text.pale',
       },
     },
-  }
-})
+  };
+});
 
-const sidebarBtn = defineStyle(() => {
-  return {
-    width: '100%',
-    fontSize: 'sm',
-    fontWeight: 500,
-    padding: 2,
-    gap: 4,
-    _hover: {
-      bg: 'background.button',
+const sidebar = defineStyle({
+  display: 'flex',
+  width: 'full',
+  gap: 2,
+  padding: 3,
+  color: 'gray.500',
+  textAlign: 'center',
+  fontWeight: 400,
+  fontSize: 'sm',
+  borderRadius: 'md',
+  '& span': {
+    '& svg': {
+      margin: 'unset',
     },
-    _active: {
-      bg: 'background.button',
-    },
-    '& span': {
-      mr: 0,
-    },
-  }
-})
+    marginInlineEnd: 'unset',
+  },
+  _hover: {
+    bg: 'blackAlpha.800',
+    color: 'white',
+  },
+  _active: {
+    bg: 'blackAlpha.800',
+    color: 'white',
+  },
+});
 
 const unstyledBtn = defineStyle(() => {
-  return {}
-})
+  return {};
+});
 
 const pagination = defineStyle(() => {
   return {
@@ -74,19 +79,35 @@ const pagination = defineStyle(() => {
       bg: 'primary.purple',
       color: 'background.main',
     },
-  }
-})
+  };
+});
+
+const openSidebar = defineStyle({
+  minW: 'unset',
+  width: 26,
+  height: 26,
+  borderRadius: 'full',
+  padding: 1,
+  fontSize: 'lg',
+  position: 'absolute',
+  zIndex: 1,
+  right: -13,
+  top: 23,
+  backgroundColor: 'background.switch',
+  boxShadow: 'lg',
+  _hover: {
+    backgroundColor: 'blackAlpha.800',
+  },
+});
 
 export const buttonTheme = defineStyleConfig({
   baseStyle,
   variants: {
     primary,
     secondary,
-    sidebarBtn,
+    sidebar,
     unstyledBtn,
     pagination,
+    openSidebar,
   },
-  defaultProps: {
-    // size: 'sm',
-  },
-})
+});

@@ -1,6 +1,7 @@
 export type TProfessorCreate = {
   email: string
   fullName: string
+  description: string
 }
 
 type TUser = { email: string }

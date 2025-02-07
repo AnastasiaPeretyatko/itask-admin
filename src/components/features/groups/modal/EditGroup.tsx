@@ -1,7 +1,7 @@
 import { Button, Flex, HStack } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import InputUI from '@/components/ui/InputUI'
+import FormInput from '@/components/ui/FormInput'
 import Empty from '@/components/ui/Empty'
 import { TGroup, TName } from '@/types/groups'
 import { useDispatch } from 'react-redux'
@@ -68,7 +68,7 @@ const EditGroup = ({ group, onClose }: Props) => {
           array={universities}
           control={control}
           name="universityId"
-          onChangeState={fetchUniversityList}
+          // onChangeState={fetchUniversityList}
           currentValue={group.university.name}
         />
         <SelectorUI
@@ -83,19 +83,15 @@ const EditGroup = ({ group, onClose }: Props) => {
           control={control}
           options={EDUCATION_MODE}
         />
-        <InputUI<TGroup>
+        <FormInput
           label={t('Course')}
           register={register('course', { required: 'Course is required' })}
-          watch={watch}
-          name="course"
         />
-        <InputUI<TGroup>
+        <FormInput
           label={t('Group number')}
           register={register('groupNumber', {
             required: 'Group number is required',
           })}
-          watch={watch}
-          name="groupNumber"
         />
         <HStack width={'100%'} gap={4} marginY={4} justify={'end'}>
           <Button>{t('Cancel')}</Button>

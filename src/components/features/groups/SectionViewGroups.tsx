@@ -66,10 +66,10 @@ const SectionViewGroups = () => {
             value={params.search}
             size="sm"
           />
-          <WindowModal
+          {/* <WindowModal
             title={t('Create student')}
             modalBody={onClose => <CreateGroup onClose={onClose} />}
-          />
+          /> */}
         </HStack>
         {!count ? (
           <Container

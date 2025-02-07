@@ -6,13 +6,21 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const baseStyle = definePartsStyle({
   header: {
-    borderBottom: '1px solid',
-    borderColor: 'whiteAlpha.100',
-    textTransform: 'uppercase',
-    fontSize: 'lg'
+    display: 'flex',
+    gap: 4,
+    padding: 6,
   },
-  dialog:{
-    bg:'background.main',
+  dialog: {
+    bg: 'background.main',
+  },
+  body: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 2,
+  },
+  footer: {
+    gap: 4,
+    padding: 6,
   }
 })
 

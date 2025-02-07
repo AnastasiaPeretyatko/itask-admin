@@ -1,14 +1,16 @@
-import { extendTheme } from '@chakra-ui/react'
-import { buttonTheme } from './components/button'
-import { containerTheme } from './components/container'
-import { headingTheme } from './components/heading'
-import { inputTheme } from './components/input'
-import { listTheme } from './components/list'
-import { modalTheme } from './components/modal'
-import { tableTheme } from './components/table'
-import { menuTheme } from './components/menu'
-import { popoverTheme } from './components/popover'
-import { colors } from './colors'
+import { extendTheme } from '@chakra-ui/react';
+import { colors } from './colors';
+import { buttonTheme } from './components/button';
+import { containerTheme } from './components/container';
+import { headingTheme } from './components/heading';
+import { inputTheme } from './components/input';
+import { listTheme } from './components/list';
+import { menuTheme } from './components/menu';
+import { modalTheme } from './components/modal';
+import { popoverTheme } from './components/popover';
+import { tableTheme } from './components/table';
+// import { menuTheme } from './components/menu'
+import { textareaTheme } from './components/textarea';
 
 export const theme = extendTheme({
   config: {
@@ -18,17 +20,20 @@ export const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: 'bg',
+        bg: 'background.main',
+        color: 'font',
       },
     },
   },
   semanticTokens: {
     colors: {
+      font: { _dark: 'whiteAlpha.900', _light: 'blackAlpha.800' },
       background: {
-        main: { _dark: '#1A1D1F', _light: 'white.100' },
-        fill: { _dark: 'BLACK_300', _light: 'white.200' },
-        switch: { _dark: 'BLACK_100', _light: 'white.300' },
+        fill: { _dark: '#1A1D1F', _light: 'white.100' },
+        main: { _dark: 'black.300', _light: 'white.300' },
+        switch: { _dark: 'black.100', _light: 'white.300' },
         button: { _dark: 'whiteAlpha.200', _light: 'neutral.light' },
+        natural: { _dark: 'black.100', _light: '#e2e3e72e' },
       },
       bg: { _dark: 'black', _light: 'white.300' },
       input: {
@@ -62,5 +67,6 @@ export const theme = extendTheme({
     Table: tableTheme,
     Menu: menuTheme,
     Popover: popoverTheme,
+    Textarea: textareaTheme,
   },
-})
+});

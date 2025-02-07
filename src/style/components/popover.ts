@@ -1,11 +1,12 @@
-import { popoverAnatomy as parts } from '@chakra-ui/anatomy'
-import { createMultiStyleConfigHelpers } from '@chakra-ui/react'
+import { popoverAnatomy as parts } from '@chakra-ui/anatomy';
+import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
+
 const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(parts.keys)
+  createMultiStyleConfigHelpers(parts.keys);
 
 const baseStyle = definePartsStyle({
-  arrow: 'inherit'
-})
+  arrow: 'inherit',
+});
 
 const userSetting = definePartsStyle({
   popper: {
@@ -15,6 +16,9 @@ const userSetting = definePartsStyle({
     bg: 'background.main',
     width: 60,
     borderRadius: '10px',
+    _focusVisible: {
+      boxShadow: 'none',
+    },
   },
   body: {
     padding: 1,
@@ -24,10 +28,10 @@ const userSetting = definePartsStyle({
   },
   arrow: {
     background: 'background.main',
-  }
-})
+  },
+});
 
 export const popoverTheme = defineMultiStyleConfig({
   baseStyle,
   variants: { userSetting },
-})
+});

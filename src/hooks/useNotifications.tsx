@@ -1,14 +1,14 @@
-import ToastAlert from '@/components/ui/toast/ToastAlert'
-import { useToast } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react';
+import ToastAlert from '@/components/ui/toast/ToastAlert';
 
 export const useNotifications = () => {
-  const toast = useToast()
+  const toast = useToast();
 
   const showErrorMessage = (message: {
     title: string
     description?: string
   }) => {
-    const { title: toastTitle, description: toastDescription } = message
+    const { title: toastTitle, description: toastDescription } = message;
 
     toast({
       position: 'bottom-right',
@@ -19,14 +19,14 @@ export const useNotifications = () => {
           onClose={onClose}
         />
       ),
-    })
-  }
+    });
+  };
 
   const showSuccessMessage = (message: {
     title: string
     description?: string
   }) => {
-    const { title: toastTitle, description: toastDescription } = message
+    const { title: toastTitle, description: toastDescription } = message;
 
     toast({
       position: 'bottom-right',
@@ -38,8 +38,8 @@ export const useNotifications = () => {
           onClose={onClose}
         />
       ),
-    })
-  }
+    });
+  };
 
-  return { showErrorMessage, showSuccessMessage }
-}
+  return { showErrorMessage, showSuccessMessage };
+};

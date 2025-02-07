@@ -1,5 +1,5 @@
 import SectionViewGroups from '@/components/features/groups/SectionViewGroups'
-import AppLayout from '@/components/layout/AppLayout'
+import AppLayout from '@/components/Layout/AppLayout'
 import BreadcrumbUI from '@/components/ui/breadcrumb'
 import { GetStaticPropsContext } from 'next'
 
