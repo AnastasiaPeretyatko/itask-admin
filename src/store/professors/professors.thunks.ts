@@ -7,6 +7,7 @@ import {
 } from '@/services/professor.service';
 import { MessageType } from '@/types/common';
 import { TProfessor, TProfessorCreate } from '@/types/professor';
+import { cleanObject } from '@/utils/cleanObject';
 
 export const postProfessorThunk = createAsyncThunk<
   { data: TProfessor; message: MessageType },
@@ -15,7 +16,7 @@ export const postProfessorThunk = createAsyncThunk<
     rejectValue: { statusCode: number; message: MessageType }
     fulfillWithValue: { data: TProfessor; message: MessageType }
   }
->('/professor/create', async (data, { rejectWithValue, fulfillWithValue }) => {
+>('/professor.create', async (data, { rejectWithValue, fulfillWithValue }) => {
   try {
     const res = await postProfessorRequest(data);
 
@@ -40,9 +41,10 @@ export const getProfessorsThunk = createAsyncThunk<
   {
     rejectValue: { statusCode: number; message: MessageType }
   }
->('/professor/get', async (params, { rejectWithValue }) => {
+>('/professors.info', async (params, { rejectWithValue }) => {
   try {
-    const { data } = await getProfessorsRequest(params);
+    const paramsWithoutEmpty = cleanObject(params) as TParams;
+    const { data } = await getProfessorsRequest(paramsWithoutEmpty);
     console.log(data);
     return { ...data };
   } catch (error) {
@@ -63,7 +65,7 @@ export const patchProfessorThunk = createAsyncThunk<
     rejectValue: { statusCode: number; message: MessageType }
     fulfillWithValue: { data: TProfessor; message: MessageType }
   }
->('/professor/patch', async ({ id, data }, { rejectWithValue }) => {
+>('/professor.update', async ({ id, data }, { rejectWithValue }) => {
   try {
     const res = await patchProfessorRequest({ id, data });
     return {

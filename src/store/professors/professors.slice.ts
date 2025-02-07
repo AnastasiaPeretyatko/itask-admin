@@ -16,12 +16,12 @@ interface PaginationState {
   page: number;
   limit: number;
   totalPages: number;
+  search?: string;
 }
 
 type TInitialState = {
   professors: TProfessor[]
   pagination: PaginationState
-  data: TProfessor[] | []
   count: number
   isLoading: boolean
   message: string | null
@@ -33,8 +33,8 @@ const initialState: TInitialState = {
     page: 1,
     limit: 10,
     totalPages: 0,
+    search: '',
   },
-  data: [],
   count: 0,
   isLoading: true,
   message: null,
@@ -50,6 +50,9 @@ const professors = createSlice({
     setPage: (state, { payload }) => {
       state.pagination.page = payload;
     },
+    setSearch: (state, { payload }) => {
+      state.pagination.search = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -60,10 +63,10 @@ const professors = createSlice({
       .addCase(postProfessorThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.count++;
-        state.data = [payload.data, ...state.data];
+        state.professors = [payload.data, ...state.professors];
 
-        if(state.data.length > state.pagination.limit) {
-          state.data.pop();
+        if(state.professors.length > state.pagination.limit) {
+          state.professors.pop();
         }
       })
       .addCase(postProfessorThunk.rejected, (state) => {
@@ -75,7 +78,7 @@ const professors = createSlice({
       })
       .addCase(getProfessorsThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.data = payload.rows;
+        state.professors = payload.rows;
         state.count = payload.count;
       })
       .addCase(getProfessorsThunk.rejected, (state) => {
@@ -87,11 +90,13 @@ const professors = createSlice({
       })
       .addCase(patchProfessorThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.data = state.data.map((el) =>
+        state.professors = state.professors.map((el) =>
           el.id === payload.data.id ? payload.data : el,
         );
       });
   },
 });
+
+export const { setLimit, setPage, setSearch } = professors.actions;
 
 export default professors.reducer;

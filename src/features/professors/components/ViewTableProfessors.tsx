@@ -1,20 +1,25 @@
 import {
   Badge,
+  Container,
+  Heading,
   Spinner,
   Table,
   TableContainer,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
+  VStack,
 } from '@chakra-ui/react';
 import moment from 'moment';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { deleteProfessor, updateProfessor } from '@/actions/definitions/professors';
+import { addProfessor, deleteProfessor, updateProfessor } from '@/actions/definitions/professors';
 import { STATUS_USER } from '@/assets/constants/enum';
+import WindowModal from '@/components/modal/WindowModal';
 import ActionMenu from '@/components/ui/ActionMenu';
 import CheckboxUI from '@/components/ui/CheckboxUI';
 import { RootState } from '@/store/store';
@@ -22,10 +27,10 @@ import { TProfessor } from '@/types/professor';
 
 const ViewTableProfessor = () => {
   const t = useTranslations();
-  const { data } = useSelector((state: RootState) => state.professors);
+  const { professors } = useSelector((state: RootState) => state.professors);
 
   const [values, setValues] = useState(
-    data ? data.map((item) => ({ ...item, checked: false })) : [],
+    professors ? professors.map((item) => ({ ...item, checked: false })) : [],
   );
 
   const allChecked = values.every((value) => value.checked);
@@ -48,12 +53,12 @@ const ViewTableProfessor = () => {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    if (data) {
-      setValues(data.map((item) => ({ ...item, checked: false })));
+    if (professors) {
+      setValues(professors.map((item) => ({ ...item, checked: false })));
     }
-  }, [data]);
+  }, [professors]);
 
-  if (!data) {
+  if (!professors) {
     return (
       <Spinner
         thickness="4px"
@@ -62,6 +67,27 @@ const ViewTableProfessor = () => {
         color="PRIMARY_PURPLE"
         size="xl"
       />
+    );
+  }
+
+  if (professors.length === 0) {
+    return (
+      <Container
+        textAlign={'center'}
+        height={'100%'}
+      >
+        <VStack
+          gap={2}
+          mb={4}
+        >
+          <Heading size={'md'} >No professors</Heading>
+          <Text>You have no professors</Text>
+        </VStack>
+        <WindowModal
+          title={'Create Professor'}
+          body={(onClose) => addProfessor.children(onClose).content}
+        />
+      </Container>
     );
   }
 
