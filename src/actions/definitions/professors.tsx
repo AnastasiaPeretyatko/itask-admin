@@ -6,6 +6,7 @@ import { TProfessor } from '@/types/professor';
 
 export type createActionType = {
   id?: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   name: (data: any) => string
   icon: ComponentWithAs<'svg', IconProps>
   actionLabel: string
@@ -18,6 +19,7 @@ export type createActionType = {
 }
 
 export const addProfessor = createAction({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   name: ({ t }: { t: any }) => t('Add professor'),
   icon: AddIcon,
   actionLabel: 'Add professor',
@@ -29,6 +31,7 @@ export const addProfessor = createAction({
 
 export const updateProfessor = (data: TProfessor) =>
   createAction({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     name: ({ t }: { t: any }) => t('Update professor'),
     icon: AddIcon,
     actionLabel: 'Update professor',
@@ -41,8 +44,9 @@ export const updateProfessor = (data: TProfessor) =>
     }),
   });
 
-export const deleteProfessor = (data: TProfessor) =>
+export const deleteProfessor = () =>
   createAction({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     name: ({ t }: { t: any }) => t('Delete professor'),
     icon: DeleteIcon,
     actionLabel: 'Delete professor',

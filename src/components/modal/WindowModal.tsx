@@ -1,22 +1,23 @@
-import { AddIcon } from '@chakra-ui/icons'
-import { Button, Modal, ModalOverlay, useDisclosure } from '@chakra-ui/react'
-import { useTranslations } from 'next-intl'
-import React, { ReactNode } from 'react'
+import { AddIcon } from '@chakra-ui/icons';
+import { Button, Modal, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import { useTranslations } from 'next-intl';
+import React, { ReactNode } from 'react';
 
 type Props = {
+  title?: string
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   action?: ReactNode
   body: (onClose: () => void) => ReactNode
 }
 
-const WindowModal = ({ size = 'xl', action, body }: Props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const t = useTranslations()
+const WindowModal = ({ size = 'xl', action, body, title }: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const t = useTranslations();
 
   const ActionButton = React.isValidElement(action)
     ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      React.cloneElement(action as React.ReactElement<any>, { onClick: onOpen })
-    : action
+    React.cloneElement(action as React.ReactElement<any>, { onClick: onOpen })
+    : action;
 
   return (
     <>
@@ -29,7 +30,7 @@ const WindowModal = ({ size = 'xl', action, body }: Props) => {
           onClick={onOpen}
           leftIcon={<AddIcon boxSize={3} />}
         >
-          {t('Create')}
+          {title || t('Add')}
         </Button>
       )}
 
@@ -44,7 +45,7 @@ const WindowModal = ({ size = 'xl', action, body }: Props) => {
         {body(onClose)}
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default WindowModal
+export default WindowModal;
