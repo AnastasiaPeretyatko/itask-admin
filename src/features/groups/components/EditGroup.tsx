@@ -1,4 +1,14 @@
-import { Button, Flex, HStack } from '@chakra-ui/react'
+import {
+  Button,
+  Flex,
+  Heading,
+  Icon,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import FormInput from '@/components/ui/FormInput'
@@ -13,6 +23,7 @@ import SelectorUI from '@/components/ui/selector/SelectorUI'
 import { DEGREE, EDUCATION_MODE } from '@/assets/constants'
 import { getUniversitiesThunk } from '@/store/universities/universities.thunks'
 import SelectForm from '@/components/ui/selector/SelectForm'
+import { FolderIcon } from '@/components/customIcon'
 
 type Props = {
   group: TGroup
@@ -60,52 +71,61 @@ const EditGroup = ({ group, onClose }: Props) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Flex flexDir={'column'} gap={4}>
-        <Empty>{t('Edit group information notify')}.</Empty>
-        <SelectForm
-          label={t('University')}
-          array={universities}
-          control={control}
-          name="universityId"
-          // onChangeState={fetchUniversityList}
-          currentValue={group.university.name}
-        />
-        <SelectorUI
-          label={t('Degree')}
-          name="degree"
-          control={control}
-          options={DEGREE}
-        />
-        <SelectorUI
-          label={t('Education mode')}
-          name="educationMode"
-          control={control}
-          options={EDUCATION_MODE}
-        />
-        <FormInput
-          label={t('Course')}
-          register={register('course', { required: 'Course is required' })}
-        />
-        <FormInput
-          label={t('Group number')}
-          register={register('groupNumber', {
-            required: 'Group number is required',
-          })}
-        />
-        <HStack width={'100%'} gap={4} marginY={4} justify={'end'}>
-          <Button>{t('Cancel')}</Button>
-          <Button
-            variant={'primary'}
-            type="submit"
-            isLoading={isLoading}
-            isDisabled={!isValid}
-          >
-            {t('Save')}
-          </Button>
-        </HStack>
-      </Flex>
-    </form>
+    <ModalContent as={'form'} onSubmit={handleSubmit(onSubmit)}>
+      <ModalHeader>
+        <Icon as={FolderIcon} width={'6'} height={'6'} />
+        <Heading size={'md'} fontWeight={500}>
+          {t('Update group')}
+        </Heading>
+      </ModalHeader>
+      <ModalCloseButton />
+      <ModalBody>
+        <Flex flexDir={'column'} gap={4}>
+          <Empty>{t('Edit group information notify')}.</Empty>
+          <SelectForm
+            label={t('University')}
+            array={universities}
+            control={control}
+            name="universityId"
+            onChangeState={fetchUniversityList}
+            currentValue={group.university.name}
+          />
+          <SelectorUI
+            label={t('Degree')}
+            name="degree"
+            control={control}
+            options={DEGREE}
+          />
+          <SelectorUI
+            label={t('Education mode')}
+            name="educationMode"
+            control={control}
+            options={EDUCATION_MODE}
+          />
+          <FormInput
+            label={t('Course')}
+            register={register('course', { required: 'Course is required' })}
+          />
+          <FormInput
+            label={t('Group number')}
+            register={register('groupNumber', {
+              required: 'Group number is required',
+            })}
+          />
+        </Flex>
+      </ModalBody>
+      <ModalFooter>
+        <Button>{t('Cancel')}</Button>
+        <Button
+          variant={'primary'}
+          type="submit"
+          isLoading={isLoading}
+          isDisabled={!isValid}
+        >
+          {t('Save')}
+        </Button>
+      </ModalFooter>
+    </ModalContent>
   )
 }
 

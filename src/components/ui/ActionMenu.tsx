@@ -3,14 +3,13 @@ import { CiMenuKebab } from 'react-icons/ci';
 import WindowModal from '../modal/WindowModal';
 import CustomMenuItem from './CustomMenuItem';
 import { createActionType } from '@/actions/definitions/professors';
-import { TProfessor } from '@/types/professor';
 
-type ActionMenuProps = {
-  actions: (el: TProfessor) => createActionType[] // Список модальных окон
-  data?: TProfessor
+type ActionMenuProps<T> = {
+  actions: (el: T) => createActionType[] // Список модальных окон
+  data?: T
 }
 
-const ActionMenu = ({ actions, data }: ActionMenuProps) => {
+const ActionMenu = <T,>({ actions, data }: ActionMenuProps<T>) => {
   const listActions = data && actions(data);
   // const t = useTranslations()
 
@@ -34,7 +33,7 @@ const ActionMenu = ({ actions, data }: ActionMenuProps) => {
                   icon={action.icon}
                   label={action.actionLabel}
                   isDelete={action.isDeleted}
-                  isDisabled={action.isDesabled}
+                  isDisabled={action.isDisabled}
                 />
               }
               body={(onClose) => action.children(onClose).content}

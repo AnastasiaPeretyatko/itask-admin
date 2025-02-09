@@ -14,3 +14,7 @@ export const helpText = {
 export const formSetFunction = {
   trim: (value: string) => value.trim(),
 };
+
+export const requiredForm = {
+  required: 'Обязательное поле',
+}

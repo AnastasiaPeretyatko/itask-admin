@@ -1,5 +1,6 @@
 import {
   Badge,
+  Button,
   Container,
   Heading,
   Spinner,
@@ -12,51 +13,31 @@ import {
   Thead,
   Tr,
   VStack,
-} from '@chakra-ui/react';
-import moment from 'moment';
-import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { addProfessor, deleteProfessor, updateProfessor } from '@/actions/definitions/professors';
-import { STATUS_USER } from '@/assets/constants/enum';
-import WindowModal from '@/components/modal/WindowModal';
-import ActionMenu from '@/components/ui/ActionMenu';
-import CheckboxUI from '@/components/ui/CheckboxUI';
-import { RootState } from '@/store/store';
-import { TProfessor } from '@/types/professor';
+} from '@chakra-ui/react'
+import moment from 'moment'
+import { useTranslations } from 'next-intl'
+import { useSelector } from 'react-redux'
+import {
+  addProfessor,
+  deleteProfessor,
+  updateProfessor,
+} from '@/actions/definitions/professors'
+import { STATUS_USER } from '@/assets/constants/enum'
+import WindowModal from '@/components/modal/WindowModal'
+import ActionMenu from '@/components/ui/ActionMenu'
+import { RootState } from '@/store/store'
+import { TProfessor } from '@/types/professor'
+import { useClipboardAlert } from '@/hooks/useClipboardAlert'
 
 const ViewTableProfessor = () => {
-  const t = useTranslations();
-  const { professors } = useSelector((state: RootState) => state.professors);
+  const t = useTranslations()
+  const { copyToClipboard } = useClipboardAlert()
+  const { professors } = useSelector((state: RootState) => state.professors)
 
-  const [values, setValues] = useState(
-    professors ? professors.map((item) => ({ ...item, checked: false })) : [],
-  );
-
-  const allChecked = values.every((value) => value.checked);
-  const indeterminate = values.some((value) => value.checked) && !allChecked;
-
-  const handleCheckAll = () => {
-    setValues(values.map((item) => ({ ...item, checked: !allChecked })));
-  };
-
-  const handleIndividualCheck = (id: string) => {
-    setValues(
-      values.map((item) =>
-        item.id === id ? { ...item, checked: !item.checked } : item,
-      ),
-    );
-  };
-
-  const listActions = (el: TProfessor) => [updateProfessor(el), deleteProfessor(el)];
-
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    if (professors) {
-      setValues(professors.map((item) => ({ ...item, checked: false })));
-    }
-  }, [professors]);
+  const listActions = (el: TProfessor) => [
+    updateProfessor(el),
+    deleteProfessor(),
+  ]
 
   if (!professors) {
     return (
@@ -67,28 +48,22 @@ const ViewTableProfessor = () => {
         color="PRIMARY_PURPLE"
         size="xl"
       />
-    );
+    )
   }
 
   if (professors.length === 0) {
     return (
-      <Container
-        textAlign={'center'}
-        height={'100%'}
-      >
-        <VStack
-          gap={2}
-          mb={4}
-        >
-          <Heading size={'md'} >No professors</Heading>
+      <Container textAlign={'center'} height={'100%'}>
+        <VStack gap={2} mb={4}>
+          <Heading size={'md'}>No professors</Heading>
           <Text>You have no professors</Text>
         </VStack>
         <WindowModal
           title={'Create Professor'}
-          body={(onClose) => addProfessor.children(onClose).content}
+          body={onClose => addProfessor.children(onClose).content}
         />
       </Container>
-    );
+    )
   }
 
   return (
@@ -96,13 +71,6 @@ const ViewTableProfessor = () => {
       <Table size={'sm'}>
         <Thead>
           <Tr>
-            <Th>
-              <CheckboxUI
-                isChecked={allChecked}
-                indeterminate={indeterminate}
-                onCheckedChange={handleCheckAll}
-              />
-            </Th>
             <Th>{t('Full Name')}</Th>
             <Th>{t('Email')}</Th>
             <Th>{t('Tel')}</Th>
@@ -112,22 +80,17 @@ const ViewTableProfessor = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {values ? values.map((el) => (
-            <Tr
-              key={el.id}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleIndividualCheck(el.id);
-              }}
-            >
-              <Td>
-                <CheckboxUI
-                  isChecked={el.checked}
-                  onCheckedChange={() => handleIndividualCheck(el.id)}
-                />
-              </Td>
+          {professors.map(el => (
+            <Tr key={el.id}>
               <Td>{el.fullName}</Td>
-              <Td>{el.user.email}</Td>
+              <Td>
+                <Button
+                  variant={'link'}
+                  onClick={() => copyToClipboard(el.user.email)}
+                >
+                  {el.user.email}
+                </Button>
+              </Td>
               <Td>{el.tel}</Td>
               <Td>{moment(el.createdAt).format('DD.MM.YYYY')}</Td>
               <Td>
@@ -135,18 +98,15 @@ const ViewTableProfessor = () => {
                   {STATUS_USER.ACTIVE}
                 </Badge>
               </Td>
-              <Td onClick={(e) => e.stopPropagation()}>
-                <ActionMenu
-                  actions={listActions}
-                  data={el}
-                />
+              <Td onClick={e => e.stopPropagation()}>
+                <ActionMenu actions={listActions} data={el} />
               </Td>
             </Tr>
-          )) : null}
+          ))}
         </Tbody>
       </Table>
     </TableContainer>
-  );
-};
+  )
+}
 
-export default ViewTableProfessor;
+export default ViewTableProfessor

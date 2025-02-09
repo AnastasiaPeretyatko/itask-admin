@@ -5,6 +5,7 @@ import {
   patchGroupThunk,
   postGroupThunk
 } from './groups.thunks'
+import { PaginationState } from '../professors/professors.slice'
 
 export type TParams = {
   limit: number
@@ -13,7 +14,8 @@ export type TParams = {
 }
 
 type TInitialState = {
-  data: TGroup[] | []
+  groups: TGroup[]
+  pagination: PaginationState
   currentGroup: TGroup
   count: number
   isLoading: boolean
@@ -21,7 +23,12 @@ type TInitialState = {
 }
 
 const initialState: TInitialState = {
-  data: [],
+  groups: [],
+  pagination: {
+    page: 1,
+    limit: 10,
+    search: '',
+  },
   currentGroup: {} as TGroup,
   count: 0,
   isLoading: true,
@@ -31,7 +38,17 @@ const initialState: TInitialState = {
 const groups = createSlice({
   name: 'groups',
   initialState,
-  reducers: {},
+  reducers: {
+    setLimit: (state, { payload }) => {
+      state.pagination.limit = payload;
+    },
+    setPage: (state, { payload }) => {
+      state.pagination.page = payload;
+    },
+    setSearch: (state, { payload }) => {
+      state.pagination.search = payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(postGroupThunk.pending, state => {
@@ -40,7 +57,9 @@ const groups = createSlice({
       })
       .addCase(postGroupThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false
-        state.data = [payload.data, ...state.data]
+        state.count++;
+
+        state.groups = [payload.data, ...state.groups]
       })
       .addCase(postGroupThunk.rejected, state => {
         state.isLoading = false
@@ -51,7 +70,7 @@ const groups = createSlice({
       })
       .addCase(getGroupsThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false
-        state.data = payload.data
+        state.groups = payload.data
         state.count = payload.count
       })
       .addCase(getGroupsThunk.rejected, (state) => {
@@ -63,11 +82,13 @@ const groups = createSlice({
       })
       .addCase(patchGroupThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false
-        state.data = state.data.map(el =>
+        state.groups = state.groups.map(el =>
           el.id === payload.data.id ? payload.data : el
         )
       })
   },
 })
+
+export const { setLimit, setPage, setSearch } = groups.actions
 
 export default groups.reducer
