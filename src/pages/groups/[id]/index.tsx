@@ -1,32 +1,27 @@
-import CardGroup from '@/components/features/groups/current/CardGroup'
-import CreateStudent from '@/components/features/students/modal/CreateStudent'
-import ViewTableStudents from '@/components/features/students/ViewTableStudents'
+import ViewTableStudents from '@/features/students/components/ViewTableStudents'
 import AppLayout from '@/components/Layout/AppLayout'
-import WindowModal from '@/components/modal/WindowModal'
-import BreadcrumbUI from '@/components/ui/breadcrumb'
 import SearchInput from '@/components/ui/SearchInput'
-import {
-  getGroupOneThunk,
-  getStudentsByGroupThunk,
-} from '@/store/groups/groups.thunks'
+import { getGroupOneThunk } from '@/store/groups/groups.thunks'
 import { AppDispatch, RootState } from '@/store/store'
-import { Container, Heading, HStack } from '@chakra-ui/react'
+import { Heading, HStack, IconButton, Tag } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticPropsContext } from 'next'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import WindowModal from '@/components/modal/WindowModal'
+import CreateStudent from '@/features/students/components/CreateStudent'
+import { AddIcon } from '@chakra-ui/icons'
+import { getStudentsByGroupThunk } from '@/store/students/students.thunks'
 
 export async function getStaticPaths() {
   try {
-    console.log('Start fetching groups IDs...')
     const { data: groups } = await axios.get(
       'http://localhost:5000/groups/groups.id'
     )
 
     if (!Array.isArray(groups) || !groups.every(g => g.id)) {
-      console.error('Неправильный формат данных:', groups)
       return { paths: [], fallback: false }
     }
 
@@ -83,9 +78,7 @@ const PageGroup = () => {
   const t = useTranslations()
   const dispatch = useDispatch<AppDispatch>()
   const { query } = useRouter()
-  const { data, students } = useSelector(
-    (state: RootState) => state.currentGroup
-  )
+  const { data } = useSelector((state: RootState) => state.currentGroup)
 
   useEffect(() => {
     if (query && query.id && typeof query.id === 'string') {
@@ -94,20 +87,30 @@ const PageGroup = () => {
     }
   }, [query, dispatch])
 
+  if (!data) {
+    return <div>Loading...</div>
+  }
+
   return (
     <AppLayout>
-      <BreadcrumbUI options={[`${data?.groupCode}`]} />
-      <Heading size={'xl'} mb={4}>
-        {data?.groupCode}
-      </Heading>
-      <CardGroup/>
-      <Container variant={'wrapper_table'}>
-        <HStack justifyContent={'space-between'} mb={4}>
-          <SearchInput onChange={() => {}} value={''} isDisabled/>
-          <WindowModal title={t('Create')} modalBody={onClose => <CreateStudent onClose={onClose} group={data}/>} />
-        </HStack>
-        <ViewTableStudents students={students} />
-      </Container>
+      {/* <BreadcrumbUI options={[`${data?.groupCode}`]} /> */}
+      <HStack mb={2}>
+        <Heading size={'xl'} mb={1}>
+          {data?.groupCode}
+        </Heading>
+        {data.degree ? <Tag colorScheme="blue">{t(data.degree)}</Tag> : null}
+        {data.educationMode ? (
+          <Tag colorScheme="green">{t(data.educationMode)}</Tag>
+        ) : null}
+      </HStack>
+      <HStack justifyContent={'space-between'} mb={4}>
+        <SearchInput onChange={() => {}} value={''} isDisabled />
+        <WindowModal
+          action={<IconButton aria-label="add" icon={<AddIcon />} />}
+          body={onClose => <CreateStudent onClose={onClose} group={data} />}
+        />
+      </HStack>
+      <ViewTableStudents />
     </AppLayout>
   )
 }

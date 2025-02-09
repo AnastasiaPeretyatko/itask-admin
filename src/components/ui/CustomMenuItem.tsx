@@ -17,7 +17,7 @@ const CustomMenuItem = ({
   isDisabled,
 }: Props) => {
   const ComponentIcon = icon as ComponentWithAs<'svg', IconProps>;
-  console.log(label, isDisabled);
+
   return (
     <MenuItem
       isDisabled={isDisabled}

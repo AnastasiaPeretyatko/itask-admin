@@ -45,7 +45,6 @@ export const getProfessorsThunk = createAsyncThunk<
   try {
     const paramsWithoutEmpty = cleanObject(params) as TParams;
     const { data } = await getProfessorsRequest(paramsWithoutEmpty);
-    console.log(data);
     return { ...data };
   } catch (error) {
     const hasErrResponse = (

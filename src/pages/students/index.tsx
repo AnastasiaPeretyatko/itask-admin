@@ -1,12 +1,12 @@
 import AppLayout from '@/components/Layout/AppLayout'
 import { GetStaticPropsContext } from 'next'
-import BreadcrumbUI from '@/components/ui/breadcrumb'
-import SectionViewStudents from '@/components/features/students/SectionViewStudents'
+// import BreadcrumbUI from '@/components/ui/breadcrumb'
+import SectionViewStudents from '@/features/students/components/SectionViewStudents'
 
 const StudentsPage = () => {
   return (
     <AppLayout>
-      <BreadcrumbUI />
+      {/* <BreadcrumbUI /> */}
       <SectionViewStudents />
     </AppLayout>
   )

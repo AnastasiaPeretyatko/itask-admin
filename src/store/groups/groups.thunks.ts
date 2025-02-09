@@ -136,25 +136,3 @@ export const patchGroupThunk = createAsyncThunk<
     return rejectWithValue(hasErrResponse.data)
   }
 })
-
-export const getStudentsByGroupThunk = createAsyncThunk<
-  { data: TStudent[] },
-  string,
-  {
-    rejectValue: { statusCode: number; message: MessageType }
-  }
->('/groups/students', async (id, { rejectWithValue }) => {
-  try {
-    const res = await getStudentsByGroupRequest(id)
-
-    return res
-  } catch (error) {
-    const hasErrResponse = (
-      error as { response: { data: { statusCode: number; message: MessageType } } }
-    ).response
-    if (!hasErrResponse) {
-      throw error
-    }
-    return rejectWithValue(hasErrResponse.data)
-  }
-})

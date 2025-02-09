@@ -1,7 +1,7 @@
 import { TGroup } from '@/types/groups'
 import { TStudent } from '@/types/student'
 import { createSlice } from '@reduxjs/toolkit'
-import { getGroupOneThunk, getStudentsByGroupThunk } from './groups.thunks'
+import { getGroupOneThunk } from './groups.thunks'
 import { patchStudentThunk, postStudentThunk } from '../students/students.thunks'
 
 type TInitialState = {
@@ -33,17 +33,6 @@ const currentGroup = createSlice({
         state.data = payload.data
       })
       .addCase(getGroupOneThunk.rejected, state => {
-        state.isLoading = false
-      })
-      .addCase(getStudentsByGroupThunk.pending, state => {
-        state.isLoading = true
-        state.message = null
-      })
-      .addCase(getStudentsByGroupThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false
-        state.students = payload.data
-      })
-      .addCase(getStudentsByGroupThunk.rejected, state => {
         state.isLoading = false
       })
       // .addCase(postStudentThunk.pending, state => {
