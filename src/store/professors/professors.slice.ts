@@ -12,10 +12,9 @@ export type TParams = {
   search?: string
 }
 
-interface PaginationState {
+export interface PaginationState {
   page: number;
   limit: number;
-  totalPages: number;
   search?: string;
 }
 
@@ -32,7 +31,6 @@ const initialState: TInitialState = {
   pagination: {
     page: 1,
     limit: 10,
-    totalPages: 0,
     search: '',
   },
   count: 0,

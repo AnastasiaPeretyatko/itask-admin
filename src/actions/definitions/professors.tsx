@@ -15,7 +15,7 @@ export type createActionType = {
     content: JSX.Element
   }
   isDeleted?: boolean
-  isDesabled?: boolean
+  isDisabled?: boolean
 }
 
 export const addProfessor = createAction({
@@ -58,5 +58,5 @@ export const deleteProfessor = () =>
       </div>,
     }),
     isDeleted: true,
-    isDesabled: true,
+    isDisabled: true,
   });

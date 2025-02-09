@@ -5,16 +5,17 @@ import {
   useBoolean,
   useOutsideClick,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form'
 import FormInput from '../FormInput'
+import { requiredForm } from '@/utils/formOptions'
 
 type Props<T extends FieldValues> = {
   array: { id: string; name: string }[]
   label?: string
   name: FieldPath<T>
   control: Control<T>
-  // onChangeState: (item: string) => void
+  onChangeState: (item: string) => void
   currentValue?: string
 }
 
@@ -23,10 +24,10 @@ const SelectForm = <T extends FieldValues>({
   label,
   name,
   control,
-  // onChangeState,
+  onChangeState,
   currentValue,
 }: Props<T>) => {
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string>(currentValue || '')
 
   const ref = useRef(null)
   const [isOpen, setIsOpen] = useBoolean()
@@ -36,33 +37,32 @@ const SelectForm = <T extends FieldValues>({
     handler: () => setIsOpen.off(),
   })
 
-  // const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-  //   setValue(e.target.value) // запись в инпут
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value) // запись в инпут
 
-  //   onChangeState(e.target.value) // оправка запроса
+    onChangeState(e.target.value) // оправка запроса
 
-  //   if (array.length > 0) {
-  //     setIsOpen.on()
-  //   } else {
-  //     setIsOpen.off()
-  //   }
-  // }
+    if (array.length > 0) {
+      setIsOpen.on()
+    } else {
+      setIsOpen.off()
+    }
+  }
 
   return (
     <>
-      <FormControl
-        width={'full'}
-        position={'relative'}
-        ref={ref}
-        padding={0}
-      >
+      <FormControl width={'full'} position={'relative'} ref={ref} padding={0}>
         <Controller
           name={name}
           control={control}
-          rules={{ required: 'This field is required' }} //TODO обязательное поле. Позже вынести в пропс
+          rules={requiredForm}
           render={({ field }) => (
             <>
-              <FormInput label={label} value={currentValue ?? value} />
+              <FormInput
+                label={label}
+                value={value}
+                onChangeInput={onChangeInput}
+              />
               {isOpen && (
                 <List variant={'selectList'} zIndex={10}>
                   {array.map((item, index) => (

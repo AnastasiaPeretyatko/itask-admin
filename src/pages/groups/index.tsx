@@ -1,4 +1,4 @@
-import SectionViewGroups from '@/components/features/groups/SectionViewGroups'
+import SectionViewGroups from '@/features/groups/components/SectionViewGroups'
 import AppLayout from '@/components/Layout/AppLayout'
 import BreadcrumbUI from '@/components/ui/breadcrumb'
 import { GetStaticPropsContext } from 'next'
@@ -6,7 +6,7 @@ import { GetStaticPropsContext } from 'next'
 const GroupsPage = () => {
   return (
     <AppLayout>
-      <BreadcrumbUI />
+      {/* <BreadcrumbUI /> */}
       <SectionViewGroups />
     </AppLayout>
   )

@@ -9,7 +9,7 @@ import {
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react';
-import { useMemo, useState } from 'react';
+import { ChangeEvent, useMemo, useState } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
 type Props = {
@@ -17,6 +17,7 @@ type Props = {
   type?: 'text' | 'password' | 'email'
   register?: UseFormRegisterReturn<string>
   value?: string
+  onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void
   errorMessage?: string | null
   helperText?: string
 }
@@ -28,6 +29,7 @@ const FormInput = ({
   errorMessage,
   helperText,
   value,
+  onChangeInput
 }: Props) => {
   const [isShowPassword, setIsShowPassword] = useState(type);
 
@@ -63,6 +65,7 @@ const FormInput = ({
           value={value}
           size={'sm'}
           placeholder={label}
+          onChange={onChangeInput}
         />
         {isPassword}
       </InputGroup>

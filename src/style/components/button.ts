@@ -100,6 +100,19 @@ const openSidebar = defineStyle({
   },
 });
 
+const link = defineStyle({
+  border: 'none',
+  padding: 'unset',
+  margin: 'unset',
+  color: 'inherit',
+  fontWeight: 400,
+  fontSize: 'sm',
+  _hover: {
+    textDecoration: 'none',
+    color: 'primary.purple',
+  }
+})
+
 export const buttonTheme = defineStyleConfig({
   baseStyle,
   variants: {
@@ -109,5 +122,6 @@ export const buttonTheme = defineStyleConfig({
     unstyledBtn,
     pagination,
     openSidebar,
+    link
   },
 });
