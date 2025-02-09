@@ -25,7 +25,6 @@ const Sidebar = () => {
 
   useEffect(() => {
     const kek = localStorage.getItem('sidebar')
-    console.log(kek)
     // if (isOpenSidebar === null) {
     //   dispatch(changeStateSidebar(Boolean(kek) || true))
     // }

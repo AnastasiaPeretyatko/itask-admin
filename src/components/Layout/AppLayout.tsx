@@ -25,7 +25,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           backgroundColor={'background.fill'}
         >
           <Header />
-          <Box padding={4} width={'full'}>{children}</Box>
+          <Box paddingX={4} width={'full'}>{children}</Box>
         </Flex>
       </HStack>
     </VStack>

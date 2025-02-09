@@ -31,9 +31,7 @@ export default function AuthPage() {
   } = useForm<AuthFromType>()
   const [isLarger] = useMediaQuery(`(min-width: ${breakpoints.lg})`)
 
-  const onSubmit: SubmitHandler<AuthFromType> = data => {
-    console.log(data)
-  }
+  const onSubmit: SubmitHandler<AuthFromType> = data => null
 
   return (
     <SimpleGrid columns={{ md: 1, lg: 2 }} width={'100%'} height={'100vh'}>

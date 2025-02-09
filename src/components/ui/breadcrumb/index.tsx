@@ -23,8 +23,6 @@ const BreadcrumbUI = ({ options }: Props) => {
     return rest[0].toUpperCase() + rest.slice(1)
   }, [router.pathname])
 
-  console.log(router.pathname, router.query);
-
   return (
     <Breadcrumb mb={4}>
       <BreadcrumbItem>

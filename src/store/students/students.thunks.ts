@@ -7,6 +7,7 @@ import {
 } from '@/services/students.service'
 import { TParams } from './student.slice'
 import { MessageType } from '@/types/common'
+import { getStudentsByGroupRequest } from '@/services/groups.service'
 
 export const postStudentThunk = createAsyncThunk<
   { data: TStudent; message: MessageType },
@@ -44,8 +45,6 @@ export const getAllStudentsThunk = createAsyncThunk<
   try {
     const res = await getAllStudentsRequest(params)
 
-    console.log(res);
-
     return {
       data: res.data.data,
       count: res.data.count,
@@ -76,6 +75,28 @@ export const patchStudentThunk = createAsyncThunk<
       data: res.data.data,
       message: res.data.message,
     })
+  } catch (error) {
+    const hasErrResponse = (
+      error as { response: { data: { statusCode: number; message: MessageType } } }
+    ).response
+    if (!hasErrResponse) {
+      throw error
+    }
+    return rejectWithValue(hasErrResponse.data)
+  }
+})
+
+export const getStudentsByGroupThunk = createAsyncThunk<
+  { data: TStudent[] },
+  string,
+  {
+    rejectValue: { statusCode: number; message: MessageType }
+  }
+>('/groups/students', async (id, { rejectWithValue }) => {
+  try {
+    const res = await getStudentsByGroupRequest(id)
+
+    return res
   } catch (error) {
     const hasErrResponse = (
       error as { response: { data: { statusCode: number; message: MessageType } } }

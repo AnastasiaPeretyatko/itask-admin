@@ -1,17 +1,16 @@
-import { IconButton, Menu, MenuButton, MenuList } from '@chakra-ui/react';
-import { CiMenuKebab } from 'react-icons/ci';
-import WindowModal from '../modal/WindowModal';
-import CustomMenuItem from './CustomMenuItem';
-import { createActionType } from '@/actions/definitions/professors';
+import { IconButton, Menu, MenuButton, MenuList } from '@chakra-ui/react'
+import { CiMenuKebab } from 'react-icons/ci'
+import WindowModal from '../modal/WindowModal'
+import CustomMenuItem from './CustomMenuItem'
+import { createActionType } from '@/actions/definitions/professors'
 
 type ActionMenuProps<T> = {
-  actions: (el: T) => createActionType[] // Список модальных окон
+  actions: (el: T) => createActionType[]
   data?: T
 }
 
 const ActionMenu = <T,>({ actions, data }: ActionMenuProps<T>) => {
-  const listActions = data && actions(data);
-  // const t = useTranslations()
+  const listActions = data && actions(data)
 
   return (
     <Menu size={'sm'}>
@@ -23,26 +22,23 @@ const ActionMenu = <T,>({ actions, data }: ActionMenuProps<T>) => {
         justifyContent={'center'}
       />
       <MenuList>
-        {listActions?.map((action) => {
-          console.log(action);
-          return (
-            <WindowModal
-              key={action.id}
-              action={
-                <CustomMenuItem
-                  icon={action.icon}
-                  label={action.actionLabel}
-                  isDelete={action.isDeleted}
-                  isDisabled={action.isDisabled}
-                />
-              }
-              body={(onClose) => action.children(onClose).content}
-            />
-          );
-        })}
+        {listActions?.map(action => (
+          <WindowModal
+            key={action.id}
+            action={
+              <CustomMenuItem
+                icon={action.icon}
+                label={action.actionLabel}
+                isDelete={action.isDeleted}
+                isDisabled={action.isDisabled}
+              />
+            }
+            body={onClose => action.children(onClose).content}
+          />
+        ))}
       </MenuList>
     </Menu>
-  );
-};
+  )
+}
 
-export default ActionMenu;
+export default ActionMenu
