@@ -1,30 +1,29 @@
-import { RootState } from '@/store/store'
 import {
   Spinner,
   Table,
   TableContainer,
   Tbody,
-  Td,
-  Th,
+  Td, Th,
   Thead,
   Tr,
-} from '@chakra-ui/react'
-import { useSelector } from 'react-redux'
-import moment from 'moment'
-import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/router'
-import ActionMenu from '@/components/ui/ActionMenu'
-import { deleteGroup, updateGroup } from '@/actions/definitions/groups'
-import { TGroup } from '@/types/groups'
+} from '@chakra-ui/react';
+import moment from 'moment';
+import { useRouter } from 'next/router';
+import { useTranslations } from 'next-intl';
+import { useSelector } from 'react-redux';
+import { deleteGroup, updateGroup } from '@/actions/definitions/groups';
+import ActionMenu from '@/components/ui/ActionMenu';
+import { RootState } from '@/store/store';
+import { TGroup } from '@/types/groups';
 
 const ViewTableGroups = () => {
-  const t = useTranslations()
-  const { groups } = useSelector((state: RootState) => state.groups)
-  const router = useRouter()
+  const t = useTranslations();
+  const { groups, isLoading } = useSelector((state: RootState) => state.groups);
+  const router = useRouter();
 
-  const listActions = (el: TGroup) => [updateGroup(el), deleteGroup()]
+  const listActions = (el: TGroup) => [updateGroup(el), deleteGroup()];
 
-  if (!groups.length) {
+  if (isLoading) {
     return (
       <Spinner
         thickness="4px"
@@ -33,7 +32,7 @@ const ViewTableGroups = () => {
         color="PRIMARY_PURPLE"
         size="xl"
       />
-    )
+    );
   }
 
   return (
@@ -50,7 +49,7 @@ const ViewTableGroups = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {groups.map(el => (
+          {groups.map((el) => (
             <Tr key={el.id}>
               <Td
                 cursor={'pointer'}
@@ -64,14 +63,17 @@ const ViewTableGroups = () => {
               <Td>{el.educationMode}</Td>
               <Td>{moment(el.created_at).format('DD.MM.YYYY')}</Td>
               <Td>
-                <ActionMenu actions={listActions} data={el} />
+                <ActionMenu
+                  actions={listActions}
+                  data={el}
+                />
               </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
     </TableContainer>
-  )
-}
+  );
+};
 
-export default ViewTableGroups
+export default ViewTableGroups;

@@ -13,9 +13,9 @@ const baseStyle = definePartsStyle({
         textTransform: 'capitalize',
         fontSize: 'sm',
         fontWeight: 'normal',
-        _first: {
-          width: '48px', // for checkbox
-        },
+        // _first: {
+        //   width: '48px', // for checkbox
+        // },
         _last: {
           width: '48px', // for checkbox
         },
@@ -28,13 +28,14 @@ const baseStyle = definePartsStyle({
           bg: 'background.natural',
         },
         td: {
+          '&:first-of-type': {
+            width: '30%',
+          },
           paddingY: 3,
         },
       },
     },
   },
 });
-
-
 
 export const tableTheme = defineMultiStyleConfig({ baseStyle });

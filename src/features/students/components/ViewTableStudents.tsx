@@ -1,7 +1,8 @@
-import { CheckIcon } from '@chakra-ui/icons'
+import { CheckIcon } from '@chakra-ui/icons';
 import {
   Button,
   Icon,
+  Spinner,
   Table,
   TableContainer,
   Tbody,
@@ -9,21 +10,35 @@ import {
   Th,
   Thead,
   Tr,
-} from '@chakra-ui/react'
-import { useTranslations } from 'next-intl'
-import { TStudent } from '@/types/student'
-import { deleteStudent, updateStudent } from '@/actions/definitions/students'
-import ActionMenu from '@/components/ui/ActionMenu'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store/store'
-import { useClipboardAlert } from '@/hooks/useClipboardAlert'
+} from '@chakra-ui/react';
+import { useTranslations } from 'next-intl';
+import { useSelector } from 'react-redux';
+import { deleteStudent, updateStudent } from '@/actions/definitions/students';
+import ActionMenu from '@/components/ui/ActionMenu';
+import { useClipboardAlert } from '@/hooks/useClipboardAlert';
+import { RootState } from '@/store/store';
+import { TStudent } from '@/types/student';
 
 const ViewTableStudents = () => {
-  const t = useTranslations()
-  const { copyToClipboard } = useClipboardAlert()
-  const { students } = useSelector((state: RootState) => state.students)
+  const t = useTranslations();
+  const { copyToClipboard } = useClipboardAlert();
+  const { students, isLoading } = useSelector(
+    (state: RootState) => state.students,
+  );
 
-  const listActions = (el: TStudent) => [updateStudent(el), deleteStudent()]
+  const listActions = (el: TStudent) => [updateStudent(el), deleteStudent()];
+
+  if (isLoading) {
+    return (
+      <Spinner
+        thickness="4px"
+        speed="0.65s"
+        emptyColor="gray.200"
+        color="PRIMARY_PURPLE"
+        size="xl"
+      />
+    );
+  }
 
   return (
     <TableContainer width={'100%'}>
@@ -40,7 +55,7 @@ const ViewTableStudents = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {students.map(el => (
+          {students.map((el) => (
             <Tr key={el.id}>
               <Td>{el.fullName}</Td>
               <Td>
@@ -57,15 +72,18 @@ const ViewTableStudents = () => {
                 <Icon as={CheckIcon} />
               </Td>
               <Td></Td>
-              <Td onClick={e => e.stopPropagation()}>
-                <ActionMenu actions={listActions} data={el} />
+              <Td onClick={(e) => e.stopPropagation()}>
+                <ActionMenu
+                  actions={listActions}
+                  data={el}
+                />
               </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
     </TableContainer>
-  )
-}
+  );
+};
 
-export default ViewTableStudents
+export default ViewTableStudents;
