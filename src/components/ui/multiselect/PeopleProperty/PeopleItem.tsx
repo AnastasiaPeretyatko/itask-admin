@@ -1,7 +1,8 @@
+
 import { CloseIcon } from '@chakra-ui/icons';
 import { Avatar, HStack, IconButton, Text } from '@chakra-ui/react';
 
-const PeopleOption = () => {
+const PeopleItem = () => {
   return (
     <HStack
       align={'center'}
@@ -26,7 +27,8 @@ const PeopleOption = () => {
         size="xs"
       />
     </HStack>
+
   );
 };
 
-export default PeopleOption;
+export default PeopleItem;
