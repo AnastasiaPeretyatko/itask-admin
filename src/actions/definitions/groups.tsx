@@ -1,19 +1,19 @@
-import { TGroup } from '@/types/groups';
-import { createAction } from '..';
 import { AddIcon } from '@chakra-ui/icons';
+import { createAction } from '..';
 import CreateGroup from '@/features/groups/components/CreateGroup';
 import EditGroup from '@/features/groups/components/EditGroup';
+import { TGroup } from '@/types/groups';
 
 export const createGroup = createAction({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    name: ({ t }: { t: any }) => t('Create group'),
-    icon: AddIcon,
-    actionLabel: 'Create group',
-    children: (onClose: () => void) => ({
-      title: 'Create group',
-      content: <CreateGroup onClose={onClose} />,
-    }),
-  });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  name: ({ t }: { t: any }) => t('Create group'),
+  icon: AddIcon,
+  actionLabel: 'Create group',
+  children: (onClose: () => void) => ({
+    title: 'Create group',
+    content: <CreateGroup onClose={onClose} />,
+  }),
+});
 
 export const updateGroup = (data: TGroup) => createAction({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,7 +22,10 @@ export const updateGroup = (data: TGroup) => createAction({
   actionLabel: 'Update group',
   children: (onClose: () => void) => ({
     title: 'Update group',
-    content: <EditGroup onClose={onClose} group={data} />,
+    content: <EditGroup
+      onClose={onClose}
+      group={data}
+    />,
   }),
 });
 

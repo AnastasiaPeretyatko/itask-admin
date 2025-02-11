@@ -1,8 +1,8 @@
-import { inputAnatomy } from '@chakra-ui/anatomy'
-import { createMultiStyleConfigHelpers } from '@chakra-ui/react'
+import { inputAnatomy } from '@chakra-ui/anatomy';
+import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
 
 const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(inputAnatomy.keys)
+  createMultiStyleConfigHelpers(inputAnatomy.keys);
 
 const form_input = definePartsStyle({
   field: {
@@ -15,7 +15,7 @@ const form_input = definePartsStyle({
       borderColor: 'primary.purple',
     },
   },
-})
+});
 
 const search = definePartsStyle({
   field: {
@@ -30,10 +30,16 @@ const search = definePartsStyle({
     _focus: {
       borderBottom: '1px solid',
       // какой нибудь акцентный цвет для бордера снизу
-    }
+    },
   },
-})
+});
+
+const unstyled = definePartsStyle({
+  field: {
+    backgroundColor: 'inherit',
+  },
+});
 
 export const inputTheme = defineMultiStyleConfig({
-  variants: { form_input, search },
-})
+  variants: { form_input, search, unstyled },
+});
