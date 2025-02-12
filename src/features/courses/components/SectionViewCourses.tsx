@@ -1,15 +1,22 @@
 import { AddIcon } from '@chakra-ui/icons';
-import { Container, Heading, HStack, IconButton, Text, VStack } from '@chakra-ui/react';
+import { Card, Container, Heading, HStack, IconButton, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import { useTranslations } from 'next-intl';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AddNewCourse from './AddNewCourse';
 import ViewTableCourse from './ViewTableCourses';
 import WindowModal from '@/components/modal/WindowModal';
-import { RootState } from '@/store/store';
+import { getCoursesThunk } from '@/store/courses/courses.thunks';
+import { AppDispatch, RootState } from '@/store/store';
 
 const SectionViewCourses = () => {
   const t = useTranslations();
   const { courses } = useSelector((state: RootState) => state.courses);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(getCoursesThunk());
+  }, [dispatch]);
 
   if (courses.length === 0) {
     return (
@@ -58,6 +65,13 @@ const SectionViewCourses = () => {
         />
       </HStack>
       <ViewTableCourse />
+      <SimpleGrid>
+        {
+          courses.map(c => (
+            <Card key={c.id}>{c.name}</Card>
+          ))
+        }
+      </SimpleGrid>
       {/* {courses.length !== 0 ? (
         <HStack
           width={'full'}

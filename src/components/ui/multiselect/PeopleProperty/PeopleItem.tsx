@@ -1,8 +1,14 @@
 
 import { CloseIcon } from '@chakra-ui/icons';
 import { Avatar, HStack, IconButton, Text } from '@chakra-ui/react';
+import { TName } from '@/types/groups';
 
-const PeopleItem = () => {
+type Props = {
+  option: TName;
+  onDeleteValue: (value: TName) => void;
+}
+
+const PeopleItem = ({ option, onDeleteValue }: Props) => {
   return (
     <HStack
       align={'center'}
@@ -17,14 +23,15 @@ const PeopleItem = () => {
       <Avatar
         width={4}
         height={4}
-        name="John Doe"
+        name={option?.name}
       />
-      <Text>John Doe</Text>
+      <Text>{option?.name}</Text>
       <IconButton
         variant={'unstyled'}
         aria-label=""
         icon={<CloseIcon boxSize={2} />}
         size="xs"
+        onClick={() => onDeleteValue(option)}
       />
     </HStack>
 

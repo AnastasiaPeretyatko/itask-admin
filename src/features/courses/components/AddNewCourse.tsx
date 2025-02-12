@@ -1,14 +1,15 @@
 import {
-  Input,
-  ModalBody,
+  Button,
+  HStack,
+  IconButton, ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalHeader,
 } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
-import { useTranslations } from 'next-intl';
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
-import { ChangeHandler, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 // import { Editor } from '@/components/Editor';
 import FormInput from '@/components/ui/FormInput';
@@ -24,38 +25,45 @@ import { TName } from '@/types/groups';
 
 
 const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
-  const [data, setData] = useState<string>();
+  const [context, setContext] = useState<string>();
+  const [isFullScreen, setIsFullScreen] = useState(false);
   // const t = useTranslations();
   const {
     register,
     handleSubmit,
-    formState: { isValid },
   } = useForm<TCreateCourse>();
   const dispatch = useDispatch<AppDispatch>();
   const { showErrorMessage, showSuccessMessage } = useNotifications();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [options, setOptions] = useState<TName[]>([]);
+  const [localValue, setLocalValue] = useState<TName[]>([]);
 
   const Editor = useMemo(() => dynamic(() => import('@/components/ui/Editor/Editor'), { ssr: false }), []);
 
   const onChangeContentEditor = (content: string) => {
-    setData(content);
+    setContext(content);
   };
 
   const onSubmit: SubmitHandler<TCreateCourse> = (data) => {
-    console.log({
+    const professorIds = localValue.map((item) => item.id);
 
-    });
-    // setIsLoading(true);
-    // dispatch(postCourseThunk(data))
-    //   .unwrap()
-    //   .then((res) => {
-    //     showSuccessMessage(res.message);
-    //     onClose();
-    //   })
-    //   .catch((err) => showErrorMessage(err.message))
-    //   .finally(() => setIsLoading(false));
+    if(!data.name){
+      showErrorMessage({ title: 'Название курса является обязательным' });
+      return;
+    }
+
+    dispatch(postCourseThunk({ ...data, professorIds, description: context ?? '' }))
+      .unwrap()
+      .then((res) => {
+        showSuccessMessage(res.message);
+        onClose();
+      })
+      .catch((err) => showErrorMessage(err.message))
+      .finally(() => setIsLoading(false));
   };
+  const optionsRender = useMemo(() => {
+    return options.filter((item) => !localValue.includes(item));
+  }, [localValue, options]);
 
   const fetchLestUser = useCallback(async (e: ChangeEvent<HTMLInputElement>) => {
     const search = e.target.value;
@@ -63,25 +71,44 @@ const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
     setOptions(data);
   }, []);
 
+  const onDeleteValue = useCallback((value: TName) => {
+    setLocalValue((prev) => prev.filter((item) => item.id !== value.id));
+  }, []);
+
+  const onChangeLocalValues = useCallback((value: TName) => {
+    setLocalValue((prev) => [...prev, value]);
+  }, []);
+
   return (
     <ModalContent
       as={'form'}
+      maxW={isFullScreen ? '100vw' : 'xl'}
+      height={isFullScreen ? '100vh' : 'auto'}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <ModalHeader>
-        {/* <Icon
-          as={FolderIcon}
-          width={'6'}
-          height={'6'}
+      <ModalHeader
+        alignItems={'center'}
+        justifyContent={'space-between'}
+      >
+        <IconButton
+          variant={'unstyledBtn'}
+          fontSize={'xl'}
+          aria-label="fullscreen"
+          boxSize={10}
+          icon={isFullScreen ? <AiOutlineFullscreenExit/> : <AiOutlineFullscreen/>}
+          onClick={() => setIsFullScreen(!isFullScreen)}
         />
-        <Heading
-          size={'md'}
-          fontWeight={500}
-        >
-          {t('Create course')}
-        </Heading> */}
+        <HStack>
+          <Button
+            size={'sm'}
+            variant={'primary'}
+            type="submit"
+            isLoading={isLoading}
+          >Опубликовать</Button>
+          <ModalCloseButton position={'inherit'}/>
+        </HStack>
+
       </ModalHeader>
-      <ModalCloseButton />
       <ModalBody paddingX={'70px'}>
         <FormInput
           register={register('name')}
@@ -91,14 +118,17 @@ const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
 
         <Multiselect
           view={VIEW.LIST}
-          options={options}
+          value={localValue}
+          options={optionsRender}
           label="Assign professors"
           renderItem={PeopleItem}
           renderOption={PeopleOption}
-          onChange={fetchLestUser}
+          onChangeInput={fetchLestUser}
+          onChangeLocalValues={onChangeLocalValues}
+          onDeleteValue={onDeleteValue}
         />
         <Editor
-          initialContent={data}
+          initialContent={context}
           onChange={onChangeContentEditor}
           // editable={true}
         />

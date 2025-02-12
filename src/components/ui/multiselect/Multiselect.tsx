@@ -1,4 +1,4 @@
-import { Collapse, Grid, HStack, Input, List, Text, useBoolean, useOutsideClick, VStack } from '@chakra-ui/react';
+import { Collapse, Flex, HStack, Input, List, Text, useBoolean, useOutsideClick, VStack } from '@chakra-ui/react';
 import { ChangeEvent, useEffect, useMemo, useRef } from 'react';
 import { BsPeople } from 'react-icons/bs';
 
@@ -14,7 +14,9 @@ type Props<T> = {
   value?: T[];
   view?: VIEW;
   label?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeLocalValues: (values: T) => void;
+  onDeleteValue: (value: T) => void;
 }
 
 type LabelComponentProps = {
@@ -24,7 +26,7 @@ type LabelComponentProps = {
   onClick: () => void;
 };
 
-const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options, onChange }: Props<T>) => {
+const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options, onChangeInput, ...rest }: Props<T>) => {
   const [isEdit, setIsEdit] = useBoolean();
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -62,10 +64,11 @@ const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options
         gap={0}
         onClick={setIsEdit.on}
       >
-        <Grid
+        <Flex
           ref={containerRef}
           width={'full'}
-          templateColumns="repeat(auto-fit, minmax(100px, 1fr))"
+          // templateColumns="repeat(auto-fit, minmax(100px, 1fr))"
+          wrap={'wrap'}
           gap={1}
           padding={1}
           sx={{
@@ -77,12 +80,13 @@ const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options
             transition: 'background .3s ease',
           }}
         >
-          {options?.map((item, index) => {
+          {value?.map((item, index) => {
             const Component = renderItem;
             return Component ? (
               <Component
                 key={index}
-                item={item}
+                option={item}
+                {...rest}
               />
             ) : null;
           })}
@@ -97,13 +101,14 @@ const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options
                 minW={10}
                 size={'xs'}
                 paddingY={1}
-                onChange={onChange}
+                onChange={onChangeInput}
               />
             ) : null
           }
-        </Grid>
+        </Flex>
         <Collapse
-          in={isEdit}
+          // eslint-disable-next-line react/jsx-no-leaked-render
+          in={isEdit && !!options?.length}
           animateOpacity
         >
           <List
@@ -117,8 +122,8 @@ const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options
                 return Component ? (
                   <Component
                     key={index}
-                    item={item}
-                    onClick={() => null}
+                    option={item}
+                    {...rest}
                   />
                 ) : null;
               }) : null

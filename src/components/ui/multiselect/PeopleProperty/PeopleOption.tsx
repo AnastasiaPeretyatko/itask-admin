@@ -1,19 +1,25 @@
 import { Avatar, HStack, ListItem, Text } from '@chakra-ui/react';
 import { TName } from '@/types/groups';
 
-const PeopleOption = ({ option }: { option: TName }) => {
-  console.log(option);
+type Props = {
+  option: TName;
+  onChangeLocalValues: (values: TName) => void;
+}
+
+const PeopleOption = ({ option, onChangeLocalValues }: Props) => {
+
   return (
     <HStack
       as={ListItem}
       fontSize={'xs'}
+      onClick={() => onChangeLocalValues(option)}
     >
       <Avatar
-        width={4}
-        height={4}
-        name={option.name}
+        width={5}
+        height={5}
+        name={option?.name}
       />
-      <Text>{option.name}</Text>
+      <Text>{option?.name}</Text>
     </HStack>
 
   );

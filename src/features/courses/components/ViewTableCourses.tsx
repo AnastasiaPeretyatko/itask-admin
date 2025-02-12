@@ -60,7 +60,7 @@ const ViewTableCourse = () => {
                 wordBreak={'break-word'}
                 textOverflow={'ellipsis'}
               >
-                {el.description}
+                {/* {el.description} */}
               </Td>
               <Td>{moment(el.createdAt).format('DD/MM/YYYY')}</Td>
               {/* <Td>

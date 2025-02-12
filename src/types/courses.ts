@@ -9,4 +9,5 @@ export type TCourse = {
 export type TCreateCourse = {
   name: string
   description: string
+  professorIds: string[]
 }
