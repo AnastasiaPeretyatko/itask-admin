@@ -49,6 +49,7 @@ const SectionViewCourses = () => {
           size="sm"
         /> */}
         <WindowModal
+          size="xl"
           action={<IconButton
             aria-label="add"
             icon={<AddIcon />}

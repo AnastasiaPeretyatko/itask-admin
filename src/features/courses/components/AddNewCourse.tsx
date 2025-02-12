@@ -7,43 +7,61 @@ import {
 } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
-import { useMemo, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
+import { ChangeHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 // import { Editor } from '@/components/Editor';
+import FormInput from '@/components/ui/FormInput';
 import Multiselect, { VIEW } from '@/components/ui/multiselect/Multiselect';
 import PeopleItem from '@/components/ui/multiselect/PeopleProperty/PeopleItem';
 import PeopleOption from '@/components/ui/multiselect/PeopleProperty/PeopleOption';
 import { useNotifications } from '@/hooks/useNotifications';
+import { getProfessorNamesRequest } from '@/services/professor.service';
 import { postCourseThunk } from '@/store/courses/courses.thunks';
 import { AppDispatch } from '@/store/store';
 import { TCreateCourse } from '@/types/courses';
+import { TName } from '@/types/groups';
+
 
 const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
-  // const [data, setData] = useState();
-  const t = useTranslations();
+  const [data, setData] = useState<string>();
+  // const t = useTranslations();
   const {
-    // register,
+    register,
     handleSubmit,
     formState: { isValid },
   } = useForm<TCreateCourse>();
   const dispatch = useDispatch<AppDispatch>();
   const { showErrorMessage, showSuccessMessage } = useNotifications();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [options, setOptions] = useState<TName[]>([]);
 
-  const Editor = useMemo(() => dynamic(() => import('@/components/Editor'), { ssr: false }), []);
+  const Editor = useMemo(() => dynamic(() => import('@/components/ui/Editor/Editor'), { ssr: false }), []);
+
+  const onChangeContentEditor = (content: string) => {
+    setData(content);
+  };
 
   const onSubmit: SubmitHandler<TCreateCourse> = (data) => {
-    setIsLoading(true);
-    dispatch(postCourseThunk(data))
-      .unwrap()
-      .then((res) => {
-        showSuccessMessage(res.message);
-        onClose();
-      })
-      .catch((err) => showErrorMessage(err.message))
-      .finally(() => setIsLoading(false));
+    console.log({
+
+    });
+    // setIsLoading(true);
+    // dispatch(postCourseThunk(data))
+    //   .unwrap()
+    //   .then((res) => {
+    //     showSuccessMessage(res.message);
+    //     onClose();
+    //   })
+    //   .catch((err) => showErrorMessage(err.message))
+    //   .finally(() => setIsLoading(false));
   };
+
+  const fetchLestUser = useCallback(async (e: ChangeEvent<HTMLInputElement>) => {
+    const search = e.target.value;
+    const { data } = await getProfessorNamesRequest(search);
+    setOptions(data);
+  }, []);
 
   return (
     <ModalContent
@@ -64,21 +82,26 @@ const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
         </Heading> */}
       </ModalHeader>
       <ModalCloseButton />
-      <ModalBody>
-        <Input
-          variant={'unstyled'}
-          placeholder="Enter title..."
-          fontWeight={600}
-          fontSize={'2xl'}
+      <ModalBody paddingX={'70px'}>
+        <FormInput
+          register={register('name')}
+          label="Enter title..."
+          withoutOutline
         />
+
         <Multiselect
           view={VIEW.LIST}
-          options={[1, 2, 3, 4, 5]}
+          options={options}
           label="Assign professors"
           renderItem={PeopleItem}
           renderOption={PeopleOption}
+          onChange={fetchLestUser}
         />
-        <Editor onChange={(content) => {console.log('ldfldfl', content);}}/>
+        <Editor
+          initialContent={data}
+          onChange={onChangeContentEditor}
+          // editable={true}
+        />
         {/* <Flex
           flexDir={'column'}
           gap={4}

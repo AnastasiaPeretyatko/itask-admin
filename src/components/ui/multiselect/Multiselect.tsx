@@ -1,5 +1,5 @@
 import { Collapse, Grid, HStack, Input, List, Text, useBoolean, useOutsideClick, VStack } from '@chakra-ui/react';
-import { useEffect, useMemo, useRef } from 'react';
+import { ChangeEvent, useEffect, useMemo, useRef } from 'react';
 import { BsPeople } from 'react-icons/bs';
 
 export enum VIEW {
@@ -7,23 +7,24 @@ export enum VIEW {
   INPUT = 'input',
 }
 
-type Props = {
+type Props<T> = {
   renderItem?: React.ElementType;
   renderOption?: React.ElementType;
-  options?: any[];
-  value?: any[];
+  options?: T[];
+  value?: T[];
   view?: VIEW;
   label?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 type LabelComponentProps = {
   label?: string;
   view?: VIEW;
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick: () => void;
 };
 
-const Multiselect = ({ view, label, renderItem, renderOption, value, options }: Props) => {
+const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options, onChange }: Props<T>) => {
   const [isEdit, setIsEdit] = useBoolean();
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -49,18 +50,17 @@ const Multiselect = ({ view, label, renderItem, renderOption, value, options }: 
     inputRef.current?.focus();
   }, [isEdit]);
 
-  console.log(containerRef.current?.offsetHeight);
-
   return (
     <LabelComponent
       view={view}
       label={label}
-      onClick={() => setIsEdit.on()}
+      onClick={setIsEdit.on}
     >
       <VStack
         position={'relative'}
         width={'full'}
         gap={0}
+        onClick={setIsEdit.on}
       >
         <Grid
           ref={containerRef}
@@ -97,6 +97,7 @@ const Multiselect = ({ view, label, renderItem, renderOption, value, options }: 
                 minW={10}
                 size={'xs'}
                 paddingY={1}
+                onChange={onChange}
               />
             ) : null
           }
@@ -107,12 +108,11 @@ const Multiselect = ({ view, label, renderItem, renderOption, value, options }: 
         >
           <List
             variant={'selectList'}
-            // top={containerHeight}
             maxH={'200px'}
             overflow={'auto'}
           >
             {
-              options?.map((item, index) => {
+              options?.length ? options?.map((item, index) => {
                 const Component = renderOption;
                 return Component ? (
                   <Component
@@ -121,7 +121,7 @@ const Multiselect = ({ view, label, renderItem, renderOption, value, options }: 
                     onClick={() => null}
                   />
                 ) : null;
-              })
+              }) : null
             }
           </List>
         </Collapse>
@@ -144,6 +144,7 @@ const LabelComponent = ({ view, children, label, onClick }: LabelComponentProps)
         <HStack
           color={'text.pale'}
           paddingY={1}
+          fontSize={'sm'}
         >
           <BsPeople />
           <Text>{label}</Text>

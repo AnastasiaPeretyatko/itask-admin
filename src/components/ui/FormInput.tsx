@@ -20,6 +20,7 @@ type Props = {
   onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void
   errorMessage?: string | null
   helperText?: string
+  withoutOutline?: boolean
 }
 
 const FormInput = ({
@@ -29,7 +30,8 @@ const FormInput = ({
   errorMessage,
   helperText,
   value,
-  onChangeInput
+  onChangeInput,
+  withoutOutline = false,
 }: Props) => {
   const [isShowPassword, setIsShowPassword] = useState(type);
 
@@ -53,6 +55,18 @@ const FormInput = ({
       );
     }
   }, [isShowPassword, type]);
+
+  if(withoutOutline) {
+    return (
+      <Input
+        variant={'unstyled'}
+        placeholder={label}
+        fontWeight={600}
+        fontSize={'2xl'}
+        {...register}
+      />
+    );
+  }
 
   return (
     <FormControl isInvalid={!!errorMessage}>

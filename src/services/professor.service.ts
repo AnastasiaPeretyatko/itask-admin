@@ -17,4 +17,4 @@ export const patchProfessorRequest = ({
 }) => http.patch(`/professors/${id}`, data);
 
 export const getProfessorNamesRequest = (search: string) =>
-  http.get('/professors/name', { params: { search } });
+  http.get('/professors/list', { params: { search } });
