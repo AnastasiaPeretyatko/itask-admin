@@ -15,3 +15,12 @@
 .bn-container[data-theming-css-demo] .bn-editor p {
   font-size: 14px;
 }
+
+.bn-container[data-theming-css-demo] .bn-editor {
+  padding: 0 0 0 54px;
+}
+
+.blocknote-view {
+  pointer-events: none; /* Запрещает взаимодействие */
+  user-select: none; /* Запрещает выделение текста */
+}

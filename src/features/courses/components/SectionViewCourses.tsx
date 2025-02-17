@@ -1,10 +1,10 @@
 import { AddIcon } from '@chakra-ui/icons';
-import { Card, Container, Heading, HStack, IconButton, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { Container, Heading, HStack, IconButton, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddNewCourse from './AddNewCourse';
-import ViewTableCourse from './ViewTableCourses';
+import CourseCard from './CourseCard';
 import WindowModal from '@/components/modal/WindowModal';
 import { getCoursesThunk } from '@/store/courses/courses.thunks';
 import { AppDispatch, RootState } from '@/store/store';
@@ -64,30 +64,21 @@ const SectionViewCourses = () => {
           body={(onClose) => <AddNewCourse onClose={onClose} />}
         />
       </HStack>
-      <ViewTableCourse />
-      <SimpleGrid>
+      {/* <ViewTableCourse /> */}
+      <SimpleGrid
+        width={'full'}
+        minChildWidth={60}
+        spacing={5}
+      >
         {
-          courses.map(c => (
-            <Card key={c.id}>{c.name}</Card>
+          courses.map((c) => (
+            <CourseCard
+              key={c.id}
+              course={c}
+            />
           ))
         }
       </SimpleGrid>
-      {/* {courses.length !== 0 ? (
-        <HStack
-          width={'full'}
-          justify={'space-between'}
-        >
-          <Text color={'text.pale'}>
-            Result 1 - {students.length} of {count}
-          </Text>
-          <Pagination
-            count={count}
-            page={page}
-            limit={limit}
-            onChangePage={onChangePage}
-          />
-        </HStack>
-      ) : null} */}
     </VStack>
   );
 };

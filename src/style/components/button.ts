@@ -28,7 +28,7 @@ const secondary = defineStyle(() => {
     fontSize: 'sm',
     border: '2px solid',
     borderColor: 'primary.purple',
-    borderRadius: 10,
+    borderRadius: 5,
     _hover: {
       opacity: 0.8,
       bg: 'primary.purple',

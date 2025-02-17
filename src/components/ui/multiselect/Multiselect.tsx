@@ -17,6 +17,7 @@ type Props<T> = {
   onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLocalValues: (values: T) => void;
   onDeleteValue: (value: T) => void;
+  isDisabled?: boolean;
 }
 
 type LabelComponentProps = {
@@ -26,7 +27,7 @@ type LabelComponentProps = {
   onClick: () => void;
 };
 
-const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options, onChangeInput, ...rest }: Props<T>) => {
+const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options, onChangeInput, isDisabled, ...rest }: Props<T>) => {
   const [isEdit, setIsEdit] = useBoolean();
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -56,18 +57,17 @@ const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options
     <LabelComponent
       view={view}
       label={label}
-      onClick={setIsEdit.on}
+      onClick={() => !isDisabled && setIsEdit.on()}
     >
       <VStack
         position={'relative'}
         width={'full'}
+        minH={'100%'}
         gap={0}
-        onClick={setIsEdit.on}
       >
         <Flex
           ref={containerRef}
           width={'full'}
-          // templateColumns="repeat(auto-fit, minmax(100px, 1fr))"
           wrap={'wrap'}
           gap={1}
           padding={1}
@@ -142,13 +142,12 @@ const LabelComponent = ({ view, children, label, onClick }: LabelComponentProps)
         width={'full'}
         whiteSpace={'nowrap'}
         align={'start'}
-        flex={1}
         gap={4}
         onClick={onClick}
       >
         <HStack
           color={'text.pale'}
-          paddingY={1}
+          paddingY={1.5}
           fontSize={'sm'}
         >
           <BsPeople />

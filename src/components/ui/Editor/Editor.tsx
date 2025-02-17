@@ -1,5 +1,5 @@
 import { BlockNoteEditor, locales, PartialBlock } from '@blocknote/core';
-import { BlockNoteView, darkDefaultTheme, lightDefaultTheme, Theme } from '@blocknote/mantine';
+import { BlockNoteView, lightDefaultTheme, Theme } from '@blocknote/mantine';
 import { useCreateBlockNote } from '@blocknote/react';
 import { Box, useColorMode } from '@chakra-ui/react';
 import '@blocknote/core/fonts/inter.css';
@@ -80,6 +80,7 @@ const Editor = ({
   editable,
   initialContent,
 }: EditorProps) => {
+  // eslint-disable-next-line import/namespace
   const locale = locales['ru'];
   const { colorMode } = useColorMode();
 
@@ -104,7 +105,7 @@ const Editor = ({
       <BlockNoteView
         editor={editor}
         editable={editable}
-        theme={redTheme.light}
+        theme={redTheme[colorMode]}
         onChange={() => onChange(JSON.stringify(editor.document, null, 2))}
         data-theming-css-demo
       />

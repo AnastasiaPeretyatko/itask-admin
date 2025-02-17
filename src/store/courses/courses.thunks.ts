@@ -47,7 +47,7 @@ export const patchCourseThunk = createAsyncThunk<
     try {
       const res = await patchCourseRequest(id, data);
       return fulfillWithValue({
-        data: res.data.rows,
+        data: res.data.data,
         message: res.data.message,
       });
     } catch (error) {

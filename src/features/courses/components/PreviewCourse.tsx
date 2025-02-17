@@ -5,69 +5,71 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalHeader,
+  useBoolean,
 } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
+import Empty from '@/components/ui/Empty';
 import FormInput from '@/components/ui/FormInput';
 import Multiselect, { VIEW } from '@/components/ui/multiselect/Multiselect';
 import PeopleItem from '@/components/ui/multiselect/PeopleProperty/PeopleItem';
 import PeopleOption from '@/components/ui/multiselect/PeopleProperty/PeopleOption';
 import { useNotifications } from '@/hooks/useNotifications';
 import { getProfessorNamesRequest } from '@/services/professor.service';
-import { postCourseThunk } from '@/store/courses/courses.thunks';
+import { patchCourseThunk } from '@/store/courses/courses.thunks';
 import { AppDispatch } from '@/store/store';
-import { TCreateCourse } from '@/types/courses';
+import { TCourse, TCreateCourse } from '@/types/courses';
 import { TName } from '@/types/groups';
 
 
-const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
-  const [context, setContext] = useState<string>();
-  const [isFullScreen, setIsFullScreen] = useState(false);
+const PreviewCourse = ({ onClose, course }: { course: TCourse, onClose: () => void }) => {
   // const t = useTranslations();
-  const {
-    register,
-    handleSubmit,
-  } = useForm<TCreateCourse>();
   const dispatch = useDispatch<AppDispatch>();
+  const { register, handleSubmit } = useForm<TCreateCourse>({ defaultValues: { name: course.name } });
+
   const { showErrorMessage, showSuccessMessage } = useNotifications();
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isEdit, setIsEdit] = useBoolean(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [context, setContext] = useState<string>(course.description);
   const [options, setOptions] = useState<TName[]>([]);
   const [localValue, setLocalValue] = useState<TName[]>([]);
 
   const Editor = useMemo(() => dynamic(() => import('@/components/ui/Editor/Editor'), { ssr: false }), []);
 
-  const onChangeContentEditor = (content: string) => {
-    setContext(content);
-  };
+  const optionsRender = useMemo(() => options.filter((item) => !localValue.includes(item)), [localValue, options]);
+
+  const onChangeContentEditor = (content: string) => setContext(content);
 
   const onSubmit: SubmitHandler<TCreateCourse> = (data) => {
+    setIsLoading(true);
+
     const professorIds = localValue.map((item) => item.id);
 
-    if(!data.name){
-      showErrorMessage({ title: 'Название курса является обязательным' });
-      return;
-    }
-
-    dispatch(postCourseThunk({ ...data, professorIds, description: context ?? '' }))
+    dispatch(patchCourseThunk({ id:course.id, data: {
+      ...data,
+      professorIds,
+      description: context ?? '',
+    } }))
       .unwrap()
       .then((res) => {
         showSuccessMessage(res.message);
         onClose();
       })
-      .catch((err) => showErrorMessage(err.message))
+      .catch((err) => {showErrorMessage(err.message);
+        console.log(err);
+      })
       .finally(() => setIsLoading(false));
   };
-  const optionsRender = useMemo(() => {
-    return options.filter((item) => !localValue.includes(item));
-  }, [localValue, options]);
+
 
   const fetchLestUser = useCallback(async (e: ChangeEvent<HTMLInputElement>) => {
-    const search = e.target.value;
-    const { data } = await getProfessorNamesRequest(search);
-    setOptions(data);
+    const { value } = e.target;
+    await getProfessorNamesRequest(value).then((res) => setOptions(res.data));
   }, []);
 
   const onDeleteValue = useCallback((value: TName) => {
@@ -100,17 +102,18 @@ const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
         <HStack>
           <Button
             size={'sm'}
-            variant={'primary'}
-            type="submit"
+            variant={isEdit ? 'primary' : 'secondary'}
+            type={isEdit ? 'button' : 'submit'}
             isLoading={isLoading}
-          >Опубликовать</Button>
+            onClick={setIsEdit.toggle}
+          >{isEdit ? 'Save' : 'Edit'}</Button>
           <ModalCloseButton position={'inherit'}/>
         </HStack>
 
       </ModalHeader>
-      <ModalBody paddingX={'70px'}>
+      <ModalBody>
         <FormInput
-          register={register('name')}
+          register={register('name', { required: 'Name is required' })}
           label="Enter title..."
           withoutOutline
         />
@@ -125,14 +128,23 @@ const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
           onChangeInput={fetchLestUser}
           onChangeLocalValues={onChangeLocalValues}
           onDeleteValue={onDeleteValue}
+          isDisabled={!isEdit}
         />
-        <Editor
-          initialContent={context}
-          onChange={onChangeContentEditor}
-        />
+        {
+          course.description ? (
+            <Editor
+              initialContent={context}
+              onChange={onChangeContentEditor}
+              editable={isEdit}
+            />
+          ) : (
+            <Empty color={'text.pale'}>Description is empty. You can add it later</Empty>
+          )
+        }
+
       </ModalBody>
     </ModalContent>
   );
 };
 
-export default AddNewCourse;
+export default PreviewCourse;
