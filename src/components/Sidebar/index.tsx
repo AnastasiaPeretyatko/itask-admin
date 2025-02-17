@@ -1,34 +1,34 @@
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import {
   Button,
   Container,
   Heading,
   IconButton,
   VStack,
-} from '@chakra-ui/react'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '@/store/store'
-import { changeStateSidebar } from '@/store/user-setting/setting.slice'
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { LogoutIcon } from '@/components/customIcon'
-import { sidebarConfig } from './config'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { sidebarConfig } from './config';
+import { LogoutIcon } from '@/components/customIcon';
+import { AppDispatch, RootState } from '@/store/store';
+import { changeStateSidebar } from '@/store/user-setting/setting.slice';
 
 const Sidebar = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { isOpenSidebar } = useSelector(
-    (state: RootState) => state.userSettings
-  )
-  const dispatch = useDispatch<AppDispatch>()
+    (state: RootState) => state.userSettings,
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
-  const setCollapse = () => dispatch(changeStateSidebar(!isOpenSidebar))
+  const setCollapse = () => dispatch(changeStateSidebar(!isOpenSidebar));
 
   useEffect(() => {
-    const kek = localStorage.getItem('sidebar')
+    // const kek = localStorage.getItem('sidebar');
     // if (isOpenSidebar === null) {
     //   dispatch(changeStateSidebar(Boolean(kek) || true))
     // }
-  }, [dispatch, isOpenSidebar])
+  }, [dispatch, isOpenSidebar]);
 
   return (
     <Container
@@ -42,7 +42,7 @@ const Sidebar = () => {
         icon={!isOpenSidebar ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         onClick={setCollapse}
       />
-      {isOpenSidebar && (
+      {isOpenSidebar ? (
         <Container
           py={4}
           mb={6}
@@ -53,9 +53,12 @@ const Sidebar = () => {
           borderColor={'input.outline'}
           paddingInline={0}
         >
-          <Heading size={'md'} whiteSpace={'nowrap'}>ITASK | Admin</Heading>
+          <Heading
+            size={'md'}
+            whiteSpace={'nowrap'}
+          >ITASK | Admin</Heading>
         </Container>
-      )}
+      ) : null}
 
       <VStack
         height="100%"
@@ -65,8 +68,11 @@ const Sidebar = () => {
         position={'relative'}
         mt={!isOpenSidebar ? 28 : 0}
       >
-        <VStack width={'100%'} align={isOpenSidebar ? 'start' : 'center'}>
-          {sidebarConfig.map(el => {
+        <VStack
+          width={'100%'}
+          align={isOpenSidebar ? 'start' : 'center'}
+        >
+          {sidebarConfig.map((el) => {
             return (
               <Button
                 key={el.title}
@@ -78,23 +84,23 @@ const Sidebar = () => {
                 _hover={
                   !isOpenSidebar
                     ? {
-                        _before: {
-                          zIndex: 1,
-                          position: 'absolute',
-                          left: 20,
-                          content: `"${el.title}"`,
-                          bg: 'blackAlpha.800',
-                          color: 'white',
-                          padding: 3,
-                          borderRadius: '5px',
-                        },
-                      }
+                      _before: {
+                        zIndex: 1,
+                        position: 'absolute',
+                        left: 20,
+                        content: `"${el.title}"`,
+                        bg: 'blackAlpha.800',
+                        color: 'white',
+                        padding: 3,
+                        borderRadius: '5px',
+                      },
+                    }
                     : {}
                 }
               >
-                {isOpenSidebar && el.title}
+                {isOpenSidebar ? el.title : null}
               </Button>
-            )
+            );
           })}
         </VStack>
       </VStack>
@@ -104,10 +110,10 @@ const Sidebar = () => {
         leftIcon={<LogoutIcon bgSize={3} />}
         // onClick={handleClickLogOut}
       >
-        {isOpenSidebar && 'Выйти'}
+        {isOpenSidebar ? 'Выйти' : null}
       </Button>
     </Container>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

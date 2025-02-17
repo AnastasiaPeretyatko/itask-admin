@@ -8,7 +8,7 @@ const primary = defineStyle(() => {
     fontSize: 'sm',
     bg: 'primary.purple',
     color: 'white',
-    borderRadius: 10,
+    borderRadius: 5,
     _disabled: {
       opacity: 0.7,
     },
@@ -28,7 +28,7 @@ const secondary = defineStyle(() => {
     fontSize: 'sm',
     border: '2px solid',
     borderColor: 'primary.purple',
-    borderRadius: 10,
+    borderRadius: 5,
     _hover: {
       opacity: 0.8,
       bg: 'primary.purple',
@@ -69,7 +69,10 @@ const sidebar = defineStyle({
 });
 
 const unstyledBtn = defineStyle(() => {
-  return {};
+  return {
+    display: 'inline-flex',
+    alignItems: 'center',
+  };
 });
 
 const pagination = defineStyle(() => {
@@ -110,8 +113,8 @@ const link = defineStyle({
   _hover: {
     textDecoration: 'none',
     color: 'primary.purple',
-  }
-})
+  },
+});
 
 export const buttonTheme = defineStyleConfig({
   baseStyle,
@@ -122,6 +125,6 @@ export const buttonTheme = defineStyleConfig({
     unstyledBtn,
     pagination,
     openSidebar,
-    link
+    link,
   },
 });

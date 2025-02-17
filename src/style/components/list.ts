@@ -1,14 +1,15 @@
-import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
-import { listAnatomy as parts } from '@chakra-ui/anatomy'
+import { listAnatomy as parts } from '@chakra-ui/anatomy';
+import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system';
 
 const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(parts.keys)
+  createMultiStyleConfigHelpers(parts.keys);
 
 const selectList = definePartsStyle(() => ({
   container: {
     width: '100%',
     position: 'absolute',
     top: '100%',
+    left: 0,
     bg: 'selector.bg',
     marginTop: 2,
     borderRadius: '5px',
@@ -25,7 +26,7 @@ const selectList = definePartsStyle(() => ({
       borderRadius: '5px',
     },
   },
-}))
+}));
 
 const settingPopover = definePartsStyle(() => ({
   item: {
@@ -36,8 +37,8 @@ const settingPopover = definePartsStyle(() => ({
       bg: 'background.switch',
     },
   },
-}))
+}));
 
 export const listTheme = defineMultiStyleConfig({
   variants: { selectList, settingPopover },
-})
+});

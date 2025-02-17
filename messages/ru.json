@@ -45,5 +45,7 @@
   "Description": "Описание",
   "Added": "Добавлен",
   "Update group": "Обновить группу",
-  "Update student": "Обновить студента"
+  "Update student": "Обновить студента",
+  "Add new courses": "Добавить новые курсы",
+  "Create course": "Создать курс"
 }
