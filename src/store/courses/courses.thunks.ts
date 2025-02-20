@@ -1,12 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   deleteCourseRequest,
+  getCourseRequest,
   getCoursesRequest,
   patchCourseRequest,
   postCourseRequest,
 } from '@/services/courses.service';
 import { MessageType } from '@/types/common';
 import { TCourse, TCreateCourse } from '@/types/courses';
+import { handleThunkError } from '@/utils/handleThunkError';
 
 export const postCourseThunk = createAsyncThunk<
   { data: TCourse; message: MessageType },
@@ -24,13 +26,7 @@ export const postCourseThunk = createAsyncThunk<
       message: res.data.message,
     });
   } catch (error) {
-    const hasErrResponse = (
-      error as { response: { data: { statusCode: number; message: MessageType } } }
-    ).response;
-    if (!hasErrResponse) {
-      throw error;
-    }
-    return rejectWithValue(hasErrResponse.data);
+    return handleThunkError(error, rejectWithValue);
   }
 });
 
@@ -51,13 +47,7 @@ export const patchCourseThunk = createAsyncThunk<
         message: res.data.message,
       });
     } catch (error) {
-      const hasErrResponse = (
-        error as { response: { data: { statusCode: number; message: MessageType } } }
-      ).response;
-      if (!hasErrResponse) {
-        throw error;
-      }
-      return rejectWithValue(hasErrResponse.data);
+      return handleThunkError(error, rejectWithValue);
     }
   },
 );
@@ -77,13 +67,7 @@ export const deleteCourseThunk = createAsyncThunk<
       message: res.data.message,
     });
   } catch (error) {
-    const hasErrResponse = (
-      error as { response: { data: { statusCode: number; message: MessageType } } }
-    ).response;
-    if (!hasErrResponse) {
-      throw error;
-    }
-    return rejectWithValue(hasErrResponse.data);
+    return handleThunkError(error, rejectWithValue);
   }
 });
 
@@ -101,13 +85,7 @@ export const getCoursesThunk = createAsyncThunk<
       count: res.data.count,
     };
   } catch (error) {
-    const hasErrResponse = (
-      error as { response: { data: { statusCode: number; message: MessageType } } }
-    ).response;
-    if (!hasErrResponse) {
-      throw error;
-    }
-    return rejectWithValue(hasErrResponse.data);
+    return handleThunkError(error, rejectWithValue);
   }
 });
 
@@ -119,15 +97,9 @@ export const getCourseThunk = createAsyncThunk<
   }
 >('/course.info', async (id, { rejectWithValue }) => {
   try {
-    const res = await getCoursesRequest();
+    const res = await getCourseRequest(id);
     return { data: res.data.rows };
   } catch (error) {
-    const hasErrResponse = (
-      error as { response: { data: { statusCode: number; message: MessageType } } }
-    ).response;
-    if (!hasErrResponse) {
-      throw error;
-    }
-    return rejectWithValue(hasErrResponse.data);
+    return handleThunkError(error, rejectWithValue);
   }
 });
