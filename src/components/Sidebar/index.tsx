@@ -6,16 +6,15 @@ import {
   IconButton,
   VStack,
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import SidebarItem from './components/SidebarItem';
 import { sidebarConfig } from './config';
 import { LogoutIcon } from '@/components/customIcon';
 import { AppDispatch, RootState } from '@/store/store';
 import { changeStateSidebar } from '@/store/user-setting/setting.slice';
 
 const Sidebar = () => {
-  const router = useRouter();
   const { isOpenSidebar } = useSelector(
     (state: RootState) => state.userSettings,
   );
@@ -72,36 +71,15 @@ const Sidebar = () => {
           width={'100%'}
           align={isOpenSidebar ? 'start' : 'center'}
         >
-          {sidebarConfig.map((el) => {
-            return (
-              <Button
+          {sidebarConfig.map((el) =>
+            (
+              <SidebarItem
                 key={el.title}
-                variant="sidebar"
-                justifyContent={!isOpenSidebar ? 'center' : 'start'}
-                leftIcon={el.icon}
-                onClick={() => router.push(el.path)}
-                isActive={router.pathname === el.path}
-                _hover={
-                  !isOpenSidebar
-                    ? {
-                      _before: {
-                        zIndex: 1,
-                        position: 'absolute',
-                        left: 20,
-                        content: `"${el.title}"`,
-                        bg: 'blackAlpha.800',
-                        color: 'white',
-                        padding: 3,
-                        borderRadius: '5px',
-                      },
-                    }
-                    : {}
-                }
-              >
-                {isOpenSidebar ? el.title : null}
-              </Button>
-            );
-          })}
+                data={el}
+                isCollapse={isOpenSidebar}
+              />
+            ),
+          )}
         </VStack>
       </VStack>
       <Button
