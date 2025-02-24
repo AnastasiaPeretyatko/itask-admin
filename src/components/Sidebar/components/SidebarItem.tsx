@@ -1,7 +1,7 @@
-import { Button, Text, Tooltip } from '@chakra-ui/react'
-import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/router'
-import React from 'react'
+import { Button, Text, Tooltip } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 type Props = {
   data: {
@@ -9,17 +9,22 @@ type Props = {
     icon: React.JSX.Element
     path?: string
   }
-  isCollapse: boolean
+  isCollapse: boolean | null
 }
 
 const SidebarItem = ({ data, isCollapse }: Props) => {
-  const t = useTranslations()
-  const router = useRouter()
+  const t = useTranslations();
+  const router = useRouter();
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {!isCollapse ? (
-        <Tooltip label={data.title} placement="right">
+        <Tooltip
+          variant={'sidebarTooltip'}
+          label={data.title}
+          placement="right"
+        >
           <Button
             variant="sidebar"
             leftIcon={data.icon}
@@ -47,7 +52,7 @@ const SidebarItem = ({ data, isCollapse }: Props) => {
         </Button>
       )}
     </>
-  )
-}
+  );
+};
 
-export default SidebarItem
+export default SidebarItem;
