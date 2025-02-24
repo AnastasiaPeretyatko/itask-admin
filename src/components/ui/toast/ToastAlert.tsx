@@ -13,7 +13,8 @@ const ToastAlert = ({ message }: {message: string}) => {
     >
       <Box
         padding={1}
-        border="1px solid black"
+        border="1px solid white.50"
+        borderRadius={'full'}
       >
         <CheckIcon/>
       </Box>

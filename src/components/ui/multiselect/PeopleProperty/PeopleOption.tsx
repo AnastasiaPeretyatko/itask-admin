@@ -19,7 +19,13 @@ const PeopleOption = ({ option, onChangeLocalValues }: Props) => {
         height={5}
         name={option?.name}
       />
-      <Text>{option?.name}</Text>
+      <Text
+        textOverflow={'ellipsis'}
+        width={'full'}
+        whiteSpace={'nowrap'}
+        overflow={'hidden'}
+      >
+        {option?.name}</Text>
     </HStack>
 
   );

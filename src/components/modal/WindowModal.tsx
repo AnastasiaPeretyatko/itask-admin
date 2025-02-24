@@ -1,6 +1,5 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Button, Modal, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import { useTranslations } from 'next-intl';
 import React, { ReactNode } from 'react';
 
 type Props = {
@@ -12,7 +11,6 @@ type Props = {
 
 const WindowModal = ({ size = 'xl', action, body, title }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const t = useTranslations();
 
   const ActionButton = React.isValidElement(action)
     ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,7 +28,7 @@ const WindowModal = ({ size = 'xl', action, body, title }: Props) => {
           onClick={onOpen}
           leftIcon={<AddIcon boxSize={3} />}
         >
-          {title || t('Add')}
+          {title ||'Add'}
         </Button>
       )}
 

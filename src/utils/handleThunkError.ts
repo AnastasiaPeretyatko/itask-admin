@@ -1,8 +1,6 @@
-import { MessageType } from '@/types/common';
-
 interface ErrorResponse {
   statusCode: number;
-  message: MessageType;
+  message: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type

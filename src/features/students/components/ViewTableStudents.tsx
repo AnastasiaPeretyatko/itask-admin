@@ -11,7 +11,6 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import { useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 import { deleteStudent, updateStudent } from '@/actions/definitions/students';
 import ActionMenu from '@/components/ui/ActionMenu';
@@ -20,7 +19,6 @@ import { RootState } from '@/store/store';
 import { TStudent } from '@/types/student';
 
 const ViewTableStudents = () => {
-  const t = useTranslations();
   const { copyToClipboard } = useClipboardAlert();
   const { students, isLoading } = useSelector(
     (state: RootState) => state.students,
@@ -45,13 +43,13 @@ const ViewTableStudents = () => {
       <Table size={'sm'}>
         <Thead>
           <Tr>
-            <Th>{t('Full Name')}</Th>
-            <Th>{t('Email')}</Th>
-            <Th>{t('Group')}</Th>
-            <Th>{t('Tel')}</Th>
-            <Th>{t('Status')}</Th>
-            <Th>{t('Created')}</Th>
-            <Th>{t('Action')}</Th>
+            <Th>{('Full Name')}</Th>
+            <Th>{('Email')}</Th>
+            <Th>{('Group')}</Th>
+            <Th>{('Tel')}</Th>
+            <Th>{('Status')}</Th>
+            <Th>{('Created')}</Th>
+            <Th>{('Action')}</Th>
           </Tr>
         </Thead>
         <Tbody>

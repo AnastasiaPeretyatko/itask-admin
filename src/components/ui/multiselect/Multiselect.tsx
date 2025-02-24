@@ -114,7 +114,6 @@ const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options
           <List
             variant={'selectList'}
             maxH={'200px'}
-            overflow={'auto'}
           >
             {
               options?.length ? options?.map((item, index) => {

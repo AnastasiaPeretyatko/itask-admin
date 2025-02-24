@@ -47,7 +47,7 @@ const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
     const professorIds = localValue.map((item) => item.id);
 
     if(!data.name){
-      showErrorMessage({ title: 'Название курса является обязательным' });
+      showErrorMessage('Название курса является обязательным');
       return;
     }
 

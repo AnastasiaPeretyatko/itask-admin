@@ -4,6 +4,7 @@ import { useCreateBlockNote } from '@blocknote/react';
 import { Box, useColorMode } from '@chakra-ui/react';
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/mantine/style.css';
+import dynamic from 'next/dynamic';
 
 
 type EditorProps = {
@@ -77,7 +78,7 @@ const redTheme = {
 
 const Editor = ({
   onChange,
-  editable,
+  editable = false,
   initialContent,
 }: EditorProps) => {
   // eslint-disable-next-line import/namespace
@@ -102,15 +103,16 @@ const Editor = ({
 
   return (
     <Box marginLeft={-54}>
+
       <BlockNoteView
         editor={editor}
         editable={editable}
         theme={redTheme[colorMode]}
         onChange={() => onChange(JSON.stringify(editor.document, null, 2))}
-        data-theming-css-demo
       />
+
     </Box>
   );
 };
 
-export default Editor;
+export default dynamic(() => Promise.resolve(Editor), { ssr: false });

@@ -9,7 +9,6 @@ import {
   ModalFooter,
   ModalHeader,
 } from '@chakra-ui/react';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -31,7 +30,6 @@ type Props = {
 }
 
 const EditGroup = ({ group, onClose }: Props) => {
-  const t = useTranslations();
   const {
     register,
     handleSubmit,
@@ -84,7 +82,7 @@ const EditGroup = ({ group, onClose }: Props) => {
           size={'md'}
           fontWeight={500}
         >
-          {t('Update group')}
+          {('Update group')}
         </Heading>
       </ModalHeader>
       <ModalCloseButton />
@@ -93,9 +91,9 @@ const EditGroup = ({ group, onClose }: Props) => {
           flexDir={'column'}
           gap={4}
         >
-          <Empty>{t('Edit group information notify')}.</Empty>
+          <Empty>{('Edit group information notify')}.</Empty>
           <SelectForm
-            label={t('University')}
+            label={('University')}
             array={universities}
             control={control}
             name="universityId"
@@ -103,23 +101,23 @@ const EditGroup = ({ group, onClose }: Props) => {
             currentValue={group.university.name}
           />
           <SelectorUI
-            label={t('Degree')}
+            label={('Degree')}
             name="degree"
             control={control}
             options={DEGREE}
           />
           <SelectorUI
-            label={t('Education mode')}
+            label={('Education mode')}
             name="educationMode"
             control={control}
             options={EDUCATION_MODE}
           />
           <FormInput
-            label={t('Course')}
+            label={('Course')}
             register={register('course', { required: 'Course is required' })}
           />
           <FormInput
-            label={t('Group number')}
+            label={('Group number')}
             register={register('groupNumber', {
               required: 'Group number is required',
             })}
@@ -127,14 +125,14 @@ const EditGroup = ({ group, onClose }: Props) => {
         </Flex>
       </ModalBody>
       <ModalFooter>
-        <Button>{t('Cancel')}</Button>
+        <Button>{('Cancel')}</Button>
         <Button
           variant={'primary'}
           type="submit"
           isLoading={isLoading}
           isDisabled={!isValid}
         >
-          {t('Save')}
+          {('Save')}
         </Button>
       </ModalFooter>
     </ModalContent>

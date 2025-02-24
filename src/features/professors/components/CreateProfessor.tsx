@@ -8,7 +8,6 @@ import {
   ModalFooter,
   ModalHeader,
 } from '@chakra-ui/react';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -22,7 +21,6 @@ import { AppDispatch } from '@/store/store';
 import { TProfessorCreate } from '@/types/professor';
 
 const CreateProfessor = ({ onClose }: { onClose: () => void }) => {
-  const t = useTranslations();
   const {
     register,
     handleSubmit,
@@ -59,37 +57,37 @@ const CreateProfessor = ({ onClose }: { onClose: () => void }) => {
           size={'md'}
           fontWeight={500}
         >
-          {t('Create professor')}
+          {('Create professor')}
         </Heading>
       </ModalHeader>
       <ModalCloseButton />
       <ModalBody>
-        <Empty marginBottom={2}>{t('Create professor information notify')}.</Empty>
+        <Empty marginBottom={2}>{('Create professor information notify')}.</Empty>
         <FormInput
           register={register('fullName', { required: 'Full name is required' })}
-          label={t('Full Name')}
+          label={('Full Name')}
           errorMessage={errors.fullName?.message}
         />
         <FormInput
           register={register('email', { required: 'Email is required' })}
-          label={t('Email')}
+          label={('Email')}
           errorMessage={errors.email?.message}
         />
         <TextareaUI
           register={register('description')}
-          label={t('Description')}
+          label={('Description')}
           errorMessage={errors.description?.message}
         />
       </ModalBody>
       <ModalFooter>
-        <Button onClick={onClose}>{t('Cancel')}</Button>
+        <Button onClick={onClose}>{('Cancel')}</Button>
         <Button
           variant={'primary'}
           type="submit"
           isLoading={isLoading}
           isDisabled={!isValid}
         >
-          {t('Save')}
+          {('Save')}
         </Button>
       </ModalFooter>
     </ModalContent>

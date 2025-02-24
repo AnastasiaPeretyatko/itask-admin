@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import {
   Container,
   HStack,
@@ -7,11 +7,11 @@ import {
   ListItem,
   Text,
   useDisclosure,
-  useOutsideClick
-} from '@chakra-ui/react'
-import { useRef } from 'react'
-import Label from '../Label'
-import { Control, Controller, FieldValues, Path } from 'react-hook-form'
+  useOutsideClick,
+} from '@chakra-ui/react';
+import { useRef } from 'react';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
+import Label from '../Label';
 
 type Props<T extends FieldValues> = {
   control: Control<T>
@@ -28,70 +28,75 @@ const SelectorUI = <T extends FieldValues>({
   control,
   name,
   options,
-  // value,
 }: Props<T>) => {
-  const ref = useRef(null)
-  const { isOpen, onToggle, onClose } = useDisclosure()
+  const ref = useRef(null);
+  const { isOpen, onToggle, onClose } = useDisclosure();
 
   useOutsideClick({
     ref: ref,
     handler: () => onClose(),
-  })
+  });
 
   return (
-    <>
-      <Container
-        width={size || 'full'}
-        position={'relative'}
-        ref={ref}
-        padding={0}
-      >
-        <Controller
-          name={name}
-          control={control}
-          render={({ field }) => (
-            <>
+    <Container
+      width={size || 'full'}
+      position={'relative'}
+      ref={ref}
+      padding={0}
+    >
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <>
+            <Container
+              variant={'selectorLine'}
+              bgGradient={
+                isOpen
+                  ? 'linear(to-r, secondary.blue, primary.purple)'
+                  : 'none'
+              }
+            >
               <Container
-                variant={'selectorLine'}
-                bgGradient={
-                  isOpen
-                    ? 'linear(to-r, secondary.blue, primary.purple)'
-                    : 'none'
-                }
+                variant={'selector'}
+                onClick={onToggle}
               >
-                <Container variant={'selector'} onClick={onToggle}>
-                  {label && <Label text={label} isFocus />}
-                  <HStack>
-                    <Text>{field.value ?? options[0]}</Text>
-                  </HStack>
-                  <Icon as={isOpen ? ChevronUpIcon : ChevronDownIcon} />
-                </Container>
+                {label ? (
+                  <Label
+                    text={label}
+                    isFocus
+                  />
+                ) : null}
+                <HStack>
+                  <Text>{field.value ?? options[0]}</Text>
+                </HStack>
+                <Icon as={isOpen ? ChevronUpIcon : ChevronDownIcon} />
               </Container>
-              {isOpen && (
-                <List variant={'selectList'}>
-                  {options.map(item => (
-                    <ListItem
-                      display={'flex'}
-                      flexDir={'row'}
-                      alignItems={'center'}
-                      gap={2}
-                      key={Math.random()}
-                      onClick={() =>{ 
-                        field.onChange(item)
-                        onClose()
-                      }}
-                    >
-                      {item}
-                    </ListItem>
-                  ))}
-                </List>
-              )}
-            </>
-          )}
-        />
-      </Container>
-    </>
-  )
-}
+            </Container>
+            {isOpen ? (
+              <List variant={'selectList'}>
+                {options.map((item) => (
+                  <ListItem
+                    display={'flex'}
+                    flexDir={'row'}
+                    alignItems={'center'}
+                    gap={2}
+                    key={Math.random()}
+                    onClick={() =>{
+                      field.onChange(item);
+                      onClose();
+                    }}
+                  >
+                    {item}
+                  </ListItem>
+                ))}
+              </List>
+            ) : null}
+          </>
+        )}
+      />
+    </Container>
+  );
+};
 
-export default SelectorUI
+export default SelectorUI;

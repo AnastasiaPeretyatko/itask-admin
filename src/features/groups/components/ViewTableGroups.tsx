@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/react';
 import moment from 'moment';
 import { useRouter } from 'next/router';
-import { useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 import { deleteGroup, updateGroup } from '@/actions/definitions/groups';
 import ActionMenu from '@/components/ui/ActionMenu';
@@ -17,7 +16,6 @@ import { RootState } from '@/store/store';
 import { TGroup } from '@/types/groups';
 
 const ViewTableGroups = () => {
-  const t = useTranslations();
   const { groups, isLoading } = useSelector((state: RootState) => state.groups);
   const router = useRouter();
 
@@ -40,12 +38,12 @@ const ViewTableGroups = () => {
       <Table size={'sm'}>
         <Thead>
           <Tr>
-            <Th>{t('Name')}</Th>
-            <Th>{t('University')}</Th>
-            <Th>{t('Degree')}</Th>
-            <Th>{t('Education mode')}</Th>
-            <Th>{t('Created')}</Th>
-            <Th>{t('Action')}</Th>
+            <Th>{('Name')}</Th>
+            <Th>{('University')}</Th>
+            <Th>{('Degree')}</Th>
+            <Th>{('Education mode')}</Th>
+            <Th>{('Created')}</Th>
+            <Th>{('Action')}</Th>
           </Tr>
         </Thead>
         <Tbody>

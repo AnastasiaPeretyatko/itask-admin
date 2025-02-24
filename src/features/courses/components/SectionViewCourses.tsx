@@ -1,6 +1,5 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Container, Heading, HStack, IconButton, SimpleGrid, Text, VStack } from '@chakra-ui/react';
-import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddNewCourse from './AddNewCourse';
@@ -10,7 +9,6 @@ import { getCoursesThunk } from '@/store/courses/courses.thunks';
 import { AppDispatch, RootState } from '@/store/store';
 
 const SectionViewCourses = () => {
-  const t = useTranslations();
   const { courses } = useSelector((state: RootState) => state.courses);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -32,7 +30,7 @@ const SectionViewCourses = () => {
           <Text>You have no courses</Text>
         </VStack>
         <WindowModal
-          title={t('Add new courses')}
+          title={'Add new courses'}
           body={(onClose) => <AddNewCourse onClose={onClose} />}
         />
       </Container>

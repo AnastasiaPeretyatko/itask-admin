@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import coursesReducer from './courses/courses.slice';
+import courseReducer from './courses/current.course.slice';
 import currentGroupReducer from './groups/current_group.slice';
 import groupsReducer from './groups/groups.slice';
 import professorCourseReducer from './professor-course/professor-course.slice';
@@ -20,5 +21,6 @@ export const store = configureStore({
     currentGroup: currentGroupReducer,
     courses: coursesReducer,
     professorCourse: professorCourseReducer,
+    course: courseReducer,
   },
 });

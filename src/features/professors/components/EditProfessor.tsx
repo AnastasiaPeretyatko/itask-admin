@@ -10,7 +10,6 @@ import {
   ModalFooter,
   ModalHeader,
 } from '@chakra-ui/react';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -27,7 +26,6 @@ type Props = {
 }
 
 const EditProfessor = ({ professor, onClose }: Props) => {
-  const t = useTranslations();
   const {
     register,
     handleSubmit,
@@ -48,10 +46,10 @@ const EditProfessor = ({ professor, onClose }: Props) => {
     dispatch(patchProfessorThunk({ id: professor.id, data }))
       .unwrap()
       .then(() => {
-        showSuccessMessage({ title: 'Преподаватель успешно отредактирован' });
+        showSuccessMessage('Преподаватель успешно отредактирован' );
         onClose();
       })
-      .catch(() => showErrorMessage({ title: 'Произошла ошибка' }))
+      .catch(() => showErrorMessage('Произошла ошибка'))
       .finally(() => setIsLoading(false));
   };
 
@@ -70,7 +68,7 @@ const EditProfessor = ({ professor, onClose }: Props) => {
           size={'md'}
           fontWeight={500}
         >
-          {t('Create professor')}
+          {('Create professor')}
         </Heading>
       </ModalHeader>
       <ModalCloseButton />
@@ -79,7 +77,7 @@ const EditProfessor = ({ professor, onClose }: Props) => {
           flexDir={'column'}
           gap={4}
         >
-          <Empty>{t('Edit professor information notify')}.</Empty>
+          <Empty>{('Edit professor information notify')}.</Empty>
           <FormInput
             label="Full Name"
             register={register('fullName', {
@@ -98,14 +96,14 @@ const EditProfessor = ({ professor, onClose }: Props) => {
             errorMessage={errors.description?.message}
           />
           <ModalFooter>
-            <Button>{t('Cancel')}</Button>
+            <Button>{('Cancel')}</Button>
             <Button
               variant={'primary'}
               type="submit"
               isLoading={isLoading}
               isDisabled={!isValid}
             >
-              {t('Save')}
+              {('Save')}
             </Button>
           </ModalFooter>
         </Flex>

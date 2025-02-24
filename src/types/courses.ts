@@ -1,3 +1,4 @@
+import { TGroup } from './groups';
 import { TProfessor } from './professor';
 
 export type TCreateCourse = {
@@ -15,7 +16,7 @@ export type TCourse = {
   course_assignment: CourseAssignment[]
 }
 
-type CourseAssignment = {
+export type CourseAssignment = {
   id: string
   course_id: string
   professor_id: string
@@ -24,4 +25,11 @@ type CourseAssignment = {
   createdAt: Date
   updatedAt: Date
   professor: TProfessor
+}
+
+export type CourseAssignmentType = {
+  id: string,
+  group: TGroup | null
+  professors: TProfessor | null
+  semesters: null
 }

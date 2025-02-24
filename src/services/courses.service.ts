@@ -14,3 +14,7 @@ export const getCoursesRequest = async () =>
   http.get('/courses');
 
 export const getCourseRequest = async (id: string) => http.get(`/courses/${id}`);
+
+export const getInfoCourse = async (id: string) => http.get(`/courses/info/${id}`);
+
+export const getGroupsCourse = async (id: string) => http.get(`/courses/list.groups/${id}`);
