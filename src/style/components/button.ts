@@ -43,28 +43,28 @@ const secondary = defineStyle(() => {
 });
 
 const sidebar = defineStyle({
-  display: 'flex',
-  width: 'full',
-  gap: 2,
   padding: 3,
-  color: 'gray.500',
+  width: 'full',
+  display: 'flex',
   textAlign: 'center',
-  fontWeight: 400,
-  fontSize: 'sm',
+  gap: 2,
   borderRadius: 'md',
+  fontSize: 'sm',
+  fontWeight: '500',
   '& span': {
+    margin: 'unset',
     '& svg': {
-      margin: 'unset',
+      width: 5,
+      height: 5,
     },
-    marginInlineEnd: 'unset',
   },
   _hover: {
-    bg: 'blackAlpha.800',
-    color: 'white',
+    background: 'sidebar.hoverButton',
+    color: 'sidebar.hoverText',
   },
   _active: {
-    bg: 'blackAlpha.800',
-    color: 'white',
+    background: 'sidebar.hoverButton',
+    color: 'sidebar.hoverText',
   },
 });
 
@@ -96,10 +96,11 @@ const openSidebar = defineStyle({
   zIndex: 1,
   right: -13,
   top: 23,
-  backgroundColor: 'background.switch',
-  boxShadow: 'lg',
+  backgroundColor: 'background.main',
+  boxShadow: 'base',
   _hover: {
-    backgroundColor: 'blackAlpha.800',
+    background: 'sidebar.hoverButton',
+    color: 'sidebar.hoverText',
   },
 });
 

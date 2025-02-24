@@ -11,6 +11,7 @@ import { modalTheme } from './components/modal';
 import { popoverTheme } from './components/popover';
 import { tableTheme } from './components/table';
 import { textareaTheme } from './components/textarea';
+import { tooltipTheme } from './components/tooltip';
 
 export const theme = extendTheme({
   config: {
@@ -21,7 +22,7 @@ export const theme = extendTheme({
     global: {
       body: {
         bg: 'background.main',
-        color: 'font',
+        color: 'text.primary',
       },
     },
   },
@@ -39,5 +40,6 @@ export const theme = extendTheme({
     Menu: menuTheme,
     Popover: popoverTheme,
     Textarea: textareaTheme,
+    Tooltip: tooltipTheme,
   },
 });

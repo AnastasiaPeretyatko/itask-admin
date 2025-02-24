@@ -1,12 +1,12 @@
-import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
+import { defineStyle, defineStyleConfig } from '@chakra-ui/react';
 
 
 const baseStyle = defineStyle(() => {
   return {
     maxW: 'unset',
     width: 'unset',
-  }
-})
+  };
+});
 
 const viewDate = defineStyle(() => {
   return {
@@ -18,8 +18,8 @@ const viewDate = defineStyle(() => {
     width: 'min-content',
     height: '100%',
     whiteSpace: 'nowrap',
-  }
-})
+  };
+});
 
 const header = defineStyle(() => {
   return {
@@ -33,8 +33,10 @@ const header = defineStyle(() => {
     justifyContent: 'end',
     gap: '20px',
     padding: 4,
-  }
-})
+
+    color: 'sidebar.text',
+  };
+});
 
 const boxTheme = defineStyle(() => {
   return {
@@ -46,8 +48,8 @@ const boxTheme = defineStyle(() => {
     borderRadius: 'md',
     gap: 1,
     margin: 0,
-  }
-})
+  };
+});
 
 const selector = defineStyle(() => {
   return {
@@ -64,8 +66,8 @@ const selector = defineStyle(() => {
     paddingX: 3,
     fontSize: 'sm',
     bg: 'background.main',
-  }
-})
+  };
+});
 
 const selectorLine = defineStyle(() => {
   return {
@@ -78,8 +80,8 @@ const selectorLine = defineStyle(() => {
     position: 'relative',
     padding: 0.5,
     fontSize: 'sm',
-  }
-})
+  };
+});
 
 const label = defineStyle(() => {
   return {
@@ -89,8 +91,8 @@ const label = defineStyle(() => {
     transition: 'all .3s ease',
     backgroundColor: 'bg',
     paddingX: 1,
-  }
-})
+  };
+});
 
 const wrapper_table = defineStyle(() => {
   return {
@@ -99,22 +101,22 @@ const wrapper_table = defineStyle(() => {
     padding: 2,
     borderRadius: '10px',
     backgroundColor: 'background.main',
-  }
-})
+  };
+});
 
-const sidebar = defineStyle(() => {
-  return {
-    bg: 'background.main',
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    width: '100%',
-    boxShadow: 'base',
-    position: 'relative',
-    top: 0,
-    padding: 4,
-    gap: 4
-  }
+const sidebar = defineStyle({
+  bg: 'sidebar.bg',
+  color: 'sidebar.text',
+  fontSize: ['sm','xs'],
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%',
+  width: '100%',
+  boxShadow: 'base',
+  position: 'relative',
+  top: 0,
+  padding: 4,
+  gap: 7,
 });
 
 export const containerTheme = defineStyleConfig({
@@ -127,6 +129,6 @@ export const containerTheme = defineStyleConfig({
     label,
     selectorLine,
     sidebar,
-    wrapper_table
+    wrapper_table,
   },
-})
+});
