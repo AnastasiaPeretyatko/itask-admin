@@ -13,18 +13,18 @@ import {
   Portal,
   Switch,
   useColorMode,
-} from '@chakra-ui/react'
-import { ReactNode } from 'react'
-import { BsGear } from 'react-icons/bs'
+} from '@chakra-ui/react';
+import { ReactNode } from 'react';
+import { BsGear } from 'react-icons/bs';
 // import { useRouter } from 'next/router'
-import { MoonIcon } from '@chakra-ui/icons'
+import { CustomMoonIcon } from '@/components/customIcon';
 
 type Props = {
   children: ReactNode
 }
 
 const UserSettingPopover = ({ children }: Props) => {
-  const { toggleColorMode, colorMode } = useColorMode()
+  const { toggleColorMode, colorMode } = useColorMode();
   // const router = useRouter()
 
   // const onChangeLocale = (newLocale: string) => {
@@ -32,7 +32,10 @@ const UserSettingPopover = ({ children }: Props) => {
   // }
 
   return (
-    <Popover variant={'userSetting'} placement="top-end">
+    <Popover
+      variant={'userSetting'}
+      placement="top-end"
+    >
       <PopoverTrigger>{children}</PopoverTrigger>
       <Portal>
         <PopoverContent>
@@ -46,8 +49,15 @@ const UserSettingPopover = ({ children }: Props) => {
                   alignItems="center"
                   justifyContent={'space-between'}
                 >
-                  <FormLabel htmlFor="dark-alerts" mb="0" fontSize={'sm'}>
-                    <Icon as={MoonIcon} mr={2} />
+                  <FormLabel
+                    htmlFor="dark-alerts"
+                    mb="0"
+                    fontSize={'sm'}
+                  >
+                    <Icon
+                      as={CustomMoonIcon}
+                      mr={2}
+                    />
                     Dark mode
                   </FormLabel>
                   <Switch
@@ -74,7 +84,7 @@ const UserSettingPopover = ({ children }: Props) => {
         </PopoverContent>
       </Portal>
     </Popover>
-  )
-}
+  );
+};
 
-export default UserSettingPopover
+export default UserSettingPopover;
