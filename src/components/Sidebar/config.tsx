@@ -1,9 +1,8 @@
-import { BsHouse, BsPeople } from 'react-icons/bs'
-import { PiStudentLight } from 'react-icons/pi'
+import { CustomGroupIcon, CustomHomeIcon, CustomStudentIcon, CustomTutorIcon } from '../customIcon';
 
 export const sidebarConfig = [
-  { title: 'Home', icon: <BsHouse />, path: '/' },
-  { title: 'Professors', icon: <BsPeople />, path: '/professors' },
-  { title: 'Groups', icon: <BsPeople />, path: '/groups' },
-  { title: 'Students', icon: <PiStudentLight />, path: '/students' },
-]
+  { title: 'Home', icon: <CustomHomeIcon />, path: '/' },
+  { title: 'Professors', icon: <CustomTutorIcon />, path: '/professors' },
+  { title: 'Students', icon: <CustomStudentIcon />, path: '/students' },
+  { title: 'Groups', icon: <CustomGroupIcon />, path: '/groups' },
+];
