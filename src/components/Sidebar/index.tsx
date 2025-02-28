@@ -1,23 +1,19 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import {
-  Button,
   Container,
   Heading,
   IconButton,
-  useColorMode,
   VStack,
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { sidebarConfig } from './config';
-import { CustomMoonIcon, CustomSettingsIcon, CustomSunIcon, LogoutIcon } from '@/components/customIcon';
+import ColorModeBtn from '../ui/ColorModeBtn';
+import SidebarItem from './components/SidebarItem';
+import { sidebarConfig, sidebarMenuConfig } from './config';
 import { AppDispatch, RootState } from '@/store/store';
 import { changeStateSidebar } from '@/store/user-setting/setting.slice';
 
 const Sidebar = () => {
-  const router = useRouter();
-  const { toggleColorMode, colorMode } = useColorMode();
 
   const { isOpenSidebar } = useSelector(
     (state: RootState) => state.userSettings,
@@ -78,60 +74,31 @@ const Sidebar = () => {
         >
           {sidebarConfig.map((el) => {
             return (
-              <Button
+              <SidebarItem
                 key={el.title}
-                variant="sidebar"
-                justifyContent={!isOpenSidebar ? 'center' : 'start'}
-                leftIcon={el.icon}
-                onClick={() => router.push(el.path)}
-                isActive={router.pathname === el.path}
-                _hover={
-                  !isOpenSidebar
-                    ? {
-                      _before: {
-                        zIndex: 1,
-                        position: 'absolute',
-                        left: 20,
-                        content: `"${el.title}"`,
-                        bg: 'blackAlpha.800',
-                        color: 'white',
-                        padding: 3,
-                        borderRadius: '5px',
-                      },
-                    }
-                    : {}
-                }
-              >
-                {isOpenSidebar ? el.title : null}
-              </Button>
+                data={el}
+                isCollapse={isOpenSidebar}
+              />
             );
           })}
         </VStack>
       </VStack>
-      <Button
-        variant="sidebar"
-        justifyContent={!isOpenSidebar ? 'center' : 'start'}
-        leftIcon={colorMode === 'dark' ? <CustomSunIcon bgSize={3}/> : <CustomMoonIcon bgSize={3}/>}
-        onClick={toggleColorMode}
+      <VStack
+        width={'100%'}
+        align={isOpenSidebar ? 'start' : 'center'}
       >
-        {isOpenSidebar ? colorMode === 'dark' ? 'Светлая тема' : 'Тёмная тема' : null}
-      </Button>
-      <Button
-        variant="sidebar"
-        justifyContent={!isOpenSidebar ? 'center' : 'start'}
-        leftIcon={<CustomSettingsIcon bgSize={3} />}
-        // onClick={handleClickSettings}
-      >
-        {isOpenSidebar ? 'Настройки' : null}
-      </Button>
-      <Button
-        variant="sidebar"
-        justifyContent={!isOpenSidebar ? 'center' : 'start'}
-        leftIcon={<LogoutIcon bgSize={3} />}
-        // onClick={handleClickLogOut}
-      >
-        {isOpenSidebar ? 'Выйти' : null}
-      </Button>
+        <ColorModeBtn isOpenSidebar = {isOpenSidebar}/>
+
+        {sidebarMenuConfig.map((el) => {
+          return (
+            <SidebarItem
+              key={el.title}
+              data={el}
+              isCollapse={isOpenSidebar}
+            />
+          );
+        })}
+      </VStack>
     </Container>
   );
 };

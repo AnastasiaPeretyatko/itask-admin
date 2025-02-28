@@ -1,6 +1,5 @@
 import { Button, Text, Tooltip } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 
 type Props = {
@@ -9,15 +8,15 @@ type Props = {
     icon: React.JSX.Element
     path?: string
   }
-  isCollapse: boolean
+  isCollapse: boolean | null
 }
 
 const SidebarItem = ({ data, isCollapse }: Props) => {
-  const t = useTranslations();
   const router = useRouter();
 
-  return !isCollapse ? (
+  return (!isCollapse ? (
     <Tooltip
+      variant={'sidebarTooltip'}
       label={data.title}
       placement="right"
     >
@@ -43,9 +42,10 @@ const SidebarItem = ({ data, isCollapse }: Props) => {
             : {}
         }
       >
-        {t(data.title)}
+        {data.title}
       </Text>
     </Button>
+  )
   );
 };
 
