@@ -1,21 +1,36 @@
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { IconButton , useColorMode } from '@chakra-ui/react';
+import { IconButton, Button, useColorMode } from '@chakra-ui/react';
+import { CustomMoonIcon, CustomSunIcon } from '../customIcon';
 
-const ColorModeBtn = () => {
+const ColorModeBtn = ({ isOpenSidebar }) => {
   const { toggleColorMode, colorMode } = useColorMode();
+  const isDarkMode = colorMode === 'dark';
+
+  if (isOpenSidebar === undefined) {
+    return (
+      <IconButton
+        isRound
+        variant="solid"
+        backgroundColor="background.main"
+        color="text.bold"
+        aria-label="Toggle dark mode"
+        fontSize="md"
+        ml={4}
+        icon={isDarkMode ? <CustomSunIcon /> : <CustomMoonIcon />}
+        onClick={toggleColorMode}
+      />
+    );
+  }
 
   return (
-    <IconButton
-      isRound
-      variant="solid"
-      backgroundColor="background.main"
-      color="text.bold"
-      aria-label="Toggle dark mode"
-      fontSize="md"
-      ml={4}
-      icon={colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
+    <Button
+      variant="sidebar"
+      justifyContent={!isOpenSidebar ? 'center' : 'start'}
+      leftIcon={isDarkMode ? <CustomSunIcon bgSize={3} /> : <CustomMoonIcon bgSize={3} />}
       onClick={toggleColorMode}
-    ></IconButton>
+    >
+      {isOpenSidebar ? isDarkMode ? 'Светлая тема' : 'Тёмная тема' : null}
+
+    </Button>
   );
 };
 

@@ -110,8 +110,8 @@ const link = defineStyle({
   _hover: {
     textDecoration: 'none',
     color: 'primary.purple',
-  }
-})
+  },
+});
 
 export const buttonTheme = defineStyleConfig({
   baseStyle,
@@ -122,6 +122,6 @@ export const buttonTheme = defineStyleConfig({
     unstyledBtn,
     pagination,
     openSidebar,
-    link
+    link,
   },
 });
