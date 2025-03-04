@@ -1,6 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import {
-  Button,
   Container,
   Heading,
   IconButton,
@@ -8,19 +7,21 @@ import {
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ColorModeBtn from '../ui/ColorModeBtn';
 import SidebarItem from './components/SidebarItem';
-import { sidebarConfig } from './config';
-import { LogoutIcon } from '@/components/customIcon';
+import { sidebarConfig, sidebarMenuConfig } from './config';
 import { AppDispatch, RootState } from '@/store/store';
 import { changeStateSidebar } from '@/store/user-setting/setting.slice';
 
 const Sidebar = () => {
+
   const { isOpenSidebar } = useSelector(
     (state: RootState) => state.userSettings,
   );
   const dispatch = useDispatch<AppDispatch>();
 
   const setCollapse = () => dispatch(changeStateSidebar(!isOpenSidebar));
+
 
   useEffect(() => {
     // const kek = localStorage.getItem('sidebar');
@@ -71,25 +72,33 @@ const Sidebar = () => {
           width={'100%'}
           align={isOpenSidebar ? 'start' : 'center'}
         >
-          {sidebarConfig.map((el) =>
-            (
+          {sidebarConfig.map((el) => {
+            return (
               <SidebarItem
                 key={el.title}
                 data={el}
                 isCollapse={isOpenSidebar}
               />
-            ),
-          )}
+            );
+          })}
         </VStack>
       </VStack>
-      <Button
-        variant="sidebar"
-        justifyContent={!isOpenSidebar ? 'center' : 'start'}
-        leftIcon={<LogoutIcon bgSize={3} />}
-        // onClick={handleClickLogOut}
+      <VStack
+        width={'100%'}
+        align={isOpenSidebar ? 'start' : 'center'}
       >
-        {isOpenSidebar ? 'Выйти' : null}
-      </Button>
+        <ColorModeBtn isOpenSidebar = {isOpenSidebar}/>
+
+        {sidebarMenuConfig.map((el) => {
+          return (
+            <SidebarItem
+              key={el.title}
+              data={el}
+              isCollapse={isOpenSidebar}
+            />
+          );
+        })}
+      </VStack>
     </Container>
   );
 };

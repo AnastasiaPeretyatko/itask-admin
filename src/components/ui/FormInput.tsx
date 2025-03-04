@@ -70,7 +70,7 @@ const FormInput = ({
 
   return (
     <FormControl isInvalid={!!errorMessage}>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel color={'text.bold'}>{label}</FormLabel>
       <InputGroup>
         <Input
           variant={'form_input'}
