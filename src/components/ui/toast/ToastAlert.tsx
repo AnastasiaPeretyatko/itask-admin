@@ -1,4 +1,4 @@
-import { CheckIcon } from '@chakra-ui/icons';
+import { NotAllowedIcon } from '@chakra-ui/icons';
 import { Box, HStack, Text } from '@chakra-ui/react';
 
 const ToastAlert = ({ message }: {message: string}) => {
@@ -16,7 +16,7 @@ const ToastAlert = ({ message }: {message: string}) => {
         border="1px solid white.50"
         borderRadius={'full'}
       >
-        <CheckIcon/>
+        <NotAllowedIcon/>
       </Box>
       <Text noOfLines={3}>{message}</Text>
     </HStack>

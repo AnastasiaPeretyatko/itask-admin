@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { CreateAssignment } from '@/features/courses/components/AddNewRecourd';
 import {
+  assignmentCreate,
   deleteCourseRequest,
   getCourseRequest,
   getCoursesRequest,
@@ -9,7 +11,7 @@ import {
   postCourseRequest,
 } from '@/services/courses.service';
 import { MessageType } from '@/types/common';
-import { CourseAssignmentType, TCourse, TCreateCourse } from '@/types/courses';
+import { Assignment, CourseAssignmentType, TCourse, TCreateCourse } from '@/types/courses';
 import { handleThunkError } from '@/utils/handleThunkError';
 
 export const postCourseThunk = createAsyncThunk<
@@ -40,7 +42,6 @@ export const patchCourseThunk = createAsyncThunk<
   async ({ id, data }, { rejectWithValue, fulfillWithValue }) => {
     try {
       const res = await patchCourseRequest(id, data);
-      console.log({ res });
       return fulfillWithValue({
         data: res.data.data,
         message: res.data.message,
@@ -135,4 +136,19 @@ export const groups = createAsyncThunk<
   }
 });
 
+const create = createAsyncThunk<
+  {data: Assignment, message: string},
+  CreateAssignment,
+  { rejectValue: { statusCode: number; message: string } }
+  >('/assignment/create', async (dto, { rejectWithValue }) => {
+    try {
+      const { data } = await assignmentCreate(dto);
+      return data;
+    } catch (error) {
+      return handleThunkError(error, rejectWithValue);
+    }
+  });
+
 export const course = { info, groups };
+
+export const assignment = { create };

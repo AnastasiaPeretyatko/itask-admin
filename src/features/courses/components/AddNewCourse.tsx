@@ -24,15 +24,13 @@ import { TName } from '@/types/groups';
 
 
 const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
-  const [context, setContext] = useState<string>();
-  const [isFullScreen, setIsFullScreen] = useState(false);
-  // const t = useTranslations();
-  const {
-    register,
-    handleSubmit,
-  } = useForm<TCreateCourse>();
+  const { register, handleSubmit } = useForm<TCreateCourse>();
   const dispatch = useDispatch<AppDispatch>();
   const { showErrorMessage, showSuccessMessage } = useNotifications();
+  // const t = useTranslations();
+
+  const [context, setContext] = useState<string>();
+  const [isFullScreen, setIsFullScreen] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [options, setOptions] = useState<TName[]>([]);
   const [localValue, setLocalValue] = useState<TName[]>([]);
@@ -60,6 +58,7 @@ const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
       .catch((err) => showErrorMessage(err.message))
       .finally(() => setIsLoading(false));
   };
+
   const optionsRender = useMemo(() => {
     return options.filter((item) => !localValue.includes(item));
   }, [localValue, options]);

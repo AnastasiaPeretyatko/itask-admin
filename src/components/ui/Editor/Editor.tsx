@@ -6,9 +6,8 @@ import '@blocknote/core/fonts/inter.css';
 import '@blocknote/mantine/style.css';
 import dynamic from 'next/dynamic';
 
-
 type EditorProps = {
-  onChange: (value: string) => void
+  onChange?: (value: string) => void
   initialContent?: string
   editable?: boolean
 }
@@ -102,13 +101,15 @@ const Editor = ({
   });
 
   return (
-    <Box marginLeft={-54}>
-
+    <Box
+      marginLeft={-54}
+      width={'full'}
+    >
       <BlockNoteView
         editor={editor}
         editable={editable}
         theme={redTheme[colorMode]}
-        onChange={() => onChange(JSON.stringify(editor.document, null, 2))}
+        onChange={() => onChange && onChange(JSON.stringify(editor.document, null, 2))}
       />
 
     </Box>

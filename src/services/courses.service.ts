@@ -1,4 +1,5 @@
 import { http } from '.';
+import { CreateAssignment } from '@/features/courses/components/AddNewRecourd';
 import { TCreateCourse } from '@/types/courses';
 
 export const postCourseRequest = async (data: TCreateCourse) =>
@@ -17,4 +18,6 @@ export const getCourseRequest = async (id: string) => http.get(`/courses/${id}`)
 
 export const getInfoCourse = async (id: string) => http.get(`/courses/info/${id}`);
 
-export const getGroupsCourse = async (id: string) => http.get(`/courses/list.groups/${id}`);
+export const getGroupsCourse = async (id: string) => http.get(`/assignment/${id}`);
+
+export const assignmentCreate = async(data: CreateAssignment) => http.patch('/assignment', data );

@@ -57,12 +57,10 @@ const PreviewCourse = ({ onClose, course }: { course: TCourse, onClose: () => vo
     } }))
       .unwrap()
       .then((res) => {
-        showSuccessMessage(res.message);
+        showSuccessMessage(res);
         onClose();
       })
-      .catch((err) => {showErrorMessage(err.message);
-        console.log(err);
-      })
+      .catch(showErrorMessage)
       .finally(() => setIsLoading(false));
   };
 
