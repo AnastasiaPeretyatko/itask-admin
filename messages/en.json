@@ -22,6 +22,7 @@
   "Degree": "Degree",
   "Education mode": "Education mode",
   "Course": "Course",
+  "Courses": "Courses",
   "Group number": "Group number",
   "Name": "Name",
   "ИКТИБ": "ICTIS",
@@ -45,5 +46,7 @@
   "Description": "Description",
   "Added": "Added",
   "Update group": "Update group",
-  "Update student": "Update student"
+  "Update student": "Update student",
+  "Add new courses": "Add new courses",
+  "Create course": "Create course"
 }

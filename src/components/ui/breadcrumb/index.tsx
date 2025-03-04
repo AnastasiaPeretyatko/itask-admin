@@ -3,11 +3,10 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   IconButton,
-} from '@chakra-ui/react'
-import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/router'
-import React, { useMemo } from 'react'
-import { BsHouse } from 'react-icons/bs'
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import React, { useMemo } from 'react';
+import { BsHouse } from 'react-icons/bs';
 
 type Props ={
   options?: string[]
@@ -15,13 +14,12 @@ type Props ={
 
 
 const BreadcrumbUI = ({ options }: Props) => {
-  const router = useRouter()
-  const t = useTranslations()
+  const router = useRouter();
 
   const path = useMemo(() => {
-    const rest = router.pathname.split('/')[1]
-    return rest[0].toUpperCase() + rest.slice(1)
-  }, [router.pathname])
+    const rest = router.pathname.split('/')[1];
+    return rest[0].toUpperCase() + rest.slice(1);
+  }, [router.pathname]);
 
   return (
     <Breadcrumb mb={4}>
@@ -35,7 +33,7 @@ const BreadcrumbUI = ({ options }: Props) => {
       </BreadcrumbItem>
 
       <BreadcrumbItem isCurrentPage={!router.query.id}>
-        <BreadcrumbLink>{t(path)}</BreadcrumbLink>
+        <BreadcrumbLink>{path}</BreadcrumbLink>
       </BreadcrumbItem>
 
       {options?.map((item, index) => (
@@ -44,7 +42,7 @@ const BreadcrumbUI = ({ options }: Props) => {
         </BreadcrumbItem>
       ))}
     </Breadcrumb>
-  )
-}
+  );
+};
 
-export default BreadcrumbUI
+export default BreadcrumbUI;

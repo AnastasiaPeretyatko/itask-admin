@@ -23,6 +23,7 @@
   "Degree": "Степень",
   "Education mode": "Форма обучения",
   "Course": "Курс",
+  "Courses": "Курсы",
   "Group number": "Номер группы",
   "Name": "Название",
   "Create": "Создать",
@@ -45,5 +46,7 @@
   "Description": "Описание",
   "Added": "Добавлен",
   "Update group": "Обновить группу",
-  "Update student": "Обновить студента"
+  "Update student": "Обновить студента",
+  "Add new courses": "Добавить новые курсы",
+  "Create course": "Создать курс"
 }

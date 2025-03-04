@@ -1,6 +1,5 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Container, Heading, HStack, IconButton, Text, VStack } from '@chakra-ui/react';
-import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateStudent from './CreateStudent';
@@ -14,7 +13,6 @@ import { setSearch, setPage } from '@/store/students/student.slice';
 import { getAllStudentsThunk } from '@/store/students/students.thunks';
 
 const SectionViewStudents = () => {
-  const t = useTranslations();
   const {
     students,
     pagination: { limit, page, search },
@@ -50,7 +48,7 @@ const SectionViewStudents = () => {
           <Text>You have no groups</Text>
         </VStack>
         <WindowModal
-          title={t('Create group')}
+          title={('Create group')}
           body={(onClose) => <CreateStudent onClose={onClose} />}
         />
       </Container>

@@ -1,0 +1,26 @@
+:root {
+  /* --bn-font-family: 'Arial', sans-serif;
+  --bn-font-size: 16px;
+  --bn-background-color-light: #f9f9f9;
+  --bn-background-color-dark: #1a1a1a;
+  --bn-text-color-light: #333;
+  --bn-text-color-dark: #ddd; */
+}
+
+.bn-block-content[data-is-empty-and-focused] .bn-inline-content:has(> .ProseMirror-trailingBreak:only-child)::before{
+  content: 'Enter text here...';
+  color: rgba(0, 0, 0, 0.274);
+}
+
+.bn-container[data-theming-css-demo] .bn-editor p {
+  font-size: 14px;
+}
+
+.bn-container[data-theming-css-demo] .bn-editor {
+  padding: 0 0 0 54px;
+}
+
+.blocknote-view {
+  pointer-events: none; /* Запрещает взаимодействие */
+  user-select: none; /* Запрещает выделение текста */
+}

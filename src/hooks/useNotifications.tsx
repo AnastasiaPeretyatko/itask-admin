@@ -4,40 +4,17 @@ import ToastAlert from '@/components/ui/toast/ToastAlert';
 export const useNotifications = () => {
   const toast = useToast();
 
-  const showErrorMessage = (message: {
-    title: string
-    description?: string
-  }) => {
-    const { title: toastTitle, description: toastDescription } = message;
-
+  const showErrorMessage = (data: {message: string} | string) => {
     toast({
-      position: 'bottom-right',
-      render: ({ onClose }) => (
-        <ToastAlert
-          toastTitle={toastTitle}
-          toastDescription={toastDescription}
-          onClose={onClose}
-        />
-      ),
+      position: 'bottom-left',
+      render: () => <ToastAlert message={data?.message ?? data} />,
     });
   };
 
-  const showSuccessMessage = (message: {
-    title: string
-    description?: string
-  }) => {
-    const { title: toastTitle, description: toastDescription } = message;
-
+  const showSuccessMessage = (data: {message: string} | string) => {
     toast({
-      position: 'bottom-right',
-      render: ({ onClose }) => (
-        <ToastAlert
-          isSuccess
-          toastTitle={toastTitle}
-          toastDescription={toastDescription}
-          onClose={onClose}
-        />
-      ),
+      position: 'bottom-left',
+      render: () => <ToastAlert message={data?.message ?? data} />,
     });
   };
 

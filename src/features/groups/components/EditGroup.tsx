@@ -8,22 +8,21 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@chakra-ui/react'
-import { useTranslations } from 'next-intl'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import FormInput from '@/components/ui/FormInput'
-import Empty from '@/components/ui/Empty'
-import { TGroup, TName } from '@/types/groups'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '@/store/store'
-import { useState } from 'react'
-import { patchGroupThunk } from '@/store/groups/groups.thunks'
-import { useNotifications } from '@/hooks/useNotifications'
-import SelectorUI from '@/components/ui/selector/SelectorUI'
-import { DEGREE, EDUCATION_MODE } from '@/assets/constants'
-import { getUniversitiesThunk } from '@/store/universities/universities.thunks'
-import SelectForm from '@/components/ui/selector/SelectForm'
-import { FolderIcon } from '@/components/customIcon'
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { DEGREE, EDUCATION_MODE } from '@/assets/constants';
+import { FolderIcon } from '@/components/customIcon';
+import Empty from '@/components/ui/Empty';
+import FormInput from '@/components/ui/FormInput';
+import SelectForm from '@/components/ui/selector/SelectForm';
+import SelectorUI from '@/components/ui/selector/SelectorUI';
+import { useNotifications } from '@/hooks/useNotifications';
+import { patchGroupThunk } from '@/store/groups/groups.thunks';
+import { AppDispatch } from '@/store/store';
+import { getUniversitiesThunk } from '@/store/universities/universities.thunks';
+import { TGroup, TName } from '@/types/groups';
 
 type Props = {
   group: TGroup
@@ -31,12 +30,10 @@ type Props = {
 }
 
 const EditGroup = ({ group, onClose }: Props) => {
-  const t = useTranslations()
   const {
     register,
     handleSubmit,
     formState: { isValid },
-    watch,
     control,
   } = useForm<TGroup>({
     defaultValues: {
@@ -46,44 +43,57 @@ const EditGroup = ({ group, onClose }: Props) => {
       course: group.course,
       groupNumber: group.groupNumber,
     },
-  })
-  const dispatch = useDispatch<AppDispatch>()
-  const { showErrorMessage, showSuccessMessage } = useNotifications()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [universities, setUniversities] = useState<TName[]>([])
+  });
+  const dispatch = useDispatch<AppDispatch>();
+  const { showErrorMessage, showSuccessMessage } = useNotifications();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [universities, setUniversities] = useState<TName[]>([]);
 
-  const onSubmit: SubmitHandler<TGroup> = data => {
-    setIsLoading(true)
+  const onSubmit: SubmitHandler<TGroup> = (data) => {
+    setIsLoading(true);
     dispatch(patchGroupThunk({ id: group.id, data }))
       .unwrap()
-      .then(res => {
-        showSuccessMessage(res.message)
-        onClose()
+      .then((res) => {
+        showSuccessMessage(res.message);
+        onClose();
       })
-      .catch(err => showErrorMessage(err.message))
-      .finally(() => setIsLoading(false))
-  }
+      .catch((err) => showErrorMessage(err.message))
+      .finally(() => setIsLoading(false));
+  };
 
   const fetchUniversityList = (item: string) => {
     dispatch(getUniversitiesThunk(item))
       .unwrap()
-      .then(res => setUniversities(res.data))
-  }
+      .then((res) => setUniversities(res.data));
+  };
 
   return (
-    <ModalContent as={'form'} onSubmit={handleSubmit(onSubmit)}>
+    <ModalContent
+      as={'form'}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <ModalHeader>
-        <Icon as={FolderIcon} width={'6'} height={'6'} />
-        <Heading size={'md'} fontWeight={500}>
-          {t('Update group')}
+        <Icon
+          as={FolderIcon}
+          width={'6'}
+          height={'6'}
+        />
+        <Heading
+          size={'md'}
+          fontWeight={500}
+        >
+          {('Update group')}
         </Heading>
       </ModalHeader>
       <ModalCloseButton />
       <ModalBody>
-        <Flex flexDir={'column'} gap={4}>
-          <Empty>{t('Edit group information notify')}.</Empty>
+        <Flex
+          flexDir={'column'}
+          gap={4}
+        >
+          <Empty>{('Edit group information notify')}.</Empty>
           <SelectForm
-            label={t('University')}
+            label={('University')}
             array={universities}
             control={control}
             name="universityId"
@@ -91,23 +101,23 @@ const EditGroup = ({ group, onClose }: Props) => {
             currentValue={group.university.name}
           />
           <SelectorUI
-            label={t('Degree')}
+            label={('Degree')}
             name="degree"
             control={control}
             options={DEGREE}
           />
           <SelectorUI
-            label={t('Education mode')}
+            label={('Education mode')}
             name="educationMode"
             control={control}
             options={EDUCATION_MODE}
           />
           <FormInput
-            label={t('Course')}
+            label={('Course')}
             register={register('course', { required: 'Course is required' })}
           />
           <FormInput
-            label={t('Group number')}
+            label={('Group number')}
             register={register('groupNumber', {
               required: 'Group number is required',
             })}
@@ -115,18 +125,18 @@ const EditGroup = ({ group, onClose }: Props) => {
         </Flex>
       </ModalBody>
       <ModalFooter>
-        <Button>{t('Cancel')}</Button>
+        <Button>{('Cancel')}</Button>
         <Button
           variant={'primary'}
           type="submit"
           isLoading={isLoading}
           isDisabled={!isValid}
         >
-          {t('Save')}
+          {('Save')}
         </Button>
       </ModalFooter>
     </ModalContent>
-  )
-}
+  );
+};
 
-export default EditGroup
+export default EditGroup;

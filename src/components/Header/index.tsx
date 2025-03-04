@@ -1,6 +1,6 @@
-import { BellIcon, CalendarIcon } from '@chakra-ui/icons'
-import { Avatar, Container, HStack, IconButton, Text } from '@chakra-ui/react'
-import UserSettingPopover from '../ui/user-settings-popover'
+import { BellIcon, CalendarIcon } from '@chakra-ui/icons';
+import { Avatar, Container, HStack, IconButton, Text } from '@chakra-ui/react';
+import UserSettingPopover from '../ui/user-settings-popover';
 
 const Header = () => {
   return (
@@ -26,7 +26,7 @@ const Header = () => {
         </UserSettingPopover>
       </HStack>
     </Container>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

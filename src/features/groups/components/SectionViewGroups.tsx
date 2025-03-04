@@ -1,6 +1,5 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Container, Heading, HStack, IconButton, Text, VStack } from '@chakra-ui/react';
-import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateGroup from './CreateGroup';
@@ -16,7 +15,6 @@ import { setPage } from '@/store/professors/professors.slice';
 import { AppDispatch, RootState } from '@/store/store';
 
 const SectionViewGroups = () => {
-  const t = useTranslations();
   const {
     groups,
     count,
@@ -54,7 +52,7 @@ const SectionViewGroups = () => {
           <Text>You have no groups</Text>
         </VStack>
         <WindowModal
-          title={t('Create group')}
+          title={('Create group')}
           body={(onClose) => <CreateGroup onClose={onClose} />}
         />
       </Container>

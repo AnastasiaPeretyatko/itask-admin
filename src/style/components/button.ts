@@ -8,7 +8,7 @@ const primary = defineStyle(() => {
     fontSize: 'sm',
     bg: 'primary.purple',
     color: 'white',
-    borderRadius: 10,
+    borderRadius: 5,
     _disabled: {
       opacity: 0.7,
     },
@@ -28,7 +28,7 @@ const secondary = defineStyle(() => {
     fontSize: 'sm',
     border: '2px solid',
     borderColor: 'primary.purple',
-    borderRadius: 10,
+    borderRadius: 5,
     _hover: {
       opacity: 0.8,
       bg: 'primary.purple',
@@ -43,33 +43,36 @@ const secondary = defineStyle(() => {
 });
 
 const sidebar = defineStyle({
-  display: 'flex',
-  width: 'full',
-  gap: 2,
   padding: 3,
-  color: 'gray.500',
+  width: 'full',
+  display: 'flex',
   textAlign: 'center',
-  fontWeight: 400,
-  fontSize: 'sm',
+  gap: 2,
   borderRadius: 'md',
+  fontSize: 'sm',
+  fontWeight: '500',
   '& span': {
+    margin: 'unset',
     '& svg': {
-      margin: 'unset',
+      width: 5,
+      height: 5,
     },
-    marginInlineEnd: 'unset',
   },
   _hover: {
-    bg: 'blackAlpha.800',
-    color: 'white',
+    background: 'sidebar.hoverButton',
+    color: 'sidebar.hoverText',
   },
   _active: {
-    bg: 'blackAlpha.800',
-    color: 'white',
+    background: 'sidebar.hoverButton',
+    color: 'sidebar.hoverText',
   },
 });
 
 const unstyledBtn = defineStyle(() => {
-  return {};
+  return {
+    display: 'inline-flex',
+    alignItems: 'center',
+  };
 });
 
 const pagination = defineStyle(() => {
@@ -93,10 +96,11 @@ const openSidebar = defineStyle({
   zIndex: 1,
   right: -13,
   top: 23,
-  backgroundColor: 'background.switch',
-  boxShadow: 'lg',
+  backgroundColor: 'background.main',
+  boxShadow: 'base',
   _hover: {
-    backgroundColor: 'blackAlpha.800',
+    background: 'sidebar.hoverButton',
+    color: 'sidebar.hoverText',
   },
 });
 

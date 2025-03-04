@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const baseURL = process.env.NEXT_PUBLIC_BASEURL
+const baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
 export const http = axios.create({
   baseURL,
@@ -8,4 +8,4 @@ export const http = axios.create({
     'Access-Control-Allow-Origin': baseURL,
     'ngrok-skip-browser-warning': true,
   },
-})
+});

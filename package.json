@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@blocknote/core": "^0.23.4",
+    "@blocknote/mantine": "^0.23.4",
+    "@blocknote/react": "^0.23.4",
     "@chakra-ui/icons": "^2.2.4",
     "@chakra-ui/next-js": "^2.2.4",
     "@chakra-ui/react": "^2.8.2",
@@ -20,6 +23,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-stylelint": "^0.1.1",
     "framer-motion": "^11.11.0",
+    "lodash": "^4.17.21",
     "lottie-react": "^2.4.0",
     "lottie-web": "^5.12.2",
     "moment": "^2.30.1",

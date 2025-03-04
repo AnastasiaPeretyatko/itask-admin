@@ -1,11 +1,15 @@
 import { IconButton, Button, useColorMode } from '@chakra-ui/react';
 import { CustomMoonIcon, CustomSunIcon } from '../customIcon';
 
-const ColorModeBtn = ({ isOpenSidebar }) => {
+type Props = {
+  isOpenSidebar?: boolean;
+};
+
+const ColorModeBtn = ({ isOpenSidebar }: Props) => {
   const { toggleColorMode, colorMode } = useColorMode();
   const isDarkMode = colorMode === 'dark';
 
-  if (isOpenSidebar === undefined) {
+  if (!isOpenSidebar) {
     return (
       <IconButton
         isRound
