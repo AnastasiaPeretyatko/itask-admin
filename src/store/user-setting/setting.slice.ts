@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 export type TParams = {
   limit: number
@@ -7,24 +7,24 @@ export type TParams = {
 }
 
 type TInitialState = {
-  isOpenSidebar: boolean | null
+  isOpenSidebar: boolean
 }
 
 const initialState: TInitialState = {
-  isOpenSidebar: null,
-}
+  isOpenSidebar: true,
+};
 
 export const settings = createSlice({
   name: 'user-setting',
   initialState,
   reducers: {
     changeStateSidebar: (state, { payload }: { payload: boolean }) => {
-      state.isOpenSidebar = payload
-      localStorage.setItem('sidebar', String(payload))
+      state.isOpenSidebar = payload;
+      localStorage.setItem('sidebar', String(payload));
     },
   },
-})
+});
 
-export const { changeStateSidebar } = settings.actions
+export const { changeStateSidebar } = settings.actions;
 
-export default settings.reducer
+export default settings.reducer;

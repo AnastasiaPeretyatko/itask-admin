@@ -13,9 +13,9 @@ import {
 } from '@chakra-ui/react';
 import { GetStaticPropsContext } from 'next';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import ColorModeBtn from '@/components/ui/ColorModeBtn';
 import Empty from '@/components/ui/Empty';
 import FormInput from '@/components/ui/FormInput';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 import { breakpoints } from '@/style/breakpoints';
 import { formSetFunction, helpText, pattern } from '@/utils/formOptions';
 
@@ -112,7 +112,7 @@ export default function AuthPage() {
           bottom="4"
           left="4"
         >
-          <ColorModeBtn/>
+          <ThemeToggle/>
         </Box>
       </Box>
 

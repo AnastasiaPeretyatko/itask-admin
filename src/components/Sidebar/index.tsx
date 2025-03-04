@@ -7,21 +7,17 @@ import {
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ColorModeBtn from '../ui/ColorModeBtn';
+import ThemeToggle from '../ui/ThemeToggle';
 import SidebarItem from './components/SidebarItem';
 import { sidebarConfig, sidebarMenuConfig } from './config';
 import { AppDispatch, RootState } from '@/store/store';
 import { changeStateSidebar } from '@/store/user-setting/setting.slice';
 
 const Sidebar = () => {
-
-  const { isOpenSidebar } = useSelector(
-    (state: RootState) => state.userSettings,
-  );
   const dispatch = useDispatch<AppDispatch>();
+  const { isOpenSidebar } = useSelector( (state: RootState) => state.userSettings );
 
   const setCollapse = () => dispatch(changeStateSidebar(!isOpenSidebar));
-
 
   useEffect(() => {
     // const kek = localStorage.getItem('sidebar');
@@ -87,7 +83,7 @@ const Sidebar = () => {
         width={'100%'}
         align={isOpenSidebar ? 'start' : 'center'}
       >
-        <ColorModeBtn isOpenSidebar = {isOpenSidebar}/>
+        <ThemeToggle isOpenSidebar = {isOpenSidebar}/>
 
         {sidebarMenuConfig.map((el) => {
           return (

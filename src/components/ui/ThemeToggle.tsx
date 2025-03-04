@@ -5,11 +5,11 @@ type Props = {
   isOpenSidebar?: boolean;
 };
 
-const ColorModeBtn = ({ isOpenSidebar }: Props) => {
+const ThemeToggle = ({ isOpenSidebar }: Props) => {
   const { toggleColorMode, colorMode } = useColorMode();
   const isDarkMode = colorMode === 'dark';
 
-  if (!isOpenSidebar) {
+  if (typeof isOpenSidebar === 'undefined') {
     return (
       <IconButton
         isRound
@@ -33,9 +33,8 @@ const ColorModeBtn = ({ isOpenSidebar }: Props) => {
       onClick={toggleColorMode}
     >
       {isOpenSidebar ? isDarkMode ? 'Светлая тема' : 'Тёмная тема' : null}
-
     </Button>
   );
 };
 
-export default ColorModeBtn;
+export default ThemeToggle;
