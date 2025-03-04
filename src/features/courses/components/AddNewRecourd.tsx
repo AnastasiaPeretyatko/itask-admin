@@ -33,13 +33,13 @@ export type CreateAssignment = {
   semester_id: string
 }
 
-type AddNewRecourdProps = {
+type AddNewRecordProps = {
   onClose: () => void,
   data: CourseAssignmentType,
   courseId?: string
 }
 
-const AddNewRecourd = ({ onClose, data, courseId } : AddNewRecourdProps) => {
+const AddNewRecord = ({ onClose, data, courseId } : AddNewRecordProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { current } = useSelector((state:RootState) => state.course);
   const { handleSubmit, control } = useForm<CreateAssignment>({
@@ -60,6 +60,7 @@ const AddNewRecourd = ({ onClose, data, courseId } : AddNewRecourdProps) => {
 
   const onSubmit: SubmitHandler<CreateAssignment> = (data) => {
     setIsLoading.on();
+    console.log(data);
     dispatch(assignment.create(data))
       .unwrap()
       .then((res) => {
@@ -110,11 +111,7 @@ const AddNewRecourd = ({ onClose, data, courseId } : AddNewRecourdProps) => {
             </BreadcrumbItem>
           </Breadcrumb>
         </HStack>
-
-
         <ModalCloseButton position={'inherit'}/>
-
-
       </ModalHeader>
       <ModalBody>
         <Empty
@@ -154,4 +151,4 @@ const AddNewRecourd = ({ onClose, data, courseId } : AddNewRecourdProps) => {
   );
 };
 
-export default AddNewRecourd;
+export default AddNewRecord;

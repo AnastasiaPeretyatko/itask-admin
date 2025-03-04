@@ -2,7 +2,7 @@ import { AddIcon } from '@chakra-ui/icons';
 import { Avatar, Box, Flex, Grid, HStack, IconButton, Spinner, Text, useBoolean, VStack } from '@chakra-ui/react';
 // import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-import AddNewRecourd from './AddNewRecourd';
+import AddNewRecord from './AddNewRecourd';
 import WindowModal from '@/components/modal/WindowModal';
 import Empty from '@/components/ui/Empty';
 import { RootState } from '@/store/store';
@@ -77,7 +77,7 @@ const TableCourseInfo = () => {
                 />
               )}
               body={(onClose) => (
-                <AddNewRecourd
+                <AddNewRecord
                   onClose={onClose}
                   data={g}
                   courseId={current?.id}

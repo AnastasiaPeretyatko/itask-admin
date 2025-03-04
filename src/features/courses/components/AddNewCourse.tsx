@@ -128,6 +128,7 @@ const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
         <Editor
           initialContent={context}
           onChange={onChangeContentEditor}
+          editable
         />
       </ModalBody>
     </ModalContent>
