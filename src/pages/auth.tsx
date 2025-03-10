@@ -42,14 +42,14 @@ export default function AuthPage() {
     >
       <Box
         position="relative"
-        backgroundColor={'background.fill'}
+        backgroundColor={'background.auth'}
         height="100%"
         overflow={'hidden'}
       >
         <Heading
           size={'md'}
           m={4}
-          color={'text.bold'}
+          color={'text.primary'}
         >
           ITASK | Admin
         </Heading>
@@ -67,8 +67,8 @@ export default function AuthPage() {
             as={'form'}
             onSubmit={handleSubmit(onSubmit)}
           >
-            <Heading color={'text.bold'}>Добро пожаловать</Heading>
-            <Empty color={'text.pale'}>С возвращаением! Пожалуйста введите email и пароль</Empty>
+            <Heading color={'text.primary'}>Добро пожаловать</Heading>
+            <Empty color={'text.secondary'}>С возвращаением! Пожалуйста введите email и пароль</Empty>
             <FormInput
               label="Email"
               type="email"
@@ -95,7 +95,7 @@ export default function AuthPage() {
               justify={'space-between'}
               mt={8}
             >
-              <Checkbox color={'text.bold'}>Запомнить меня</Checkbox>
+              <Checkbox color={'text.primary'}>Запомнить меня</Checkbox>
               <Link color={'primary.purple'}>Забыли пароль?</Link>
             </HStack>
             <Button

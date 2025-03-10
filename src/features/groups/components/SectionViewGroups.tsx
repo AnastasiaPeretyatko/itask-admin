@@ -89,7 +89,7 @@ const SectionViewGroups = () => {
           width={'full'}
           justify={'space-between'}
         >
-          <Text color={'text.pale'}>
+          <Text color={'text.secondary'}>
             Result 1 - {groups.length} of {count}
           </Text>
           <Pagination

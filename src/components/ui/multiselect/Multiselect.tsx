@@ -145,7 +145,7 @@ const LabelComponent = ({ view, children, label, onClick }: LabelComponentProps)
         onClick={onClick}
       >
         <HStack
-          color={'text.pale'}
+          color={'text.secondary'}
           paddingY={1.5}
           fontSize={'sm'}
         >

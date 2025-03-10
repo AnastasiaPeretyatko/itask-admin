@@ -18,8 +18,8 @@ const TableCourseInfo = () => {
       <Spinner
         thickness="4px"
         speed="0.65s"
-        emptyColor="gray.200"
-        color="PRIMARY_PURPLE"
+        emptyColor="white.primary.25"
+        color="primary.purple"
         size="xl"
       />
     );

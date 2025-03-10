@@ -36,7 +36,7 @@ const secondary = defineStyle(() => {
       _disabled: {
         opacity: 0.5,
         bg: 'button.bg',
-        color: 'text.pale',
+        color: 'text.secondary',
       },
     },
   };
@@ -77,7 +77,7 @@ const unstyledBtn = defineStyle(() => {
 
 const pagination = defineStyle(() => {
   return {
-    color: 'text.pale',
+    color: 'text.secondary',
     _active: {
       bg: 'primary.purple',
       color: 'background.main',

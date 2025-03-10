@@ -1,5 +1,5 @@
-import { Checkbox } from '@chakra-ui/react'
-import React from 'react'
+import { Checkbox } from '@chakra-ui/react';
+import React from 'react';
 
 type Props = {
   isChecked: boolean
@@ -23,7 +23,7 @@ const CheckboxUI = ({
         onChange={onCheckedChange}
       />
     </>
-  )
-}
+  );
+};
 
-export default CheckboxUI
+export default CheckboxUI;

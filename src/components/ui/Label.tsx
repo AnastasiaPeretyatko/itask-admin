@@ -1,5 +1,5 @@
-import { Container } from '@chakra-ui/react'
-import React from 'react'
+import { Container } from '@chakra-ui/react';
+import React from 'react';
 
 type Props = {
   text: string
@@ -18,12 +18,12 @@ const Label = ({ text, isFocus }: Props) => {
         fontSize: isFocus ? 'xs' : 'md',
         backgroundColor: 'background.main',
         paddingX: 1,
-        color: isFocus ? 'text.bold' : 'text.pale',
+        color: isFocus ? 'text.primary' : 'text.secondary',
       }}
     >
       {text}
     </Container>
-  )
-}
+  );
+};
 
-export default Label
+export default Label;

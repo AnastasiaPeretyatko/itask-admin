@@ -7,6 +7,7 @@ type Props = {
 
 const ThemeToggle = ({ isOpenSidebar }: Props) => {
   const { toggleColorMode, colorMode } = useColorMode();
+
   const isDarkMode = colorMode === 'dark';
 
   if (typeof isOpenSidebar === 'undefined') {
@@ -15,7 +16,7 @@ const ThemeToggle = ({ isOpenSidebar }: Props) => {
         isRound
         variant="solid"
         backgroundColor="background.main"
-        color="text.bold"
+        color="text.primary"
         aria-label="Toggle dark mode"
         fontSize="md"
         ml={4}

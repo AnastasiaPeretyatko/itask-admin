@@ -5,9 +5,9 @@ import {
   FormLabel,
   InputGroup,
   Textarea,
-} from '@chakra-ui/react'
-import React from 'react'
-import { UseFormRegisterReturn } from 'react-hook-form'
+} from '@chakra-ui/react';
+import React from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 type Props = {
   label?: string
@@ -29,12 +29,12 @@ const TextareaUI = ({ label, register, errorMessage, helperText }: Props) => {
         />
       </InputGroup>
       {!errorMessage ? (
-        <FormHelperText color={'text.pale'}>{helperText}</FormHelperText>
+        <FormHelperText color={'text.secondary'}>{helperText}</FormHelperText>
       ) : (
         <FormErrorMessage>{errorMessage}</FormErrorMessage>
       )}
     </FormControl>
-  )
-}
+  );
+};
 
-export default TextareaUI
+export default TextareaUI;

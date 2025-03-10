@@ -70,7 +70,7 @@ const FormInput = ({
 
   return (
     <FormControl isInvalid={!!errorMessage}>
-      <FormLabel color={'text.bold'}>{label}</FormLabel>
+      <FormLabel color={'text.primary'}>{label}</FormLabel>
       <InputGroup>
         <Input
           variant={'form_input'}
@@ -84,7 +84,7 @@ const FormInput = ({
         {isPassword}
       </InputGroup>
       {!errorMessage ? (
-        <FormHelperText color={'text.pale'}>{helperText}</FormHelperText>
+        <FormHelperText color={'text.secondary'}>{helperText}</FormHelperText>
       ) : (
         <FormErrorMessage>{errorMessage}</FormErrorMessage>
       )}

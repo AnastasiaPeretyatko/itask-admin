@@ -29,8 +29,8 @@ const ViewTableCourse = () => {
       <Spinner
         thickness="4px"
         speed="0.65s"
-        emptyColor="gray.200"
-        color="PRIMARY_PURPLE"
+        emptyColor="warmGrey"
+        color="primary.purple"
         size="xl"
       />
     );

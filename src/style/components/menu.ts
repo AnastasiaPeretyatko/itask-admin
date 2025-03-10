@@ -13,7 +13,7 @@ const baseStyle = definePartsStyle({
     gap: 2,
     borderRadius: '5px',
     padding: 2,
-    color: 'text.pale',
+    color: 'text.secondary',
     _active: {
       bg: 'transparent',
     },

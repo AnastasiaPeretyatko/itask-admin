@@ -15,12 +15,16 @@ export const colors = {
 
   black: {
     10: 'rgba(0, 0, 0, 0.1)',
+    20:'rgba(0, 0, 0, 0.2)',
     50: 'rgba(0, 0, 0, 0.5)',
+    60:'rgba(0, 0, 0, 0.6)',
     100: '#111315',
     200: '#1A1D1F',
     300: '#272B30',
     400: '#303336',
   },
+  lightBlack: '#2f3336',
+  shadow: { _light: 'rgba(0, 0, 0, 0.2)', _dark: 'rgba(0, 0, 0, 0.6)' },
   red: {
     100: '#FFECEE',
   },
@@ -43,12 +47,34 @@ export const colors = {
     50: 'rgba(255, 255, 255, 0.5)',
     75: 'rgba(255, 255, 255, 0.75)',
   },
-  warmGrey: '#f2f2f2',
   veryDarkBlue: '#08090c',
   slate: {
     primary: '#9ba6b2',
     dark: '#394351',
     light: '#dae1e9',
+    lightGray: '#808aa9',
+    black: '#07070a',
   },
-  lightBlack: '#2f3336',
+
+  warmGrey: '#f2f2f2',
+  whisperGray: 'rgba(226, 227, 231, 0.18)',
+  lightGray: '#d9d9d9',
+
+  darkCyanBlue: '#2e3337',
+  spindle: {
+    gray: '#b8c0c8',
+    blue: '#a2b2c3',
+    dark: '#4e5c6e',
+  },
+  onyx: {
+    gray: '#1A1D1F',
+    midnight: '#1A1D23',
+    light: '#1f2128',
+    blue: '#262a37',
+  },
+
+  status: {
+    red: '#FF2C2C',
+    green: '#14EF10',
+  },
 };

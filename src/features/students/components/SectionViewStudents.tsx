@@ -85,7 +85,7 @@ const SectionViewStudents = () => {
           width={'full'}
           justify={'space-between'}
         >
-          <Text color={'text.pale'}>
+          <Text color={'text.secondary'}>
             Result 1 - {students.length} of {count}
           </Text>
           <Pagination
