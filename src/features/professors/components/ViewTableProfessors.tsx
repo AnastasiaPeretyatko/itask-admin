@@ -42,8 +42,8 @@ const ViewTableProfessor = () => {
       <Spinner
         thickness="4px"
         speed="0.65s"
-        emptyColor="gray.200"
-        color="PRIMARY_PURPLE"
+        emptyColor="warmGrey"
+        color="primary.purple"
         size="xl"
       />
     );
@@ -98,7 +98,7 @@ const ViewTableProfessor = () => {
               <Td>{el.tel}</Td>
               <Td>{moment(el.createdAt).format('DD.MM.YYYY')}</Td>
               <Td>
-                <Badge bg={STATUS_USER.ACTIVE ? 'green.100' : 'red.100'}>
+                <Badge bg={STATUS_USER.ACTIVE ? 'status.green' : 'status.red'}>
                   {STATUS_USER.ACTIVE}
                 </Badge>
               </Td>

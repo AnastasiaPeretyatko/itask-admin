@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import {
   Collapse,
   Container,
@@ -9,9 +9,9 @@ import {
   Text,
   useDisclosure,
   useOutsideClick,
-} from '@chakra-ui/react'
-import React, { useRef } from 'react'
-import Label from './Label'
+} from '@chakra-ui/react';
+import React, { useRef } from 'react';
+import Label from './Label';
 
 type Props = {
   size?: number
@@ -30,18 +30,18 @@ const SelectUI = ({
   onChangeValue,
   isDisabled = false,
 }: Props) => {
-  const ref = useRef(null)
-  const { isOpen, onToggle, onClose } = useDisclosure()
+  const ref = useRef(null);
+  const { isOpen, onToggle, onClose } = useDisclosure();
 
   useOutsideClick({
     ref: ref,
     handler: () => onClose(),
-  })
+  });
 
   const onChangeState = (item: string | number) => {
-    onChangeValue(item)
-    onToggle()
-  }
+    onChangeValue(item);
+    onToggle();
+  };
 
   return (
     <Container
@@ -57,43 +57,50 @@ const SelectUI = ({
       <Container
         variant={'selectorLine'}
         bgGradient={
-          isOpen ? 'linear(to-r, SECONDARY_BLUE, PRIMARY_PURPLE)' : 'none'
+          isOpen ? 'linear(to-r, secondary.blue, primary.purple)' : 'none'
         }
       >
         <Container
           variant={'selector'}
           onClick={() => {
-            if (!isDisabled) onToggle()
+            if (!isDisabled) {onToggle();}
           }}
         >
-          {label && <Label text={label} isFocus />}
+          {label ? (
+            <Label
+              text={label}
+              isFocus
+            />
+          ) : null}
           <HStack>
-            <Text>{array.find(el => el === currentValue) || array[0]}</Text>
+            <Text>{array.find((el) => el === currentValue) || array[0]}</Text>
           </HStack>
 
           <Icon as={isOpen ? ChevronUpIcon : ChevronDownIcon} />
         </Container>
       </Container>
 
-      <Collapse in={isOpen} animateOpacity>
+      <Collapse
+        in={isOpen}
+        animateOpacity
+      >
         <List variant={'selectList'}>
-          {array &&
-            array.map(item => (
-              <ListItem
-                display={'flex'}
-                flexDir={'row'}
-                alignItems={'center'}
-                gap={2}
-                key={Math.random()}
-                onClick={() => onChangeState(item)}
-              >
-                {item}
-              </ListItem>
-            ))}
+          {array ? array.map((item) => (
+            <ListItem
+              display={'flex'}
+              flexDir={'row'}
+              alignItems={'center'}
+              gap={2}
+              key={Math.random()}
+              onClick={() => onChangeState(item)}
+            >
+              {item}
+            </ListItem>
+          )) : null}
         </List>
       </Collapse>
     </Container>
-  )
-}
+  );
+};
 
-export default SelectUI
+export default SelectUI;

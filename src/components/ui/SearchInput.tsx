@@ -1,11 +1,11 @@
-import { CloseIcon, SearchIcon } from '@chakra-ui/icons'
+import { CloseIcon, SearchIcon } from '@chakra-ui/icons';
 import {
   IconButton,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
 export type SearchInputProps = {
   value: string
@@ -25,19 +25,22 @@ const SearchInput = ({
   placeholder = 'Search',
 }: SearchInputProps) => {
   return (
-    <InputGroup width={80} size={size}>
+    <InputGroup
+      width={80}
+      size={size}
+    >
       <Input
         variant={'search'}
         placeholder={placeholder}
         value={value}
-        onChange={e => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
         isDisabled={isDisabled}
       />
       <InputLeftElement>
         <SearchIcon />
       </InputLeftElement>
       <InputRightElement>
-        {value && (
+        {value ? (
           <IconButton
             size={'xs'}
             variant={'unstyled'}
@@ -45,10 +48,10 @@ const SearchInput = ({
             icon={<CloseIcon />}
             onClick={onClearSearchInput}
           />
-        )}
+        ) : null}
       </InputRightElement>
     </InputGroup>
-  )
-}
+  );
+};
 
-export default SearchInput
+export default SearchInput;

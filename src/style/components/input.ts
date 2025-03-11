@@ -25,7 +25,7 @@ const search = definePartsStyle({
     fontSize: 'sm',
     _placeholder: {
       fontSize: 'md',
-      color: 'text.pale',
+      color: 'text.secondary',
     },
     _focus: {
       borderBottom: '1px solid',

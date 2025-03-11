@@ -1,4 +1,4 @@
-import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
+import { defineStyle, defineStyleConfig } from '@chakra-ui/react';
 
 const logo = defineStyle({
   fontSize: 'xl',
@@ -8,11 +8,11 @@ const logo = defineStyle({
     borderRight: '2px solid',
     borderColor: 'blackAlpha.700',
     _dark: {
-      borderColor: 'whiteAlpha.700'
-    }
-  }
-})
+      borderColor: 'whiteAlpha.700',
+    },
+  },
+});
 
 export const headingTheme = defineStyleConfig({
   variants: { logo },
-})
+});

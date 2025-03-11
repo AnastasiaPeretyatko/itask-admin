@@ -24,7 +24,7 @@ const CourseCard = ({ course }: {course: TCourse}) => {
       <Heading
         size={'sm'}
         fontWeight={600}
-        color={'text.bold'}
+        color={'text.primary'}
       >{course.name}</Heading>
       <AvatarGroup
         size={'sm'}

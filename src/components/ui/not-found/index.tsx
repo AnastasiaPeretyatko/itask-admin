@@ -1,6 +1,6 @@
-import React from 'react'
-import Lottie from 'lottie-react'
-import animationData from '@/assets/animation/not-found.json'
+import Lottie from 'lottie-react';
+import React from 'react';
+import animationData from '@/assets/animation/not-found.json';
 
 const NotFoundImage = () => {
   return (
@@ -9,7 +9,7 @@ const NotFoundImage = () => {
       loop={true}
       style={{ maxHeight: 500, maxWidth: 500 }}
     />
-  )
-}
+  );
+};
 
-export default NotFoundImage
+export default NotFoundImage;

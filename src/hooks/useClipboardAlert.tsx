@@ -1,7 +1,7 @@
-import { Box, useToast } from '@chakra-ui/react'
+import { Box, useToast } from '@chakra-ui/react';
 
 export const useClipboardAlert = () => {
-  const toast = useToast()
+  const toast = useToast();
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard
@@ -24,9 +24,9 @@ export const useClipboardAlert = () => {
           duration: 2000,
           isClosable: true,
           position: 'top',
-        })
-      })
-  }
+        });
+      });
+  };
 
-  return { copyToClipboard }
-}
+  return { copyToClipboard };
+};

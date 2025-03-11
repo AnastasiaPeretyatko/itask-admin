@@ -8,13 +8,11 @@ const Header = () => {
       <HStack>
         <IconButton
           variant={'unstyled'}
-          color={'text.pale'}
           aria-label="notify"
           icon={<CalendarIcon boxSize={5} />}
         />
         <IconButton
           variant={'unstyled'}
-          color={'text.pale'}
           aria-label="notify"
           icon={<BellIcon boxSize={6} />}
         />

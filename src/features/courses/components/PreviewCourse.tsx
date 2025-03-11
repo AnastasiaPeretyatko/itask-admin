@@ -136,7 +136,7 @@ const PreviewCourse = ({ onClose, course }: { course: TCourse, onClose: () => vo
               editable={isEdit}
             />
           ) : (
-            <Empty color={'text.pale'}>Description is empty. You can add it later</Empty>
+            <Empty color={'text.secondary'}>Description is empty. You can add it later</Empty>
           )
         }
 
