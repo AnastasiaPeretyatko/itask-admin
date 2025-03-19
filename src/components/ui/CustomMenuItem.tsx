@@ -26,7 +26,7 @@ const CustomMenuItem = ({
         gap: 2,
         _hover: {
           bg: isDelete ? 'red.100' : 'background.switch',
-          color: isDelete ? 'red' : 'text.primary',
+          color: isDelete ? 'red.hovered' : 'text.primary',
           fontWeight: 500,
         },
       }}

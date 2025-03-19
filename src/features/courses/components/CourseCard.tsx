@@ -41,7 +41,7 @@ const CourseCard = ({ course }: {course: TCourse}) => {
                   position: 'absolute',
                   top: '100%',
                   padding: 1,
-                  bg: 'blackAlpha.800',
+                  bg: 'black.80',
                   fontSize: '12',
                   zIndex: 10,
                 },

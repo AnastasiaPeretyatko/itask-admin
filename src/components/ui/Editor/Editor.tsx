@@ -16,35 +16,35 @@ type EditorProps = {
 const lightRedTheme = {
   colors: {
     editor: {
-      text: 'rgba(0, 0, 0, 0.80)',
+      text: 'black.80',
       background: 'inherit',
       // placeholder: 'lightgray',
     },
     menu: {
-      background: '#ffffff',
-      text: '#000000',
-      // background: '#9b0000',
+      background: 'white.primary',
+      text: 'black.zero',
+      // background: 'red.menu',
     },
     tooltip: {
-      text: '#ffffff',
-      background: '#4d78b8c3',
+      text: 'white.primary',
+      background: 'tooltipBlue',
     },
     hovered: {
-      text: '#0f0f0f',
-      background: '#0000001f',
-      // background: '#b00000',
+      text: 'veryDarkGray',
+      background: 'darkBlue',
+      // background: 'red.hovered',
     },
     // selected: {
-    //   text: '#ffffff',
-    //   background: '#c50000',
+    //   text: 'white.primary',
+    //   background: 'red.selected',
     // },
     // disabled: {
-    //   text: '#9b0000',
-    //   background: '#7d0000',
+    //   text: 'red.disabled.text',
+    //   background: 'red.disabled.background',
     // },
     shadow: 'none',
     border: 'none',
-    sideMenu: '#bababa',
+    sideMenu: 'marbleGray',
     highlights: lightDefaultTheme.colors!.highlights,
   },
   // borderRadius: 4,
@@ -58,10 +58,10 @@ const darkRedTheme = {
   colors: {
     // ...lightRedTheme.colors,
     // editor: {
-    //   text: '#ffffff',
-    //   // background: '#9b0000',
+    //   text: 'white.primary',
+    //   // background: 'red.disabled.text',
     // },
-    // sideMenu: '#ffffff',
+    // sideMenu: 'white.primary',
     // highlights: darkDefaultTheme.colors!.highlights,
   },
 } satisfies Theme;

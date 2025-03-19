@@ -1,11 +1,11 @@
 export const semanticTokens = {
   colors: {
-    font: { _dark: 'whiteAlpha.900', _light: 'blackAlpha.800' },
+    font: { _dark: 'white.92', _light: 'black.80' },
     background: {
-      fill: { _dark: 'onyx.gray', _light: 'white.100' },
+      fill: { _dark: 'onyx.gray', _light: 'white.primary' },
       // main: { _dark: 'black.300', _light: 'white.300' },
-      switch: { _dark: 'black.100', _light: 'white.300' },
-      button: { _dark: 'whiteAlpha.200', _light: 'neutral.light' },
+      switch: { _dark: 'black.100', _light: 'white.primary' },
+      button: { _dark: 'white.8', _light: 'neutral.light' },
       natural: { _dark: 'black.100', _light: 'whisperGray' },
       auth: { _dark: 'onyx.midnight', _light: 'whisperGray' },
 
@@ -15,23 +15,21 @@ export const semanticTokens = {
       secondary: { _dark: 'black.50', _light: 'warmGrey' },
 
     },
-    bg: { _dark: 'black', _light: 'white.300' },
+    bg: { _dark: 'black', _light: 'white.primary' },
     input: {
-      outline: { _dark: 'whiteAlpha.200', _light: 'blackAlpha.300' },
+      outline: { _dark: 'white.8', _light: 'black.16' },
     },
     selector: {
-      bg: { _dark: 'darkCyanBlue', _light: 'white.100' },
+      bg: { _dark: 'darkCyanBlue', _light: 'white.primary' },
     },
     notify: {
-      bg: { _dark: 'primary.darkBlue', _light: 'white.100' },
+      bg: { _dark: 'primary.darkBlue', _light: 'white.primary' },
     },
-
-
 
     link: { _light: 'primary.blue', _dark: 'primary.darkBlue' },
     text: {
       primary: { _light: 'almostBlack', _dark: 'almostWhite' },
-      lighter: { _light: 'slate.lightGray', _dark: 'white' },
+      lighter: { _light: 'slate.lightGray', _dark: 'white.primary' },
       secondary: { _light: 'slate.dark', _dark: 'spindle.gray' },
       tertiary: { _light: 'slate.primary', _dark: 'slate.primary' },
     },

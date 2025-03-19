@@ -11,7 +11,7 @@ export const useClipboardAlert = () => {
           title: 'Скопировано!',
           render: () => (
             <Box
-              boxShadow={'rgba(0, 0, 0, 0.24) 0px 3px 8px'}
+              boxShadow={'black.24 0px 3px 8px'}
               background={'background.fill'}
               padding={4}
               borderRadius={10}

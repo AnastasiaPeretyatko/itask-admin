@@ -75,7 +75,7 @@ const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options
             ...styleInput,
             cursor: isEdit ? 'pointer' : 'default',
             backgroundColor: isEdit ? 'background.fill' : 'background.switch',
-            boxShadow: isEdit ? 'rgba(0, 0, 0, 0.24) 0px 3px 8px' : 'none',
+            boxShadow: isEdit ? 'black.24 0px 3px 8px' : 'none',
             borderRadius: isEdit ? '5px' : 'unset',
             transition: 'background .3s ease',
           }}

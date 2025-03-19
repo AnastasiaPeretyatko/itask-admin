@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { TParams } from './courses.slice';
 import { CreateAssignment } from '@/features/courses/components/AddNewRecourd';
 import {
   assignmentCreate,
@@ -13,6 +14,7 @@ import {
 import { MessageType } from '@/types/common';
 import { Assignment, CourseAssignmentType, TCourse, TCreateCourse } from '@/types/courses';
 import { handleThunkError } from '@/utils/handleThunkError';
+import { cleanObject } from '@/utils/cleanObject';
 
 export const postCourseThunk = createAsyncThunk<
   { data: TCourse; message: string },
@@ -73,19 +75,25 @@ export const deleteCourseThunk = createAsyncThunk<
 
 export const getCoursesThunk = createAsyncThunk<
   { data: TCourse[]; count: number },
-  undefined,
+  TParams,
   {
     rejectValue: { statusCode: number; message: MessageType }
   }
->('/courses.info', async (_, { rejectWithValue }) => {
+>('/courses.info', async (params, { rejectWithValue }) => {
   try {
-    const res = await getCoursesRequest();
-    return {
-      data: res.data.data,
-      count: res.data.count,
-    };
+    console.log('Params being sent to API:', params); // 🔍 Логируем параметры
+
+    const paramsWithoutEmpty = cleanObject(params) as TParams;
+    const { data } = await getCoursesRequest(paramsWithoutEmpty);
+    return { ...data };
   } catch (error) {
-    return handleThunkError(error, rejectWithValue);
+    const hasErrResponse = (
+      error as { response: { data: { statusCode: number; message: MessageType } } }
+    ).response;
+    if (!hasErrResponse) {
+      throw error;
+    }
+    return rejectWithValue(hasErrResponse.data);
   }
 });
 
