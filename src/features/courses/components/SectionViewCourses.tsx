@@ -2,11 +2,11 @@ import { AddIcon } from '@chakra-ui/icons';
 import { Container, Heading, HStack, IconButton, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchInput from '../../../../itask-admin/src/components/ui/SearchInput';
 import AddNewCourse from './AddNewCourse';
 import CourseCard from './CourseCard';
 import WindowModal from '@/components/modal/WindowModal';
 import Pagination from '@/components/ui/Pagination';
+import SearchInput from '@/components/ui/SearchInput';
 import useDebounce from '@/hooks/useDebounce';
 import { setPage, setSearch } from '@/store/courses/courses.slice';
 import { getCoursesThunk } from '@/store/courses/courses.thunks';
@@ -15,9 +15,6 @@ import { AppDispatch, RootState } from '@/store/store';
 
 const SectionViewCourses = () => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const reduxState = useSelector((state: RootState) => state.courses);
-  console.log('Redux State:', reduxState); // 🔍 Логируем текущее состояние Redux
 
   const {
     pagination: { page, limit, search },
@@ -36,36 +33,57 @@ const SectionViewCourses = () => {
   };
 
   const onChangePage = (page: number) => {
-    console.log('Page change event:', page, typeof page); // 🔍 Проверяем тип перед отправкой
-
     dispatch(setPage(page));
   };
 
-  // useEffect(() => {
-  //   dispatch(getCoursesThunk({ limit, page, search: debouncedSearch }));
-  // }, [debouncedSearch, dispatch, limit, page]);
-  // useEffect(() => {
-  //   dispatch(getCoursesThunk({
-  //     limit: Number(limit), // 🔧 Преобразуем в число
-  //     page: Number(page), // 🔧 Преобразуем в число
-  //     search: debouncedSearch,
-  //   }));
-  // }, [debouncedSearch, dispatch, limit, page]);
-
   useEffect(() => {
-    const params = {
-      limit: Number(limit),
-      page: Number(page),
-      search: debouncedSearch,
-    };
-
-    console.log('Params being sent to getCoursesThunk:', params);
-
-    dispatch(getCoursesThunk(params));
+    dispatch(getCoursesThunk({ limit, page, search: debouncedSearch }));
   }, [debouncedSearch, dispatch, limit, page]);
 
-  if (courses.length === 0) {
-    return (
+  let courseContent;
+  if ((search !== '') && (courses.length === 0)){
+    courseContent = (
+      <VStack
+        textAlign={'center'}
+        height={'100%'}
+        width={'full'}
+        borderRadius={'10px'}
+        gap={5}
+      >
+        <HStack
+          width={'full'}
+          justify={'space-between'}
+        >
+          <SearchInput
+            value={search || ''}
+            placeholder="Search by name..."
+            onChange={onChangeSearchInput}
+            onClearSearchInput={onClearSearchInput}
+          />
+          <WindowModal
+            size="xl"
+            action={<IconButton
+              aria-label="add"
+              icon={<AddIcon />}
+            />}
+            body={(onClose) => <AddNewCourse onClose={onClose} />}
+          />
+        </HStack>
+        <VStack
+          gap={3}
+          marginBlock={2}
+        >
+          <Heading size={'md'}>Курс "{search}" не найден</Heading>
+          <Text>Введите другое название или создайте новый курс</Text>
+        </VStack>
+        <WindowModal
+          title={'Add new courses'}
+          body={(onClose) => <AddNewCourse onClose={onClose} />}
+        />
+      </VStack>
+    );
+  } else if (!courses.length) {
+    courseContent = (
       <Container
         textAlign={'center'}
         height={'100%'}
@@ -83,9 +101,7 @@ const SectionViewCourses = () => {
         />
       </Container>
     );
-  }
-
-  return (
+  } else { courseContent = (
     <VStack
       width={'full'}
       borderRadius={'10px'}
@@ -102,7 +118,7 @@ const SectionViewCourses = () => {
           onClearSearchInput={onClearSearchInput}
         />
         <WindowModal
-          size="xl"
+          size="2xl"
           action={<IconButton
             aria-label="add"
             icon={<AddIcon />}
@@ -110,7 +126,6 @@ const SectionViewCourses = () => {
           body={(onClose) => <AddNewCourse onClose={onClose} />}
         />
       </HStack>
-      {/* <ViewTableCourse /> */}
       <SimpleGrid
         width={'full'}
         minChildWidth={60}
@@ -143,6 +158,8 @@ const SectionViewCourses = () => {
       ) : null}
     </VStack>
   );
+  }
+  return courseContent;
 };
 
 export default SectionViewCourses;

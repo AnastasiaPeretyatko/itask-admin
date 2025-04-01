@@ -13,8 +13,8 @@ import {
 } from '@/services/courses.service';
 import { MessageType } from '@/types/common';
 import { Assignment, CourseAssignmentType, TCourse, TCreateCourse } from '@/types/courses';
-import { handleThunkError } from '@/utils/handleThunkError';
 import { cleanObject } from '@/utils/cleanObject';
+import { handleThunkError } from '@/utils/handleThunkError';
 
 export const postCourseThunk = createAsyncThunk<
   { data: TCourse; message: string },
@@ -81,8 +81,6 @@ export const getCoursesThunk = createAsyncThunk<
   }
 >('/courses.info', async (params, { rejectWithValue }) => {
   try {
-    console.log('Params being sent to API:', params); // 🔍 Логируем параметры
-
     const paramsWithoutEmpty = cleanObject(params) as TParams;
     const { data } = await getCoursesRequest(paramsWithoutEmpty);
     return { ...data };

@@ -32,7 +32,7 @@ const CourseCard = ({ course }: {course: TCourse}) => {
         max={3}
       >
         {
-          course.course_assignment.map((el) => (
+          course.assignments.map((el) => (
             <Avatar
               key={el.id}
               borderColor={'inherit'}

@@ -13,7 +13,7 @@ export type TCourse = {
   description: string
   createdAt: Date
   updatedAt: Date
-  course_assignment: CourseAssignment[]
+  assignments: CourseAssignment[]
 }
 
 export type TSemester = {

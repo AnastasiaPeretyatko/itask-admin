@@ -32,7 +32,7 @@ const initialState: TInitialState = {
   courses: [],
   pagination: {
     page: 1,
-    limit: 10,
+    limit: 30,
     search: '',
   },
   count: 0,
@@ -44,17 +44,11 @@ const courses = createSlice({
   name: 'courses',
   initialState,
   reducers: {
-    // setLimit: (state, { payload }) => {
-    //   state.pagination.limit = payload;
-    // },
-    // setPage: (state, { payload }) => {
-    //   state.pagination.page = payload;
-    // },
     setLimit: (state, { payload }) => {
-      state.pagination.limit = Number(payload); // 🔧 Приводим к числу
+      state.pagination.limit = payload;
     },
     setPage: (state, { payload }) => {
-      state.pagination.page = Number(payload); // 🔧 Приводим к числу
+      state.pagination.page = payload;
     },
     setSearch: (state, { payload }) => {
       state.pagination.search = payload;

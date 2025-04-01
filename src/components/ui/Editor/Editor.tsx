@@ -5,6 +5,7 @@ import { Box, useColorMode } from '@chakra-ui/react';
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/mantine/style.css';
 import dynamic from 'next/dynamic';
+import { colors } from '@/style/colors';
 
 type EditorProps = {
   onChange?: (value: string) => void
@@ -16,22 +17,22 @@ type EditorProps = {
 const lightRedTheme = {
   colors: {
     editor: {
-      text: 'black.80',
+      text: colors.black[80], // rgba(0, 0, 0, 0.8)
       background: 'inherit',
       // placeholder: 'lightgray',
     },
     menu: {
-      background: 'white.primary',
-      text: 'black.zero',
+      background: colors.white.primary, // #fff
+      text: colors.black.zero, // #000000
       // background: 'red.menu',
     },
     tooltip: {
-      text: 'white.primary',
-      background: 'tooltipBlue',
+      text: colors.white.primary, // #fff
+      background: colors.tooltipBlue, // #4d78b8c3
     },
     hovered: {
-      text: 'veryDarkGray',
-      background: 'darkBlue',
+      text: colors.veryDarkGray, // #0f0f0f
+      background: colors.darkBlue, // #0000001f
       // background: 'red.hovered',
     },
     // selected: {
@@ -44,7 +45,7 @@ const lightRedTheme = {
     // },
     shadow: 'none',
     border: 'none',
-    sideMenu: 'marbleGray',
+    sideMenu: colors.marbleGray, // #bababa
     highlights: lightDefaultTheme.colors!.highlights,
   },
   // borderRadius: 4,
@@ -58,13 +59,38 @@ const darkRedTheme = {
   colors: {
     // ...lightRedTheme.colors,
     // editor: {
-    //   text: 'white.primary',
-    //   // background: 'red.disabled.text',
+    //   text: 'colors.white.primary',
+    //   // background: 'colors.red.disabled.text',
     // },
-    // sideMenu: 'white.primary',
+    // sideMenu: 'colors.white.primary',
     // highlights: darkDefaultTheme.colors!.highlights,
   },
 } satisfies Theme;
+
+// const darkRedTheme = {
+//   ...lightRedTheme,
+//   colors: {
+//     ...lightRedTheme.colors,
+//     editor: {
+//       text: colors.white.primary, // #fff
+//       background: colors.black[200], // #1A1D1F
+//     },
+//     menu: {
+//       background: colors.black[300], // #272B30
+//       text: colors.white.primary, // #fff
+//     },
+//     tooltip: {
+//       text: colors.white.primary, // #fff
+//       background: colors.tooltipBlue, // #4d78b8c3
+//     },
+//     hovered: {
+//       text: colors.almostWhite, // #e6e6e6
+//       background: colors.darkBlue, // #0000001f
+//     },
+//     sideMenu: colors.black[400], // #303336
+//   },
+// } satisfies Theme;
+
 
 // The combined "red theme",
 // we pass this to BlockNoteView and then the editor will automatically
@@ -89,7 +115,7 @@ const Editor = ({
       ...locale,
       placeholders: {
         // ...locale.placeholders,
-        default: 'Введите текст ...',
+        default: 'Введите текст...',
         // heading: 'This is a custom heading',
         bulletListItem: '',
         numberedListItem: '',
