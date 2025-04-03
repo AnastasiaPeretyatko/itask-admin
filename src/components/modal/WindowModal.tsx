@@ -4,12 +4,12 @@ import React, { ReactNode } from 'react';
 
 type Props = {
   title?: string
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | 'full'
   action?: ReactNode
   body: (onClose: () => void) => ReactNode
 }
 
-const WindowModal = ({ size = 'xl', action, body, title }: Props) => {
+const WindowModal = ({ size = 'xs', action, body, title }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const ActionButton = React.isValidElement(action)

@@ -7,7 +7,7 @@ const primary = defineStyle(() => {
     paddingX: 7,
     fontSize: 'sm',
     bg: 'primary.purple',
-    color: 'white',
+    color: 'white.primary',
     borderRadius: 5,
     _disabled: {
       opacity: 0.7,
@@ -32,7 +32,7 @@ const secondary = defineStyle(() => {
     _hover: {
       opacity: 0.8,
       bg: 'primary.purple',
-      color: 'white',
+      color: 'white.primary',
       _disabled: {
         opacity: 0.5,
         bg: 'button.bg',

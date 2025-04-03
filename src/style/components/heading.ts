@@ -6,9 +6,9 @@ const logo = defineStyle({
   _first:{
     paddingRight: 2,
     borderRight: '2px solid',
-    borderColor: 'blackAlpha.700',
+    borderColor: 'black.64',
     _dark: {
-      borderColor: 'whiteAlpha.700',
+      borderColor: 'black.64',
     },
   },
 });

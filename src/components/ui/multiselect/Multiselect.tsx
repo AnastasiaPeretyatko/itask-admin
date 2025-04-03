@@ -14,6 +14,7 @@ type Props<T> = {
   value?: T[];
   view?: VIEW;
   label?: string;
+  icon?: React.ElementType;
   onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLocalValues: (values: T) => void;
   onDeleteValue: (value: T) => void;
@@ -22,12 +23,13 @@ type Props<T> = {
 
 type LabelComponentProps = {
   label?: string;
+  icon?: React.ElementType;
   view?: VIEW;
   children: React.ReactNode;
   onClick: () => void;
 };
 
-const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options, onChangeInput, isDisabled, ...rest }: Props<T>) => {
+const Multiselect = <T,>({ view, label, icon, renderItem, renderOption, value, options, onChangeInput, isDisabled, ...rest }: Props<T>) => {
   const [isEdit, setIsEdit] = useBoolean();
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,6 +59,7 @@ const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options
     <LabelComponent
       view={view}
       label={label}
+      icon={icon}
       onClick={() => !isDisabled && setIsEdit.on()}
     >
       <VStack
@@ -75,7 +78,7 @@ const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options
             ...styleInput,
             cursor: isEdit ? 'pointer' : 'default',
             backgroundColor: isEdit ? 'background.fill' : 'background.switch',
-            boxShadow: isEdit ? 'rgba(0, 0, 0, 0.24) 0px 3px 8px' : 'none',
+            boxShadow: isEdit ? 'black.24 0px 3px 8px' : 'none',
             borderRadius: isEdit ? '5px' : 'unset',
             transition: 'background .3s ease',
           }}
@@ -134,7 +137,7 @@ const Multiselect = <T,>({ view, label, renderItem, renderOption, value, options
   );
 };
 
-const LabelComponent = ({ view, children, label, onClick }: LabelComponentProps) => {
+const LabelComponent = ({ view, children, label, icon: Icon, onClick }: LabelComponentProps) => {
   if (view === VIEW.LIST) {
     return (
       <HStack
@@ -149,7 +152,7 @@ const LabelComponent = ({ view, children, label, onClick }: LabelComponentProps)
           paddingY={1.5}
           fontSize={'sm'}
         >
-          <BsPeople />
+          {Icon ? <Icon /> : null} {/* Отображаем иконку, если она передана */}
           <Text>{label}</Text>
         </HStack>
         {children}

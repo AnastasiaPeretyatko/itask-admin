@@ -32,7 +32,7 @@ const CourseCard = ({ course }: {course: TCourse}) => {
         max={3}
       >
         {
-          course.course_assignment.map((el) => (
+          course.assignments.map((el) => (
             <Avatar
               key={el.id}
               borderColor={'inherit'}
@@ -41,7 +41,7 @@ const CourseCard = ({ course }: {course: TCourse}) => {
                   position: 'absolute',
                   top: '100%',
                   padding: 1,
-                  bg: 'blackAlpha.800',
+                  bg: 'black.80',
                   fontSize: '12',
                   zIndex: 10,
                 },

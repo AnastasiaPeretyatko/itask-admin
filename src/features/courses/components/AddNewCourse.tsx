@@ -1,3 +1,4 @@
+import { CalendarIcon } from '@chakra-ui/icons';
 import {
   Button,
   HStack,
@@ -11,6 +12,7 @@ import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
+import { CustomChartIcon, CustomGradeTypeIcon, CustomLanguageIcon, CustomLockIcon, CustomTutorIcon } from '@/components/customIcon';
 import FormInput from '@/components/ui/FormInput';
 import Multiselect, { VIEW } from '@/components/ui/multiselect/Multiselect';
 import PeopleItem from '@/components/ui/multiselect/PeopleProperty/PeopleItem';
@@ -80,7 +82,7 @@ const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
   return (
     <ModalContent
       as={'form'}
-      maxW={isFullScreen ? '100vw' : 'xl'}
+      maxW={isFullScreen ? '100vw' : '5xl'}
       height={isFullScreen ? '100vh' : 'auto'}
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -110,21 +112,93 @@ const AddNewCourse = ({ onClose }: { onClose: () => void }) => {
       <ModalBody paddingX={'70px'}>
         <FormInput
           register={register('name')}
-          label="Enter title..."
+          label="Введите название..."
           withoutOutline
         />
 
+        {/* //🔹 Формат обучения – чекбоксы или переключатель (онлайн, офлайн, смешанный). */}
         <Multiselect
           view={VIEW.LIST}
           value={localValue}
           options={optionsRender}
-          label="Assign professors"
+          label="Формат обучения"
+          icon={CustomGradeTypeIcon}
           renderItem={PeopleItem}
           renderOption={PeopleOption}
           onChangeInput={fetchLestUser}
           onChangeLocalValues={onChangeLocalValues}
           onDeleteValue={onDeleteValue}
         />
+
+        {/* //🔹 Длительность – в неделях/часах. */}
+        <Multiselect
+          view={VIEW.LIST}
+          value={localValue}
+          options={optionsRender}
+          label="Длительность"
+          icon={CalendarIcon}
+          renderItem={PeopleItem}
+          renderOption={PeopleOption}
+          onChangeInput={fetchLestUser}
+          onChangeLocalValues={onChangeLocalValues}
+          onDeleteValue={onDeleteValue}
+        />
+
+        {/* //🔹 Язык – если поддержка мультиязычности (русский, английский и т. д.). */}
+        <Multiselect
+          view={VIEW.LIST}
+          value={localValue}
+          options={optionsRender}
+          label="Язык"
+          icon={CustomLanguageIcon}
+          renderItem={PeopleItem}
+          renderOption={PeopleOption}
+          onChangeInput={fetchLestUser}
+          onChangeLocalValues={onChangeLocalValues}
+          onDeleteValue={onDeleteValue}
+        />
+
+        <Multiselect
+          view={VIEW.LIST}
+          value={localValue}
+          options={optionsRender}
+          label="Преподаватели"
+          icon={CustomTutorIcon}
+          renderItem={PeopleItem}
+          renderOption={PeopleOption}
+          onChangeInput={fetchLestUser}
+          onChangeLocalValues={onChangeLocalValues}
+          onDeleteValue={onDeleteValue}
+        />
+
+        {/* 🔹 Система оценивания – баллы, проценты, зачет/незачет. */}
+        <Multiselect
+          view={VIEW.LIST}
+          value={localValue}
+          options={optionsRender}
+          label="Система оценивания"
+          icon={CustomChartIcon}
+          renderItem={PeopleItem}
+          renderOption={PeopleOption}
+          onChangeInput={fetchLestUser}
+          onChangeLocalValues={onChangeLocalValues}
+          onDeleteValue={onDeleteValue}
+        />
+
+        {/* 🔹 Доступность – открытый (для всех) / закрытый (по приглашению) / по коду. */}
+        <Multiselect
+          view={VIEW.LIST}
+          value={localValue}
+          options={optionsRender}
+          label="Доступ"
+          icon={CustomLockIcon}
+          renderItem={PeopleItem}
+          renderOption={PeopleOption}
+          onChangeInput={fetchLestUser}
+          onChangeLocalValues={onChangeLocalValues}
+          onDeleteValue={onDeleteValue}
+        />
+
         <Editor
           initialContent={context}
           onChange={onChangeContentEditor}

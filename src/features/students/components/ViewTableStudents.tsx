@@ -31,7 +31,7 @@ const ViewTableStudents = () => {
       <Spinner
         thickness="4px"
         speed="0.65s"
-        emptyColor="warmGrey"
+        emptyColor="coldGray"
         color="primary.purple"
         size="xl"
       />

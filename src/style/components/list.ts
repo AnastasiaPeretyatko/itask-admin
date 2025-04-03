@@ -14,7 +14,7 @@ const selectList = definePartsStyle(() => ({
     marginTop: 2,
     borderRadius: '5px',
     padding: 2,
-    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 18px 50px -10px',
+    boxShadow: 'black.20 0px 18px 50px -10px',
     zIndex: 10,
     overflowX: 'hidden',
 

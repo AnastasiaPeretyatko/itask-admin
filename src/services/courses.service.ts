@@ -1,5 +1,6 @@
 import { http } from '.';
 import { CreateAssignment } from '@/features/courses/components/AddNewRecourd';
+import { TParams } from '@/store/courses/courses.slice';
 import { TCreateCourse } from '@/types/courses';
 
 export const postCourseRequest = async (data: TCreateCourse) =>
@@ -11,8 +12,8 @@ export const patchCourseRequest = async (id: string, data: TCreateCourse) =>
 export const deleteCourseRequest = async (id: string) =>
   http.delete(`/courses/${id}`);
 
-export const getCoursesRequest = async () =>
-  http.get('/courses');
+export const getCoursesRequest = async (params: TParams) =>
+  http.get('/courses', { params });
 
 export const getCourseRequest = async (id: string) => http.get(`/courses/${id}`);
 

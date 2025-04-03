@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { PaginationState } from '../professors/professors.slice';
 import {
   deleteCourseThunk,
   getCoursesThunk,
@@ -8,6 +7,18 @@ import {
 } from './courses.thunks';
 import { MessageType } from '@/types/common';
 import { TCourse } from '@/types/courses';
+
+export type TParams = {
+  limit: number
+  page: number
+  search?: string
+}
+
+export interface PaginationState {
+  page: number;
+  limit: number;
+  search?: string;
+}
 
 type TInitialState = {
   courses: TCourse[] | []
@@ -21,7 +32,7 @@ const initialState: TInitialState = {
   courses: [],
   pagination: {
     page: 1,
-    limit: 10,
+    limit: 30,
     search: '',
   },
   count: 0,
@@ -32,7 +43,17 @@ const initialState: TInitialState = {
 const courses = createSlice({
   name: 'courses',
   initialState,
-  reducers: {},
+  reducers: {
+    setLimit: (state, { payload }) => {
+      state.pagination.limit = payload;
+    },
+    setPage: (state, { payload }) => {
+      state.pagination.page = payload;
+    },
+    setSearch: (state, { payload }) => {
+      state.pagination.search = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(postCourseThunk.pending, (state) => {
@@ -86,5 +107,7 @@ const courses = createSlice({
       });
   },
 });
+
+export const { setLimit, setPage, setSearch } = courses.actions;
 
 export default courses.reducer;
