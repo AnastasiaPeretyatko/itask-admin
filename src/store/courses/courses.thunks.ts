@@ -12,7 +12,7 @@ import {
   postCourseRequest,
 } from '@/services/courses.service';
 import { MessageType } from '@/types/common';
-import { Assignment, CourseAssignmentType, TCourse, TCreateCourse } from '@/types/courses';
+import { Assignment, TCourse, TCreateCourse } from '@/types/courses';
 import { cleanObject } from '@/utils/cleanObject';
 import { handleThunkError } from '@/utils/handleThunkError';
 
@@ -128,7 +128,7 @@ export const info = createAsyncThunk<
 });
 
 export const groups = createAsyncThunk<
-  { data: CourseAssignmentType[] },
+  { data: Assignment[] },
   string,
   {
     rejectValue: { statusCode: number; message: string }

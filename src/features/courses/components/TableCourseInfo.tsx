@@ -1,17 +1,11 @@
-import { AddIcon } from '@chakra-ui/icons';
-import { Avatar, Box, Flex, Grid, HStack, IconButton, Spinner, Text, useBoolean, VStack } from '@chakra-ui/react';
-// import { useRouter } from 'next/router';
+import { Box, Grid, Spinner, VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
-import AddNewRecord from './AddNewRecourd';
-import WindowModal from '@/components/modal/WindowModal';
+import GroupColumn from './GroupColumn';
 import Empty from '@/components/ui/Empty';
 import { RootState } from '@/store/store';
 
-
 const TableCourseInfo = () => {
-  const { current, groups, isLoading } = useSelector((state: RootState) => state.course);
-  const [addRecord, setAddRecord] = useBoolean(false);
-  // const router = useRouter();
+  const { groups, isLoading } = useSelector((state: RootState) => state.course);
 
   if(isLoading) {
     return (
@@ -50,70 +44,7 @@ const TableCourseInfo = () => {
         <Box>Семестр</Box>
         <Box>Преподаватели</Box>
       </Grid>
-      {
-        groups.map((g) => (
-          <Grid
-            width={'full'}
-            key={g.id}
-            onMouseMove={setAddRecord.on}
-            onMouseLeave={setAddRecord.off}
-            templateColumns="repeat(3, 1fr)"
-            position={'relative'}
-            padding={2}
-          >
-            <WindowModal
-              action={(
-                <IconButton
-                  aria-label="add"
-                  position={'absolute'}
-                  left={'-20px'}
-                  top={'50%'}
-                  transform={'translate(-50%, -50%)'}
-                  size={'sm'}
-                  icon={<AddIcon/>}
-                  variant={'unstyled'}
-                  overflow={addRecord ? 'visible' : 'hidden'}
-                  opacity={addRecord ? 1 : 0}
-                />
-              )}
-              body={(onClose) => (
-                <AddNewRecord
-                  onClose={onClose}
-                  data={g}
-                  courseId={current?.id}
-                />
-              )}
-            />
-            <Flex align={'center'}>{g.group?.groupCode}</Flex>
-            <VStack>{g.semesters?.map((e) => (
-              <HStack
-                width={'full'}
-                align={'start'}
-              >
-                <Text>{e.name}</Text>
-              </HStack>
-            ))}
-            </VStack>
-            <VStack
-              width={'full'}
-              align={'start'}
-            >
-              {g.professors?.map((e) => (
-                <HStack
-                  // onClick={() => router.push(`/professors/${e.id}`)}
-                  _hover={{ cursor: 'pointer',color: 'primary.purple' }}
-                >
-                  <Avatar
-                    size={'xs'}
-                    name={e.fullName}
-                  />
-                  <Text color={'inherit'}>{e.fullName}</Text>
-                </HStack>
-              ))}
-            </VStack>
-          </Grid>
-        ))
-      }
+      { groups.map((g) => ( <GroupColumn g={g} /> )) }
     </VStack>
   );
 };

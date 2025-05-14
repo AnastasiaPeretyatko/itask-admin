@@ -37,7 +37,7 @@ const CreateGroup = ({ onClose }: { onClose: () => void }) => {
 
   const onSubmit: SubmitHandler<TGroupCreate> = (data) => {
     setIsLoading(true);
-    dispatch(postGroupThunk(data))
+    dispatch(postGroupThunk({ ...data, degree: data.degree ?? DEGREE[0], educationMode: data.educationMode ?? EDUCATION_MODE[0] }))
       .unwrap()
       .then((res) => {
         showSuccessMessage(res.message);

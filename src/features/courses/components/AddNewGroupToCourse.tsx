@@ -27,10 +27,10 @@ import { TName } from '@/types/groups';
 
 export type CreateAssignment = {
   id: string
-  course_id: string
-  group_id: string
-  professor_id: string
-  semester_id: string
+  courseId: string
+  groupId: string
+  professorId: string
+  semesterId: string
 }
 
 type AddNewRecourdProps = {
@@ -41,11 +41,8 @@ const AddNewGroupToCourse = ({ onClose } : AddNewRecourdProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { current } = useSelector((state:RootState) => state.course);
   const { handleSubmit, control } = useForm<CreateAssignment>({
-    defaultValues: {
-      course_id: current?.id,
-    },
-  },
-  );
+    defaultValues: { courseId: current?.id },
+  } );
   const { showErrorMessage, showSuccessMessage } = useNotifications();
 
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -119,21 +116,21 @@ const AddNewGroupToCourse = ({ onClose } : AddNewRecourdProps) => {
           label={('Group')}
           array={groups}
           control={control}
-          name="group_id"
+          name="groupId"
           onChangeState={fetchGroupList}
         />
         <SelectForm
           label={('Semester')}
           array={semesters}
           control={control}
-          name="semester_id"
+          name="semesterId"
           onChangeState={fetchSemesterList}
         />
         <SelectForm
           label={('Professor')}
           array={professors}
           control={control}
-          name="professor_id"
+          name="professorId"
           onChangeState={fetchProfessorList}
         />
       </ModalBody>

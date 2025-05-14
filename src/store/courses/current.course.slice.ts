@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { assignment, course, info } from './courses.thunks';
-import { CourseAssignmentType, TCourse } from '@/types/courses';
+import { Assignment, TCourse } from '@/types/courses';
 
 type TInitialState = {
   current: TCourse | null
-  groups: CourseAssignmentType[] | null
+  groups: Assignment[] | null
   isLoading: boolean
 }
 
@@ -46,21 +46,7 @@ const courses = createSlice({
       })
       .addCase(assignment.create.fulfilled, (state, { payload }) => {
         const { data } = payload;
-
-        const exists = state.groups?.find((g)=> g.group?.id === payload.data.groups.id);
-        if(exists){
-          state.groups = state.groups ? state.groups.map((g) => {
-            if(g.group?.id === data.groups?.id){
-              g.semesters?.push(data.semesters ?? []);
-              g.professors?.push(data.professors ?? []);
-              return g;
-            }
-            return g;
-          }) : null;
-          return;
-        }
-
-        state.groups = state.groups ? [...state.groups, payload.data] : [payload.data];
+        state.groups = state.groups ? [...state.groups, data] : [data];
       });
   },
 });

@@ -22,20 +22,20 @@ import { getProfessorNamesRequest } from '@/services/professor.service';
 import { getSemestersOnNameRequest } from '@/services/semester.service';
 import { assignment } from '@/store/courses/courses.thunks';
 import { AppDispatch, RootState } from '@/store/store';
-import { CourseAssignmentType } from '@/types/courses';
+import { Assignment } from '@/types/courses';
 import { TName } from '@/types/groups';
 
 export type CreateAssignment = {
   id: string
-  course_id: string
-  group_id: string
-  professor_id: string
-  semester_id: string
+  courseId: string
+  groupId: string
+  professorId: string
+  semesterId: string
 }
 
 type AddNewRecordProps = {
   onClose: () => void,
-  data: CourseAssignmentType,
+  data: Assignment,
   courseId?: string
 }
 
@@ -45,8 +45,8 @@ const AddNewRecord = ({ onClose, data, courseId } : AddNewRecordProps) => {
   const { handleSubmit, control } = useForm<CreateAssignment>({
     defaultValues: {
       id: data.id,
-      group_id: data.group?.id,
-      course_id: courseId,
+      groupId: data.group?.id,
+      courseId: courseId,
     },
   },
   );
@@ -124,14 +124,14 @@ const AddNewRecord = ({ onClose, data, courseId } : AddNewRecordProps) => {
           label={('Semester')}
           array={semester}
           control={control}
-          name="semester_id"
+          name="semesterId"
           onChangeState={fetchSemesterList}
         />
         <SelectForm
           label={('Professor')}
           array={professor}
           control={control}
-          name="professor_id"
+          name="professorId"
           onChangeState={fetchProfessorList}
         />
       </ModalBody>

@@ -21,4 +21,4 @@ export const getInfoCourse = async (id: string) => http.get(`/courses/info/${id}
 
 export const getGroupsCourse = async (id: string) => http.get(`/assignment/${id}`);
 
-export const assignmentCreate = async(data: CreateAssignment) => http.patch('/assignment', data );
+export const assignmentCreate = async(data: CreateAssignment) => http.post('/assignment', data );
