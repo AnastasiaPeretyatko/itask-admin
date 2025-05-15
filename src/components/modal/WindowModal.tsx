@@ -9,7 +9,7 @@ type Props = {
   body: (onClose: () => void) => ReactNode
 }
 
-const WindowModal = ({ size = 'xs', action, body, title }: Props) => {
+const WindowModal = ({ size = '2xl', action, body, title }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const ActionButton = React.isValidElement(action)
