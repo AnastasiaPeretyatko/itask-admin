@@ -59,8 +59,8 @@ export const semanticTokens = {
       text: { _light: 'white.primary', _dark: 'lightBlack' },
     },
     toast: {
-      bg: { _light: 'almostBlack', _dark: 'white.primary' },
-      text: { _light: 'white.primary', _dark: 'lightBlack' },
+      bg: { _dark: 'slate.light', _light: 'almostBlack' },
+      text: { _light: 'slate.light', _dark: 'almostBlack' },
     },
   },
 };

@@ -12,13 +12,14 @@ export const useClipboardAlert = () => {
           render: () => (
             <Box
               boxShadow={'black.24 0px 3px 8px'}
-              background={'background.fill'}
+              background={'toast.bg'}
+              color={'toast.text'}
               padding={4}
               borderRadius={10}
-              fontWeight={400}
+              fontWeight={500}
               fontSize={'sm'}
             >
-              Текст был скопирован в буфер обмена.
+            Текст был скопирован в буфер обмена
             </Box>
           ),
           duration: 2000,
