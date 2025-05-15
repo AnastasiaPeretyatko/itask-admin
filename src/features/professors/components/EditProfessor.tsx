@@ -68,7 +68,7 @@ const EditProfessor = ({ professor, onClose }: Props) => {
           size={'md'}
           fontWeight={500}
         >
-          {('Create professor')}
+          Редактировать преподавателя
         </Heading>
       </ModalHeader>
       <ModalCloseButton />
@@ -77,33 +77,36 @@ const EditProfessor = ({ professor, onClose }: Props) => {
           flexDir={'column'}
           gap={4}
         >
-          <Empty>{('Edit professor information notify')}.</Empty>
+          <Empty>
+            Измененные данные о преподавателе будут обновлены в системе и сразу станут доступными на платформе,
+             а преподаватель получит уведомление об изменениях, если это необходимо
+          </Empty>
           <FormInput
-            label="Full Name"
+            label="ФИО"
             register={register('fullName', {
-              required: 'Full name is required',
+              required: 'Необходимо указать ФИО',
             })}
             errorMessage={errors.fullName?.message}
           />
           <FormInput
-            label="Tel"
+            label="Номер телефона"
             register={register('tel')}
             errorMessage={errors.tel?.message}
           />
           <FormInput
-            label="Description"
+            label="Описание"
             register={register('description')}
             errorMessage={errors.description?.message}
           />
-          <ModalFooter>
-            <Button>{('Cancel')}</Button>
+          <ModalFooter paddingBottom={0}>
+            <Button>Отмена</Button>
             <Button
               variant={'primary'}
               type="submit"
               isLoading={isLoading}
               isDisabled={!isValid}
             >
-              {('Save')}
+              Сохранить
             </Button>
           </ModalFooter>
         </Flex>

@@ -47,7 +47,7 @@ const GroupColumn = ({ g }: {g: Assignment}) => {
       />
       <Flex align={'center'}>{g.group?.groupCode}</Flex>
       <VStack align={'start'}>
-        <Text>{g.semester.name}</Text>
+        <Text>{g.semester?.name}</Text>
       </VStack>
       <VStack
         width={'full'}
