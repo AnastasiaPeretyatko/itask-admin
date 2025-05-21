@@ -120,6 +120,8 @@ const SectionViewCourses = () => {
         <WindowModal
           size="2xl"
           action={<IconButton
+            bg={'primary.purple'}
+            color={'toast.text'}
             aria-label="add"
             icon={<AddIcon />}
           />}

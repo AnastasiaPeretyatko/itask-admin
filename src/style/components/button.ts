@@ -117,6 +117,20 @@ const link = defineStyle({
   },
 });
 
+const edit = defineStyle(() => {
+  return {
+    paddingX: 0,
+    fontSize: 'sm',
+    bg: 'none',
+    color: 'button.netural.text',
+    borderRadius: 'full',
+    _hover: {
+      bg: 'sidebar.hoverButton',
+      color: 'sidebar.hoverText',
+    },
+  };
+});
+
 export const buttonTheme = defineStyleConfig({
   baseStyle,
   variants: {
@@ -127,5 +141,6 @@ export const buttonTheme = defineStyleConfig({
     pagination,
     openSidebar,
     link,
+    edit,
   },
 });

@@ -28,7 +28,7 @@ const WindowModal = ({ size = '2xl', action, body, title }: Props) => {
           onClick={onOpen}
           leftIcon={<AddIcon boxSize={3} />}
         >
-          {title ||'Add'}
+          {title ||'Добавить группу'}
         </Button>
       )}
 

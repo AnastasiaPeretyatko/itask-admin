@@ -4,7 +4,7 @@ import { TProfessor } from './professor';
 export type TCreateCourse = {
   name: string
   description: string
-  professorIds: string[]
+  professorIds?: string[]
 }
 
 export type TCourse = {
