@@ -7,14 +7,20 @@ export const useNotifications = () => {
   const showErrorMessage = (data: {message: string} | string) => {
     toast({
       position: 'bottom-left',
-      render: () => <ToastAlert message={data?.message ?? data} />,
+      render: () => (<ToastAlert
+        status={false}
+        message={data?.message ?? data}
+      />),
     });
   };
 
   const showSuccessMessage = (data: {message: string} | string) => {
     toast({
       position: 'bottom-left',
-      render: () => <ToastAlert message={data?.message ?? data} />,
+      render: () => (<ToastAlert
+        status={true}
+        message={data?.message ?? data}
+      />),
     });
   };
 

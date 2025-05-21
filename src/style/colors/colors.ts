@@ -93,7 +93,7 @@ export const colors = {
 
   status: {
     red: '#FF2C2C',
-    green: '#14EF10',
+    green: '#06c902',
   },
   tooltipBlue: '#4d78b8c3',
 };
